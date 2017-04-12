@@ -6,6 +6,11 @@
 #lastColumn {
 }
 
+#transactions-container{
+  border-style: solid;
+  height: 500px;
+  width: 80px;
+}
 @media (max-width: 768px) { 
   .col-sm-1,
   .col-sm-2,
