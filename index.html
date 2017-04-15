@@ -13,29 +13,37 @@ Eric Luu
 <title>Where's My Money?</title>
 
 <!-- Load style sheets -->
-<link rel="stylesheet" href=
-  "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="mainLayout.css">
 
 <!-- Use mobile-aware viewport -->
-<meta name="viewport" content=
-  "width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Load any supplemental Javascript libraries here -->
-<script src=
-  "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src=
-  "https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.2/seedrandom.js">
-</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.2/seedrandom.js"></script>
+<script src="transactionsList.js"></script>
+<script src="transaction.js"></script>
 
 <script>
+var transactionsList = new TransactionsList();
+
 // Final initialization entry point: the Javascript code inside this block
 // runs at the end of start-up when the page has finished loading.
 $(document).ready(function()
 {
-
+	// TODO: Populate transactions-list when the page is loaded
+	initializeList();
 });
+
+function initializeList() {
+	transactionsList.render();
+}
+
+function filterTransactions(e) {
+	return undefined;
+}
 
 </script>
 
@@ -44,23 +52,40 @@ $(document).ready(function()
 <body>
 
 <div class="row">
-  <input id="transfer-button" class="btn" type="button" value="Transfer" text-color="black"/>
-  <input id="incoming-requests-button" class="btn" type="button" value="Incoming Requests" text-color="black"/>
-  <input id="manage-accounts-button" class="btn" type="button" value="Manage Accounts" text-color="black"/>
+	<div class="col-sm-4">
+  		<input id="transfer-button" class="btn" type="button" value="Transfer" text-color="black"/>
+  	</div>
+  	<div class="col-sm-4">
+  		<input id="incoming-requests-button" class="btn" type="button" value="Incoming Requests" text-color="black"/>
+  	</div>
+  	<div class="col-sm-4">
+  		<input id="manage-accounts-button" class="btn" type="button" value="Manage Accounts" text-color="black"/>
+  	</div>
 </div>
 
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-6 col-md-6" id="firstColumn">
-      <div id="firstColumnText">
-      <!-- Column 1 Code Here -->
-        <p>Where's</br>My Money?</p>
-        <div id="transactions-container">
-  </div>
+  	<div class="row">
+    	<div class="col-sm-6" id="firstColumn">
+      		<div id="firstColumnText">
+      		<!-- Column 1 Code Here -->
+        		<p>Where's</br>My Money?</p>
+    			<div id="transactions-container">
+    				<select name="transactionsFilter" onchange="filterTransactions(this.value);">
+  						<option selected="allTransactions" value="all">All Transactions</option>
+  						<option value="withdrawals">Withdrawals</option>
+  						<option value="deposits">Deposits</option>
+  					</select>
+  					<ul id="transactions-list">
+  						<li>something</li>
+  					</ul>
+    			</div>
+    		</div>
+		</div>
 
-    <div class="col-sm-6 col-md-6" id="lastColumn">
-    </div>
-  </div> <!-- class="row" -->
+    	<div class="col-sm-6" id="lastColumn">
+    		<p> Second Column </p>
+    	</div>
+  	</div> <!-- class="row" -->
 </div> <!-- class="container" -->
 
 </body>
