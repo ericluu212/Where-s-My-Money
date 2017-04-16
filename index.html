@@ -25,27 +25,7 @@ Eric Luu
 <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.2/seedrandom.js"></script>
 <script src="transactionsList.js"></script>
 <script src="transaction.js"></script>
-
-<script>
-var transactionsList = new TransactionsList();
-
-// Final initialization entry point: the Javascript code inside this block
-// runs at the end of start-up when the page has finished loading.
-$(document).ready(function()
-{
-	// TODO: Populate transactions-list when the page is loaded
-	initializeList();
-});
-
-function initializeList() {
-	transactionsList.render();
-}
-
-function filterTransactions(e) {
-	return undefined;
-}
-
-</script>
+<script src="transferModal.js"></script>
 
 </head>
 
@@ -53,7 +33,7 @@ function filterTransactions(e) {
 
 <div class="row">
 	<div class="col-sm-4">
-  		<input id="transfer-button" class="btn" type="button" value="Transfer" text-color="black"/>
+  		<input id="transfer-button" class="btn" type="button" value="Transfer" text-color="black" onclick="Transfer()" />
   	</div>
   	<div class="col-sm-4">
   		<input id="incoming-requests-button" class="btn" type="button" value="Incoming Requests" text-color="black"/>
@@ -62,7 +42,15 @@ function filterTransactions(e) {
   		<input id="manage-accounts-button" class="btn" type="button" value="Manage Accounts" text-color="black"/>
   	</div>
 </div>
+<div id="transferModal" class="modal">
 
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Some text in the Modal..</p>
+  </div>
+
+</div>
 <div class="container-fluid">
   	<div class="row">
     	<div class="col-sm-6" id="firstColumn">
