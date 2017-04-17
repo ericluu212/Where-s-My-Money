@@ -28,6 +28,7 @@ Eric Luu
 <script src="transferModal.js"></script>
 <script>
 var transactionsList = new TransactionsList();
+var accountsArray = ["Bank of America", "Chase", "MITFCU"];
 // Final initialization entry point: the Javascript code inside this block
 // runs at the end of start-up when the page has finished loading.
 $(document).ready(function()
@@ -49,20 +50,20 @@ function filterTransactions(e) {
 
 <div class="row">
 	<div class="col-sm-4">
-  		<input id="transfer-button" class="btn" type="button" value="Transfer" text-color="black" onclick="transfer()" />
+  		<input id="transfer-button" class="btn" type="button" value="Transfer" text-color="black" onclick="showTransfer()" />
   	</div>
   	<div class="col-sm-4">
   		<input id="incoming-requests-button" class="btn" type="button" value="Incoming Requests" text-color="black"/>
   	</div>
   	<div class="col-sm-4">
-  		<input id="manage-accounts-button" class="btn" type="button" value="Manage Accounts" text-color="black"/>
+  		<input id="manage-accounts-button" class="btn" type="button" value="Manage Accounts" text-color="black" onclick="showAccounts()" />
   	</div>
 </div>
 <div id="transferModal" class="modal">
 
   <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
+  <div class="modal-content" id="transferContent">
+    <span class="close" id ="closeTransfer">&times;</span>
     <table class="paddingBetweenCols">
     	<tr>
 	    	<td><label for="fromList">From</label></td>
@@ -95,8 +96,21 @@ function filterTransactions(e) {
     	<input id="transferBtn" class="btn" type="button" value="Transfer">
     </div>
   </div>
-
 </div>
+
+<div id="accountsModal" class="modal">
+  <div class="modal-content" id="accountsContent">
+  	<span class="close" id ="closeAccounts">&times;</span>
+  	<h1>Accounts</h1>
+  	<ul id="accountsList">
+  	</ul>
+  	<div>
+  		<input id="add-account-button" class="btn" type="button" value="Add"/>
+  		<input id="remove-account-button" class="btn" type="button" value="Remove"/>
+  	</div>
+  </div>
+</div>
+
 <div class="container-fluid">
   	<div class="row">
     	<div class="col-sm-6" id="firstColumn">
