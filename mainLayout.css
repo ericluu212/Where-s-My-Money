@@ -12,7 +12,14 @@
   width: 250px;
 }
 
+li a:hover { 
+    cursor: pointer;
+}
 
+.btn{
+	height: 100%;
+	width:150px;
+}
 /* Code for madals (popups)*/
 .modal {
     display: none; /* Hidden by default */
