@@ -1,16 +1,12 @@
 function showTransfer(){
 	// Get the modal
 	var modal = document.getElementById('transferModal');
-
 	// Get the <span> element that closes the modal
 	var span = document.getElementById("closeTransfer");
-
 	//transfer button
 	var btn = document.getElementById('transferBtn');
-
 	// When the user clicks the button, open the modal 
 	modal.style.display = "block";
-
 	// When the user clicks on <span> (x), close the modal
 	span.onclick = function() {
 	    modal.style.display = "none";
@@ -28,8 +24,8 @@ function showTransfer(){
 		c = validateCurrency();
 		if(a && c){
 			modal.style.display = "none";
-			document.getElementById('fromList').value = 'default';
-			document.getElementById('toList').value = 'default';
+			document.getElementById('fromList').value = 'initial';
+			document.getElementById('toList').value = 'initial';
 			var currency = document.getElementById("Amount").value = '';
 			showTransferSuccess();
 		}
@@ -59,8 +55,8 @@ function showTransfer(){
 			return false;
 		}
 	}
-
 }
+
 
 function showTransferSuccess(){
 	// Get the modal
@@ -85,6 +81,7 @@ function showTransferSuccess(){
 	}
 }
 
+
 function showAccounts(){
 	// Get the modal
 	var modal = document.getElementById('accountsModal');
@@ -107,9 +104,6 @@ function showAccounts(){
     	accountsList.removeChild(accountsList.firstChild);
 	}
 	for (var i = 0; i < accountsArray.length; i++) {
-		// var element = document.createElement("li");
-		// element.innerHTML = accountsArray[i];
-  //   	accountsList.appendChild(element);
   		var checkbox = document.createElement('input');
   		checkbox.type = "checkbox";
 		checkbox.name = accountsArray[i];
@@ -148,7 +142,6 @@ function showAccounts(){
 			}
 			//update array of accounts
 			accountsArray = [];
-			console.log(accountsArray);
 			for(var i=0; i<accountsList.children.length; i++){
 				if(accountsList.children[i].tagName == 'INPUT'){
 					accountsArray.push(accountsList.children[i].id);
@@ -156,5 +149,56 @@ function showAccounts(){
 			}
 	    }
 		
+	}
+
+	addBtn.onclick = function(){
+		var modal = document.getElementById('addAccountModal');
+		// Get the <span> element that closes the modal
+		var span = document.getElementById("closeAddAccount");
+		//create button
+		var btn = document.getElementById('create-button');
+		// When the user clicks the button, open the modal 
+		modal.style.display = "block";
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+		    modal.style.display = "none";
+		}
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+		    if (event.target == modal) {
+		        modal.style.display = "none";
+		    }
+		}
+		btn.onclick = function(){
+			validNumber = validateAccountNumber();
+			if(validNumber){
+				var accountName = document.getElementById('accountName').value;
+				accountsArray.push(accountName);
+				var checkbox = document.createElement('input');
+		  		checkbox.type = "checkbox";
+				checkbox.name = accountName;
+				checkbox.value = accountName;
+				checkbox.id = accountName;
+				var label = document.createElement('label')
+				label.htmlFor = accountName;
+				label.appendChild(document.createTextNode(accountName));
+				accountsList.appendChild(checkbox);
+				accountsList.appendChild(label);
+				modal.style.display = "none";
+				document.getElementById('accountName').value = '';
+				document.getElementById('accountNumber').value = '';
+				//showAddSuccess();
+			}
+		}
+		function validateAccountNumber(){
+			var accountNumber = document.getElementById("accountNumber").value;
+			var regex  = /^\d+/;
+			if(regex.test(accountNumber)){
+				return true;
+			}else{
+				alert("Invalid account number.");
+				return false;
+			}
+		}
 	}
 }

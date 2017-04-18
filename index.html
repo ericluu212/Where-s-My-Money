@@ -105,15 +105,17 @@ function filterTransactions(e) {
   </div>
 </div>
 
+<!--modal for a successful transfer-->
 <div id="transferSuccessModal" class="modal">
 
   <!-- Modal content -->
-  <div class="modal-content" id="transferContent">
+  <div class="modal-content" id="transferSuccessContent">
     <span class="close" id ="closeTransferSuccess">&times;</span>
     <p style="font-size: 18px;">Transfer has been made.</p>
   </div>
 </div>
 
+<!--modal for managing accounts-->
 <div id="accountsModal" class="modal">
   <div class="modal-content" id="accountsContent">
   	<span class="close" id ="closeAccounts">&times;</span>
@@ -125,6 +127,28 @@ function filterTransactions(e) {
   	<div>
   		<input id="add-account-button" class="btn" type="button" value="Add"/>
   		<input id="remove-account-button" class="btn" type="button" value="Remove"/>
+  	</div>
+  </div>
+</div>
+
+<!--Modal for adding account-->
+<div id="addAccountModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content" id="addAccountContent">
+    <span class="close" id ="closeAddAccount">&times;</span>
+    <h1>Add</h1>
+    <table class="paddingBetweenCols">
+  		<tr>
+		    <td><label for="accountName">Account Name</label></td>
+		    <td valign="top"><input id="accountName" type="text" style="width: 130px;"></td>
+  		</tr>
+  		<tr>
+		    <td><label for="accountNumber">Account Number</label></td>
+		    <td valign="top"><input id="accountNumber" type="text" style="width: 130px;"></td>
+  		</tr>
+    </table>
+    <div>
+  		<input id="create-button" class="btn" type="button" value="Create"/>
   	</div>
   </div>
 </div>
