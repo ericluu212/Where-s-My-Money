@@ -19,13 +19,14 @@ h4{
   width: 250px;
 }
 
+
 #expenses-container{
   border-style: solid;
   height: 500px;
   width: 250px;
   float: right;
 }
-li a:hover { 
+li a:hover {
     cursor: pointer;
 }
 

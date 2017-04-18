@@ -14,7 +14,7 @@ Eric Luu
 
 <!-- Load style sheets -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+<link rel="stylesheet" href="modal.css">
 <link rel="stylesheet" href="mainLayout.css">
 
 <!-- Use mobile-aware viewport -->
@@ -30,7 +30,7 @@ Eric Luu
 <script src="expense.js"></script>
 <script>
 
-var transactionsList, expensesList;
+var transactionsList, expensesList, requestsList;
 var accountsArray = ["Bank of America", "Chase", "MITFCU"];
 
 // Final initialization entry point: the Javascript code inside this block
@@ -41,9 +41,11 @@ $(document).ready(function()
 	transactionsList.accounts = accountsArray;
 	expensesList = new ExpensesList();
 	expensesList.accounts = accountsArray;
-	
+
 	transactionsList.render();
 	expensesList.render();
+
+	requestsList = new RequestList();
 });
 
 function handleTransactionsListChange() {
@@ -59,6 +61,11 @@ function handleExpensesListChange() {
 }
 
 </script>
+
+<script src="incoming_requests.js"></script>
+<script src="requestList.js"></script>
+<script src="request.js"></script>
+
 </head>
 
 <body>
@@ -124,8 +131,29 @@ function handleExpensesListChange() {
   	<div>
   		<input id="add-account-button" class="btn" type="button" value="Add"/>
   		<input id="remove-account-button" class="btn" type="button" value="Remove"/>
+
   	</div>
   </div>
+</div>
+
+</div>
+<!-- modal for incoming requests -->
+<div id="incoming-requests-popup" class="modal" style="display: none">
+	<!--modal content -->
+	<div class="incoming-requests-modal-content modal-content">
+			<div class="modal-header">
+				<h2>Incoming Requests</h2>
+				<span class="close">&times;</span>
+			</div>
+
+			<div class="modal-body">
+				<div class="list-group" id="incoming-requests-list">
+
+				</div>
+			</div>
+			<div class="modal-footer">
+			</div>
+	</div>
 </div>
 
 <div class="container-fluid">
