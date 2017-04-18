@@ -6,7 +6,7 @@ function showTransfer(){
 	var span = document.getElementById("closeTransfer");
 
 	//transfer button
-	var btn = document.getElementById('transferBtn')
+	var btn = document.getElementById('transferBtn');
 
 	// When the user clicks the button, open the modal 
 	modal.style.display = "block";
@@ -92,6 +92,12 @@ function showAccounts(){
 	// Get the <span> element that closes the modal
 	var span = document.getElementById("closeAccounts")
 
+	//remove button
+	var removeBtn = document.getElementById('remove-account-button');
+
+	//add button
+	var addBtn = document.getElementById('add-account-button');
+
 	// When the user clicks the button, open the modal 
 	modal.style.display = "block";
 
@@ -101,9 +107,19 @@ function showAccounts(){
     	accountsList.removeChild(accountsList.firstChild);
 	}
 	for (var i = 0; i < accountsArray.length; i++) {
-		var element = document.createElement("li");
-		element.innerHTML = accountsArray[i];
-    	accountsList.appendChild(element);
+		// var element = document.createElement("li");
+		// element.innerHTML = accountsArray[i];
+  //   	accountsList.appendChild(element);
+  		var checkbox = document.createElement('input');
+  		checkbox.type = "checkbox";
+		checkbox.name = accountsArray[i];
+		checkbox.value = accountsArray[i];
+		checkbox.id = accountsArray[i];
+		var label = document.createElement('label')
+		label.htmlFor = accountsArray[i];
+		label.appendChild(document.createTextNode(accountsArray[i]));
+		accountsList.appendChild(checkbox);
+		accountsList.appendChild(label);
 	}
 
 	// When the user clicks on <span> (x), close the modal
@@ -116,5 +132,26 @@ function showAccounts(){
 	    if (event.target == modal) {
 	        modal.style.display = "none";
 	    }
+	}
+
+	removeBtn.onclick = function(){
+		var accountsList = document.getElementById("accountsList");
+		for(var i=0; i<accountsList.children.length; i++){
+			if(accountsList.children[i].tagName == 'LABEL'){
+				var elem = document.getElementById(accountsList.children[i].htmlFor);
+				if(elem.checked){
+					accountsList.removeChild(accountsList.children[i]);
+					accountsList.removeChild(elem);
+				}
+			}
+		}
+		//update array of accounts
+		accountsArray = [];
+		console.log(accountsArray);
+		for(var i=0; i<accountsList.children.length; i++){
+			if(accountsList.children[i].tagName == 'INPUT'){
+				accountsArray.push(accountsList.children[i].id);
+			}
+		}
 	}
 }
