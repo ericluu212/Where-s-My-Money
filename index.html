@@ -14,7 +14,7 @@ Eric Luu
 
 <!-- Load style sheets -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+<link rel="stylesheet" href="modal.css">
 <link rel="stylesheet" href="mainLayout.css">
 
 <!-- Use mobile-aware viewport -->
@@ -25,10 +25,11 @@ Eric Luu
 <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.2/seedrandom.js"></script>
 <script src="transactionsList.js"></script>
 <script src="transaction.js"></script>
+<script src="incoming_requests.js"></script>
 
 <script>
 var transactionsList;
-
+var requestsList;
 // Final initialization entry point: the Javascript code inside this block
 // runs at the end of start-up when the page has finished loading.
 $(document).ready(function()
@@ -36,6 +37,8 @@ $(document).ready(function()
 	// TODO: Populate transactions-list when the page is loaded
 	transactionsList = new TransactionsList();
 	initializeList();
+
+	requestsList = new RequestsList();
 });
 
 function initializeList() {
@@ -59,11 +62,45 @@ function filterTransactions(e) {
   		<input id="transfer-button" class="btn" type="button" value="Transfer" text-color="black"/>
   	</div>
   	<div class="col-sm-4">
-  		<input id="incoming-requests-button" class="btn" type="button" value="Incoming Requests" text-color="black"/>
+  		<input id="incoming-requests-button" class="btn" type="button" value="Incoming Requests" text-color="black" onclick="incoming_requests()"/>
   	</div>
   	<div class="col-sm-4">
   		<input id="manage-accounts-button" class="btn" type="button" value="Manage Accounts" text-color="black"/>
   	</div>
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h2>Modal Header</h2>
+    </div>
+    <div class="modal-body">
+      <p>Some text in the Modal Body</p>
+      <p>Some other text...</p>
+    </div>
+    <div class="modal-footer">
+      <h3>Modal Footer</h3>
+    </div>
+  </div>
+
+</div>
+<!-- modal for incoming requests -->
+<div id="incoming-requests-popup" class="modal" style="display: none">
+	<!--modal content -->
+	<div class="incoming-requests-modal-content modal-content">
+			<div class="modal-header">
+				<h2>Incoming Requests</h2>
+				<span class="close">&times;</span>
+			</div>
+			<div class="modal-body">
+			</div>
+			<div class="modal-footer">
+			</div>
+	</div>
 </div>
 
 <div class="container-fluid">
