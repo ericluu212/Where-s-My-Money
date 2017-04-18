@@ -25,7 +25,7 @@ Eric Luu
 <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.2/seedrandom.js"></script>
 <script src="transactionsList.js"></script>
 <script src="transaction.js"></script>
-<script src="incoming_requests.js"></script>
+
 
 <script>
 var transactionsList;
@@ -38,7 +38,7 @@ $(document).ready(function()
 	transactionsList = new TransactionsList();
 	initializeList();
 
-	requestsList = new RequestsList();
+	requestsList = new RequestList();
 });
 
 function initializeList() {
@@ -52,6 +52,10 @@ function filterTransactions(e) {
 }
 
 </script>
+
+<script src="incoming_requests.js"></script>
+<script src="requestList.js"></script>
+<script src="request.js"></script>
 
 </head>
 
@@ -69,24 +73,6 @@ function filterTransactions(e) {
   	</div>
 </div>
 
-<!-- The Modal -->
-<div id="myModal" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <div class="modal-header">
-      <span class="close">&times;</span>
-      <h2>Modal Header</h2>
-    </div>
-    <div class="modal-body">
-      <p>Some text in the Modal Body</p>
-      <p>Some other text...</p>
-    </div>
-    <div class="modal-footer">
-      <h3>Modal Footer</h3>
-    </div>
-  </div>
-
 </div>
 <!-- modal for incoming requests -->
 <div id="incoming-requests-popup" class="modal" style="display: none">
@@ -96,7 +82,11 @@ function filterTransactions(e) {
 				<h2>Incoming Requests</h2>
 				<span class="close">&times;</span>
 			</div>
+
 			<div class="modal-body">
+				<div class="list-group" id="incoming-requests-list">
+
+				</div>
 			</div>
 			<div class="modal-footer">
 			</div>
