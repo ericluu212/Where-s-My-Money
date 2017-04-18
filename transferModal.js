@@ -135,23 +135,26 @@ function showAccounts(){
 	}
 
 	removeBtn.onclick = function(){
-		var accountsList = document.getElementById("accountsList");
-		for(var i=0; i<accountsList.children.length; i++){
-			if(accountsList.children[i].tagName == 'LABEL'){
-				var elem = document.getElementById(accountsList.children[i].htmlFor);
-				if(elem.checked){
-					accountsList.removeChild(accountsList.children[i]);
-					accountsList.removeChild(elem);
+	    if (confirm("Are you sure you want to remove all of the selected accounts?") == true) {
+	        var accountsList = document.getElementById("accountsList");
+			for(var i=0; i<accountsList.children.length; i++){
+				if(accountsList.children[i].tagName == 'LABEL'){
+					var elem = document.getElementById(accountsList.children[i].htmlFor);
+					if(elem.checked){
+						accountsList.removeChild(accountsList.children[i]);
+						accountsList.removeChild(elem);
+					}
 				}
 			}
-		}
-		//update array of accounts
-		accountsArray = [];
-		console.log(accountsArray);
-		for(var i=0; i<accountsList.children.length; i++){
-			if(accountsList.children[i].tagName == 'INPUT'){
-				accountsArray.push(accountsList.children[i].id);
+			//update array of accounts
+			accountsArray = [];
+			console.log(accountsArray);
+			for(var i=0; i<accountsList.children.length; i++){
+				if(accountsList.children[i].tagName == 'INPUT'){
+					accountsArray.push(accountsList.children[i].id);
+				}
 			}
-		}
+	    }
+		
 	}
 }
