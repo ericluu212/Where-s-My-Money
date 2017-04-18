@@ -8,6 +8,7 @@ var TransactionsList = function()
 		new Transaction(20170211, "UROP Deposit", 423, "Bank of America", 3)
 		];
 	this.filteredTransactions = this.transactions;
+	this.accounts = [];
 
 	this.clearRenderedList = function()
 	{
@@ -49,7 +50,7 @@ var TransactionsList = function()
 		});
 	}
 
-	function datesFilter(startDate, endDate) {
+	function datesFilter(transactionsList, startDate, endDate) {
 		// Date style is Year Month Day=>20161231
 		return transactionsList.filter(function(transaction) {
 			if (startDate && endDate) {
@@ -64,8 +65,37 @@ var TransactionsList = function()
 		});
 	}
 
-	this.filterTransactions = function(transactionType="all", accountsList=[], startDate=null, endDate=null) {
+	function getTransactionTypeFilterValue() {
+		var transactionsTypeFilterElement = $('#transactionsTypeFilter')[0];
+		return transactionsTypeFilterElement.options[transactionsTypeFilterElement.selectedIndex].value;
+	}
+
+	function getTransactionsStartDate() {
+		var transactionsStartDateElement = $('#transactionsStartDate')[0];
+		if (transactionsStartDateElement.value.length == 8) {
+			return parseInt(transactionsStartDateElement.value);
+		} else {
+			return null;
+		}
+	}
+
+	function getTransactionsEndDate() {
+		var transactionsEndDateElement = $('#transactionsEndDate')[0];
+		if (transactionsEndDateElement.value.length == 8) {
+			return parseInt(transactionsEndDateElement.value);
+		} else {
+			return null;
+		}
+	}
+
+	this.filterTransactions = function() {
 		// var Transaction = function(date, description, cost, account, id)
+		var transactionType, accountsList, startDate, endDate;
+		transactionType = getTransactionTypeFilterValue();
+		accountsList = this.accounts;
+		startDate = getTransactionsStartDate();
+		endDate = getTransactionsEndDate();
+
 		this.filteredTransactions = this.transactions;
 		if (transactionType == "withdrawals") {
 			this.filteredTransactions = withdrawalsFilter(this.filteredTransactions);
@@ -73,6 +103,7 @@ var TransactionsList = function()
 			this.filteredTransactions = depositsFilter(this.filteredTransactions);
 		}
 
-
+		this.filteredTransactions = datesFilter(this.filteredTransactions, startDate, endDate);
+		this.filteredTransactions = accountsFilter(this.filteredTransactions, accountsList);
 	}
 }

@@ -26,60 +26,36 @@ Eric Luu
 <script src="transactionsList.js"></script>
 <script src="transaction.js"></script>
 <script src="transferModal.js"></script>
+<script src="expensesList.js"></script>
+<script src="expense.js"></script>
 <script>
 
-var transactionsList;
+var transactionsList, expensesList;
 var accountsArray = ["Bank of America", "Chase", "MITFCU"];
 
 // Final initialization entry point: the Javascript code inside this block
 // runs at the end of start-up when the page has finished loading.
 $(document).ready(function()
 {
-	// TODO: Populate transactions-list when the page is loaded
 	transactionsList = new TransactionsList();
-	initializeList();
+	transactionsList.accounts = accountsArray;
+	expensesList = new ExpensesList();
+	expensesList.accounts = accountsArray;
+	
+	transactionsList.render();
+	expensesList.render();
 });
 
-function initializeList() {
-	transactionsList.render();
-}
-
-function filterTransactions() {
-	var transactionType, accountsList, startDate, endDate;
-	transactionType = getTransactionTypeFilterValue();
-	accountsList = getFilteringAccounts();
-	startDate = getTransactionsStartDate();
-	endDate = getTransactionsEndDate();
-	transactionsList.filterTransactions(transactionType, accountsList, startDate, endDate);
+function handleTransactionsListChange() {
+	transactionsList.filterTransactions();
 	transactionsList.clearRenderedList();
 	transactionsList.render();
 }
 
-function getTransactionTypeFilterValue() {
-	var transactionsTypeFilterElement = $('#transactionsTypeFilter')[0];
-	return transactionsTypeFilterElement.options[transactionsTypeFilterElement.selectedIndex].value;
-}
-
-function getTransactionsStartDate() {
-	var transactionsStartDateElement = $('#transactionsStartDate')[0];
-	return transactionsStartDateElement.value;
-}
-
-function getTransactionsEndDate() {
-	var transactionsEndDateElement = $('#transactionsEndDate')[0];
-	return transactionsEndDateElement.value;
-}
-
-function getFilteringAccounts() {
-	return [];
-}
-
-function handleTransactionsStartDateChange() {
-	filterTransactions();
-}
-
-function handleTransactionsEndDateChange() {
-	filterTransactions();
+function handleExpensesListChange() {
+	expensesList.filterExpenses();
+	expensesList.clearRenderedList();
+	expensesList.render();
 }
 
 </script>
@@ -160,15 +136,15 @@ function handleTransactionsEndDateChange() {
     			<div id="transactions-container">
     				<div id="transactions-filtering-options">
     					Viewing
-    					<select id="transactionsTypeFilter" onchange="filterTransactions(this.value);">
+    					<select id="transactionsTypeFilter" onchange="handleTransactionsListChange()">
   							<option selected="allTransactions" value="all">All Transactions</option>
   							<option value="withdrawals">Withdrawals</option>
   							<option value="deposits">Deposits</option>
   						</select>
   						From
-  						<input type="text" id="transactionsStartDate" onblur="handleTransactionsStartDateChange()">
+  						<input type="text" id="transactionsStartDate" onblur="handleTransactionsListChange()">
 						To
-  						<input type="text" id="transactionsEndDate" onblur="handleTransactionsEndDateChange()">
+  						<input type="text" id="transactionsEndDate" onblur="handleTransactionsListChange()">
   					</div>
   					<ul id="transactions-list"></ul>
     			</div>
@@ -180,9 +156,9 @@ function handleTransactionsEndDateChange() {
     		<div id="expenses-container">
     				<div id="transactions-filtering-options">
     					Viewing Expenses From
-  						<input type="text" id="expensesStartDate" onblur="handleTransactionsStartDateChange()">
+  						<input type="text" id="expensesStartDate" onblur="handleExpensesListChange()">
 						To
-  						<input type="text" id="expensesEndDate" onblur="handleTransactionsEndDateChange()">
+  						<input type="text" id="expensesEndDate" onblur="handleExpensesListChange()">
   					</div>
   					<ul id="expenses-list"></ul>
     			</div>
