@@ -25,9 +25,11 @@ Eric Luu
 <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.2/seedrandom.js"></script>
 <script src="transactionsList.js"></script>
 <script src="transaction.js"></script>
-
+<script src="transferModal.js"></script>
 <script>
+
 var transactionsList;
+var accountsArray = ["Bank of America", "Chase", "MITFCU"];
 
 // Final initialization entry point: the Javascript code inside this block
 // runs at the end of start-up when the page has finished loading.
@@ -37,37 +39,83 @@ $(document).ready(function()
 	transactionsList = new TransactionsList();
 	initializeList();
 });
-
 function initializeList() {
 	transactionsList.render();
-}
 
+}
 function filterTransactions(e) {
 	transactionsList.filterTransactions(e);
 	transactionsList.clearRenderedList();
 	transactionsList.render();
 }
-
 </script>
-
 </head>
 
 <body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <img src="wheres-my-money-logo.png" style="width:100px;height:50px; float: left;">
+      <a class="navbar-brand" href="#">Where's My Money?</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a onclick="showTransfer()">Transfer</a></li>
+      <li><a>Incoming Requests</a></li>
+      <li><a onclick="showAccounts()">Manage Accounts</a></li>
+    </ul>
+  </div>
+</nav>
 
-<div class="row">
-  <h1>Where's My Money?</h1>
+<div id="transferModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content" id="transferContent">
+    <span class="close" id ="closeTransfer">&times;</span>
+    <table class="paddingBetweenCols">
+    	<tr>
+	    	<td><label for="fromList">From</label></td>
+	    	<td valign="top">
+	    		<select id="fromList">
+		    		<option value="" disabled selected="selected">Select one</option>
+		    		<option value="Bank of America">Bank of America</option>
+		    		<option value="Chase">Chase</option>
+		    		<option value="MITFCU">MITFCU</option>
+	    		</select>
+	    	</td>
+		</tr>
+    	<tr>
+    		<td><label for="toList">To</label></td>
+    		<td valign="top">
+    			<select id="toList">
+			    	<option value="" disabled selected="selected">Select one</option>
+			    	<option value="Bank of America">Bank of America</option>
+			    	<option value="Chase">Chase</option>
+			    	<option value="MITFCU">MITFCU</option>
+	    		</select>
+    		</td>
+  		</tr>
+  		<tr>
+		    <td><label for="Amount">Amount</label></td>
+		    <td valign="top"><input id="Amount" type="text" placeholder="0.00" style="width: 130px;"></td>
+  		</tr>
+    </table>
+    <div class="transferModalBtn">
+    	<input id="transferBtn" class="btn" type="button" value="Transfer">
+    </div>
+  </div>
 </div>
 
-<div class="row">
-	<div class="col-sm-4">
-  		<input id="transfer-button" class="btn" type="button" value="Transfer" text-color="black"/>
+<div id="accountsModal" class="modal">
+  <div class="modal-content" id="accountsContent">
+  	<span class="close" id ="closeAccounts">&times;</span>
+  	<h1>Accounts</h1>
+  	<ul id="accountsList">
+  	</ul>
+  	<div>
+  		<input id="add-account-button" class="btn" type="button" value="Add"/>
+  		<input id="remove-account-button" class="btn" type="button" value="Remove"/>
   	</div>
-  	<div class="col-sm-4">
-  		<input id="incoming-requests-button" class="btn" type="button" value="Incoming Requests" text-color="black"/>
-  	</div>
-  	<div class="col-sm-4">
-  		<input id="manage-accounts-button" class="btn" type="button" value="Manage Accounts" text-color="black"/>
-  	</div>
+  </div>
 </div>
 
 <div class="container-fluid">
