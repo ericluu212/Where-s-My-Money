@@ -44,7 +44,24 @@ var TransactionsList = function()
 	}
 
 	function accountsFilter(transactionsList, accountsList) {
-		return undefined;
+		return transactionsList.filter(function(transaction) {
+			return $.inArray(transaction.account, accountsList) > -1;
+		});
+	}
+
+	function datesFilter(startDate, endDate) {
+		// Date style is Year Month Day=>20161231
+		return transactionsList.filter(function(transaction) {
+			if (startDate && endDate) {
+				return (startDate <= transaction.date && endDate >= transaction.date);
+			} else if (startDate) {
+				return (startDate <= transaction.date);
+			} else if (endDate) {
+				return (endDate >= transaction.date);
+			} else {
+				return true;
+			}
+		});
 	}
 
 	this.filterTransactions = function(transactionType="all", accountsList=[], startDate=null, endDate=null) {
@@ -55,5 +72,7 @@ var TransactionsList = function()
 		} else if (transactionType == "deposits") {
 			this.filteredTransactions = depositsFilter(this.filteredTransactions);
 		}
+
+
 	}
 }

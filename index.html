@@ -42,12 +42,44 @@ $(document).ready(function()
 function initializeList() {
 	transactionsList.render();
 
-}
-function filterTransactions(e) {
-	transactionsList.filterTransactions(e);
+function filterTransactions() {
+	var transactionType, accountsList, startDate, endDate;
+	transactionType = getTransactionTypeFilterValue();
+	accountsList = getFilteringAccounts();
+	startDate = getTransactionsStartDate();
+	endDate = getTransactionsEndDate();
+	transactionsList.filterTransactions(transactionType, accountsList, startDate, endDate);
 	transactionsList.clearRenderedList();
 	transactionsList.render();
 }
+
+function getTransactionTypeFilterValue() {
+	var transactionsTypeFilterElement = $('#transactionsTypeFilter')[0];
+	return transactionsTypeFilterElement.options[transactionsTypeFilterElement.selectedIndex].value;
+}
+
+function getTransactionsStartDate() {
+	var transactionsStartDateElement = $('#transactionsStartDate')[0];
+	return transactionsStartDateElement.value;
+}
+
+function getTransactionsEndDate() {
+	var transactionsEndDateElement = $('#transactionsEndDate')[0];
+	return transactionsEndDateElement.value;
+}
+
+function getFilteringAccounts() {
+	return [];
+}
+
+function handleTransactionsStartDateChange() {
+	filterTransactions();
+}
+
+function handleTransactionsEndDateChange() {
+	filterTransactions();
+}
+
 </script>
 </head>
 
@@ -124,28 +156,34 @@ function filterTransactions(e) {
     		<div id="firstColumnText">
     		<!-- Column 1 Code Here -->
     			<div id="transactions-container">
-    				<select name="transactionsFilter" onchange="filterTransactions(this.value);">
-  						<option selected="allTransactions" value="all">All Transactions</option>
-  						<option value="withdrawals">Withdrawals</option>
-  						<option value="deposits">Deposits</option>
-  					</select>
-  					<ul id="transactions-list">
-  					</ul>
+    				<div id="transactions-filtering-options">
+    					Viewing
+    					<select id="transactionsTypeFilter" onchange="filterTransactions(this.value);">
+  							<option selected="allTransactions" value="all">All Transactions</option>
+  							<option value="withdrawals">Withdrawals</option>
+  							<option value="deposits">Deposits</option>
+  						</select>
+  						From
+  						<input type="text" id="transactionsStartDate" onblur="handleTransactionsStartDateChange()">
+						To
+  						<input type="text" id="transactionsEndDate" onblur="handleTransactionsEndDateChange()">
+  					</div>
+  					<ul id="transactions-list"></ul>
     			</div>
     		</div>
   		</div>
 
     	<div class="col-sm-6" id="lastColumn">
 
-    		<div id="secondColumnText">
-        <!-- Column 2 Code Here -->
-          <div id="expenses-container">
-            <h4>Upcoming Expenses</h4>
-            <ul id="expenses-list">
-            </ul>
-          </div>
-        </div>
-
+    		<div id="expenses-container">
+    				<div id="transactions-filtering-options">
+    					Viewing Expenses From
+  						<input type="text" id="expensesStartDate" onblur="handleTransactionsStartDateChange()">
+						To
+  						<input type="text" id="expensesEndDate" onblur="handleTransactionsEndDateChange()">
+  					</div>
+  					<ul id="expenses-list"></ul>
+    			</div>
     	</div>
   	</div> <!-- class="row" -->
 </div> <!-- class="container" -->
