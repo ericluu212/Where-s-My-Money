@@ -39,8 +39,10 @@ $(document).ready(function()
 	transactionsList = new TransactionsList();
 	initializeList();
 });
+
 function initializeList() {
 	transactionsList.render();
+}
 
 function filterTransactions() {
 	var transactionType, accountsList, startDate, endDate;
