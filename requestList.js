@@ -57,7 +57,17 @@ var RequestList = function(){
 
     var info = $('<ul></ul>').addClass('list-inline list-group');
     var name = $('<li></li>').addClass('list-group-item p-2').attr('id', 'name').text(request.name);
-    var cost = $('<li></li>').addClass('list-group-item p-2').attr('id', 'cost').text('$' + request.cost);
+
+    var cost = $('<li></li>').addClass('list-group-item p-2').attr('id', 'cost').text("$" + request.cost);
+    /*var costForm = $('<form></form>').addClass('form-inline');
+    var costDiv = $('<div></div>').addClass('form-group');
+    var inputLabel = $('<label></label>').addClass('label').attr('for', 'price').attr('color', '#000').text("$");
+    var inputCost = $('<input></input>').attr("type", "text").addClass('form-control').attr('id', 'price').val(request.cost);
+    costDiv.append(inputLabel);
+    costDiv.append(inputCost);
+    costForm.append(costDiv);
+    cost.append(costForm);
+    */ 
     var date = $('<li></li>').addClass('list-group-item p-2').attr('id', 'date').text(months[request.date.getMonth()] + " " + request.date.getDate() + ", " + request.date.getFullYear());
     info.append(name).append(cost).append(date);
 
