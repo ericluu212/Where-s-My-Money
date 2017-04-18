@@ -14,8 +14,9 @@ Eric Luu
 
 <!-- Load style sheets -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="modal.css">
+
 <link rel="stylesheet" href="mainLayout.css">
+<link rel="stylesheet" href="modal.css">
 
 <!-- Use mobile-aware viewport -->
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -77,7 +78,7 @@ function handleExpensesListChange() {
     </div>
     <ul class="nav navbar-nav">
       <li><a onclick="showTransfer()">Transfer</a></li>
-      <li><a>Incoming Requests</a></li>
+      <li><a onclick="incoming_requests()">Incoming Requests</a></li>
       <li><a onclick="showAccounts()">Manage Accounts</a></li>
     </ul>
   </div>
@@ -140,18 +141,18 @@ function handleExpensesListChange() {
 <!-- modal for incoming requests -->
 <div id="incoming-requests-popup" class="modal" style="display: none">
 	<!--modal content -->
-	<div class="incoming-requests-modal-content modal-content">
-			<div class="modal-header">
+	<div id="incoming-requests-modal-content" class="incoming-requests-modal-content modal-content">
+			<div class="incoming-requests-modal-header">
 				<h2>Incoming Requests</h2>
 				<span class="close">&times;</span>
 			</div>
 
-			<div class="modal-body">
+			<div class="incoming-requests-modal-body">
 				<div class="list-group" id="incoming-requests-list">
 
 				</div>
 			</div>
-			<div class="modal-footer">
+			<div class="incoming-requests-modal-footer">
 			</div>
 	</div>
 </div>

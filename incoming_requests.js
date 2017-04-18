@@ -4,7 +4,7 @@ function incoming_requests(){
   requestsList.render();
   modal.style.display = "block";
 
-  var close = document.getElementsByClassName('close')[0];
+  var close = document.getElementsByClassName('close')[2];
 
   close.onclick = function(){
     modal.style.display = "none"
