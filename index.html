@@ -261,7 +261,7 @@ $( function() {
     	<div class="col-sm-6" id="firstColumn">
     		<div id="firstColumnText">
     		<!-- Column 1 Code Here -->
-    			<div class = "pad" id="transactions-container">
+    			<div id="transactions-container" class="data-container">
     				<div id="transactions-filtering-options">
     					Viewing
     					<select id="transactionsTypeFilter" onchange="handleTransactionsListChange()">
@@ -269,35 +269,37 @@ $( function() {
   							<option value="withdrawals">Withdrawals</option>
   							<option value="deposits">Deposits</option>
   						</select>
-              &nbsp;From:
-  						<input type="text" class = "calendarWidget" id="transactionsStartDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
-              &nbsp;To:
-  						<input type="text" class = "calendarWidget" id="transactionsEndDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
+
+              			&nbsp;From:
+  						<input type="text" class="calendarWidget date-input" id="transactionsStartDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
+              			&nbsp;To:
+  						<input type="text" class="calendarWidget date-input" id="transactionsEndDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
+
   					</div>
-            <br>
-            <div class = "scrollMoney">
-  					 <table id="transactions-table"></table>
-            </div>
+            		<div class = "scrollMoney">
+  						<table id="transactions-table"></table>
+            		</div>
     			</div>
     		</div>
   		</div>
 
     	<div class="col-sm-6" id="lastColumn">
 
-    		<div class = "pad" id="expenses-container">
-    				<div id="transactions-filtering-options">
-    					Viewing Expenses &nbsp;&nbsp;&nbsp;&nbsp;
-              From:
-  						<input type="text" class = "calendarWidget" id="expensesStartDate" onblur="handleExpensesListChange()" onchange="handleExpensesListChange()">
-              &nbsp;&nbsp;&nbsp;
-              To:
-  						<input type="text" class = "calendarWidget" id="expensesEndDate" onblur="handleExpensesListChange()" onchange="handleExpensesListChange()">
-  					</div>
-            <br>
-  					<div class = "scrollMoney">
-             <table id="expenses-table"></table>
-            </div>
-    			</div>
+    		<div class="data-container" id="expenses-container">
+				<div id="transactions-filtering-options">
+					Viewing Expenses &nbsp;&nbsp;&nbsp;&nbsp;
+          From:
+					<input type="text" class = "calendarWidget date-input" id="expensesStartDate" onblur="handleExpensesListChange()" onchange="handleExpensesListChange()">
+          &nbsp;&nbsp;&nbsp;
+          To:
+					<input type="text" class = "calendarWidget date-input" id="expensesEndDate" onblur="handleExpensesListChange()" onchange="handleExpensesListChange()">
+					</div>
+					<div class = "scrollMoney">
+         				<table id="expenses-table"></table>
+         			</div>
+        		</div>
+			</div>
+
     	</div>
   	</div> <!-- class="row" -->
 </div> <!-- class="container" -->
