@@ -16,10 +16,21 @@ var TransactionsList = function()
 		new Transaction(20160531, "UROP Deposit", 411, "Bank of America", 12),
 		new Transaction(20160215, "La Verde's", -8.42, "MITFCU", 4),
 		new Transaction(20160216, "La Verde's", -3.45, "MITFCU", 5),
-		new Transaction(20160216, "La Verde's", -5.49, "MITFCU", 6),
-		new Transaction(20160217, "La Verde's", -2.11, "MITFCU", 7),
+		new Transaction(20160229, "La Verde's", -5.49, "MITFCU", 6),
+		new Transaction(20160317, "La Verde's", -2.11, "MITFCU", 7),
 		new Transaction(20160217, "La Verde's", -18.13, "MITFCU", 8),
-		new Transaction(20160218, "La Verde's", -20.02, "MITFCU", 9)
+		new Transaction(20160418, "La Verde's", -20.02, "MITFCU", 9),
+		new Transaction(20170101, "Tuition Payment", -3528, "Chase", 13),
+		new Transaction(20160101, "Tuition Payment", -3487, "Chase", 14),
+		new Transaction(20170601, "Tuition Payment", -4792, "Chase", 15),
+		new Transaction(20160601, "Tuition Payment", -4523, "Chase", 16),
+		new Transaction(20160631, "Microsoft Internship", 5567, "MITFCU", 17),
+		new Transaction(20160731, "Microsoft Internship", 5603, "MITFCU", 18),
+		new Transaction(20160831, "Microsoft Internship", 5743, "MITFCU", 19),
+		new Transaction(20160931, "Amazon", -24.22, "Bank of America", 20),
+		new Transaction(20170318, "Amazon", -34.28, "MITFCU", 21),
+		new Transaction(20170318, "Amazon", -74.50, "Chase", 22),
+		new Transaction(20170517, "Keg Party Supplier", -429.87, "Chase", 23),
 
 	];
 
@@ -37,17 +48,20 @@ var TransactionsList = function()
 	{
 		for (var i=0; i<this.filteredTransactions.length; i++)
 		{
+			this.filteredTransactions.sort(function(a, b) {
+				return a.date - b.date;
+			});
 			this.transactionTableElement.appendChild(createTableElement(this.filteredTransactions[i]));
 		}
 	}
 
-	function generateTransactions(){
-		transactionsList = []
-		for (var i = 2017; i < ENDYEAR; i++) {
-			transactionsList.push(new Expense(parseInt(i.toString() + MONTH_AND_DATE.toString()), "UROP Deposit", 450, "Bank of America", i-2016));
-		}
-		return transactionsList;
-	}
+	// function generateTransactions(){
+	// 	transactionsList = []
+	// 	for (var i = 2017; i < ENDYEAR; i++) {
+	// 		transactionsList.push(new Expense(parseInt(i.toString() + MONTH_AND_DATE.toString()), "UROP Deposit", 450, "Bank of America", i-2016));
+	// 	}
+	// 	return transactionsList;
+	// }
 
 	function createTableElement(transaction)
 	{
