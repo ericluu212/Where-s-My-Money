@@ -16,6 +16,10 @@ Eric Luu
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="mainLayout.css">
+<link rel="stylesheet" href="modal.css">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
+
 
 <!-- Use mobile-aware viewport -->
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -26,29 +30,59 @@ Eric Luu
 <script src="transactionsList.js"></script>
 <script src="transaction.js"></script>
 <script src="transferModal.js"></script>
+<script src="expensesList.js"></script>
+<script src="expense.js"></script>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="incoming_requests.js"></script>
+<script src="requestList.js"></script>
+<script src="request.js"></script>
+
 <script>
 
-var transactionsList;
+var transactionsList, expensesList, requestsList;
 var accountsArray = ["Bank of America", "Chase", "MITFCU"];
 
 // Final initialization entry point: the Javascript code inside this block
 // runs at the end of start-up when the page has finished loading.
 $(document).ready(function()
 {
-	// TODO: Populate transactions-list when the page is loaded
 	transactionsList = new TransactionsList();
-	initializeList();
-});
-function initializeList() {
-	transactionsList.render();
+	transactionsList.accounts = accountsArray;
+	expensesList = new ExpensesList();
+	expensesList.accounts = accountsArray;
 
-}
-function filterTransactions(e) {
-	transactionsList.filterTransactions(e);
+	transactionsList.render();
+	expensesList.render();
+
+	requestsList = new RequestList();
+	updateBtnDescription();
+});
+
+function handleTransactionsListChange() {
+	transactionsList.filterTransactions();
 	transactionsList.clearRenderedList();
 	transactionsList.render();
 }
+
+function handleExpensesListChange() {
+	expensesList.filterExpenses();
+	expensesList.clearRenderedList();
+	expensesList.render();
+}
+
+//Allow for selecting date with calendar widget
+$( function() {
+    $( ".calendarWidget" ).datepicker({
+      numberOfMonths: 2,
+      showButtonPanel: true,
+    });
+  } );
 </script>
+
+
+
 </head>
 
 <body>
@@ -60,7 +94,7 @@ function filterTransactions(e) {
     </div>
     <ul class="nav navbar-nav">
       <li><a onclick="showTransfer()">Transfer</a></li>
-      <li><a>Incoming Requests</a></li>
+      <li><a onclick="incoming_requests()" id="request-btn"></a></li>
       <li><a onclick="showAccounts()">Manage Accounts</a></li>
     </ul>
   </div>
@@ -130,6 +164,7 @@ function filterTransactions(e) {
   	<div>
   		<input id="add-account-button" class="btn" type="button" value="Add"/>
   		<input id="remove-account-button" class="btn" type="button" value="Remove"/>
+
   	</div>
   </div>
 </div>
@@ -165,26 +200,106 @@ function filterTransactions(e) {
     <p style="font-size: 18px; text-align: center;">Account has been successfully added.</p>
   </div>
 </div>
+<!-- modal for incoming requests -->
+<div id="incoming-requests-popup" class="request-modal" style="display: none">
+	<!--modal content -->
+
+	<div class="request-modal-content modal-content">
+			<div class="modal-header" id="request-header">
+				<h2>Incoming Requests</h2>
+				<span class="close request-close" id="request-close">&times;</span>
+			</div>
+
+			<div class="modal-body" id='request-body'>
+				<div class="list-group" id="incoming-requests-list">
+
+				</div>
+			</div>
+			<div class="modal-footer" id='request-footer'>
+				<button type="button" class="btn btn-outline-primary request-close">Close</button>
+			</div>
+	</div>
+</div>
+
+<div id="change-amt-popup" class="change-amt-modal modal" style="display: none">
+	<!--modal content -->
+
+	<div class="change-amt-modal-content modal-content">
+			<div class="modal-header" id="change-amt-header">
+				<h2>Change amount</h2>
+				<span class="close change-amt-close" id="change-amt-close">&times;</span>
+			</div>
+
+			<div class="modal-body row" id='change-amt-body'>
+				<h5>Current amount: <h5 id="current-cost"></h5></h5>
+				<form class='form-inline'>
+					<div class='form-group'>
+						<label for='change-amt-text' id='change-amt-label'>New amount:</label>
+						<input class='form-control' type='text' id='change-amt-text' />
+					</div>
+
+				</form>
+
+			</div>
+			<div class="modal-footer" id='change-amt-footer'>
+					<div class='btn-group'>
+						<button type='button' class='btn btn-primary' id='change-amt-confirm'>Update</button>
+						<button type="button" class="btn btn-outline-primary change-amt-close">Close</button>
+					</div>
+
+			</div>
+	</div>
+</div>
 
 <div class="container-fluid">
   	<div class="row">
     	<div class="col-sm-6" id="firstColumn">
-      		<div id="firstColumnText">
-      		<!-- Column 1 Code Here -->
-    			<div id="transactions-container">
-    				<select name="transactionsFilter" onchange="filterTransactions(this.value);">
-  						<option selected="allTransactions" value="all">All Transactions</option>
-  						<option value="withdrawals">Withdrawals</option>
-  						<option value="deposits">Deposits</option>
-  					</select>
-  					<ul id="transactions-list">
-  					</ul>
+    		<div id="firstColumnText">
+    		<!-- Column 1 Code Here -->
+    			<div class = "pad" id="transactions-container">
+    				<div id="transactions-filtering-options">
+    					Viewing
+    					<select id="transactionsTypeFilter" onchange="handleTransactionsListChange()">
+  							<option selected="allTransactions" value="all">All Transactions</option>
+  							<option value="withdrawals">Withdrawals</option>
+  							<option value="deposits">Deposits</option>
+  						</select>
+              <br>
+              <br>
+              From:
+  						<input type="text" class = "calendarWidget" id="transactionsStartDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
+						  <br>
+              <br>
+              To:
+  						<input type="text" class = "calendarWidget" id="transactionsEndDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
+  					</div>
+            <br>
+            <div class = "scrollMoney">
+  					 <table id="transactions-table"></table>
+            </div>
     			</div>
     		</div>
-		</div>
+  		</div>
 
     	<div class="col-sm-6" id="lastColumn">
-    		<p> Second Column </p>
+
+    		<div class = "pad" id="expenses-container">
+    				<div id="transactions-filtering-options">
+    					Viewing Expenses
+              <br>
+              <br>
+              From:
+  						<input type="text" class = "calendarWidget" id="expensesStartDate" onblur="handleExpensesListChange()" onchange="handleExpensesListChange()">
+  						<br>
+              <br>
+              To:
+  						<input type="text" class = "calendarWidget" id="expensesEndDate" onblur="handleExpensesListChange()" onchange="handleExpensesListChange()">
+  					</div>
+            <br>
+  					<div class = "scrollMoney">
+             <table id="expenses-table"></table>
+            </div>
+    			</div>
     	</div>
   	</div> <!-- class="row" -->
 </div> <!-- class="container" -->

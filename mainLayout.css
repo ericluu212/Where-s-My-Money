@@ -1,4 +1,11 @@
+h1{
+	text-align: center;
+}
 
+h4{
+	text-align: center;
+	text-decoration: underline;
+}
 
 #firstColumn {
 }
@@ -9,10 +16,17 @@
 #transactions-container{
   border-style: solid;
   height: 500px;
-  width: 250px;
+  width: 350px;
 }
 
-li a:hover { 
+
+#expenses-container{
+  border-style: solid;
+  height: 500px;
+  width: 350px;
+  float: right;
+}
+li a:hover {
     cursor: pointer;
 }
 
@@ -102,4 +116,15 @@ li a:hover {
 	font-size: 20px;
 	text-decoration: underline;
 	font-weight: bold;
+}
+.pad{
+  padding: 10px;
+}
+.scrollMoney{
+  height: 350px;
+  overflow: auto;
+}
+
+ol{
+  padding-left: 0px;
 }
