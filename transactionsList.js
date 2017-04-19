@@ -3,7 +3,7 @@ var MONTH_AND_DATE = 0501;
 
 var TransactionsList = function()
 {
-	this.transactionListElement = $('#transactions-list')[0];
+	this.transactionTableElement = $('#transactions-table')[0];
 
 	this.transactions = generateTransactions();
 	/*
@@ -19,8 +19,8 @@ var TransactionsList = function()
 
 	this.clearRenderedList = function()
 	{
-		while (this.transactionListElement.firstChild) {
-			this.transactionListElement.removeChild(this.transactionListElement.firstChild);
+		while (this.transactionTableElement.firstChild) {
+			this.transactionTableElement.removeChild(this.transactionTableElement.firstChild);
 		}
 	}
 
@@ -28,7 +28,7 @@ var TransactionsList = function()
 	{
 		for (var i=0; i<this.filteredTransactions.length; i++)
 		{
-			this.transactionListElement.appendChild(createListElement(this.filteredTransactions[i]));
+			this.transactionTableElement.appendChild(createTableElement(this.filteredTransactions[i]));
 		}
 	}
 
@@ -40,11 +40,24 @@ var TransactionsList = function()
 		return transactionsList;
 	}
 
-	function createListElement(transaction)
+	function createTableElement(transaction)
 	{
-		var listElement = document.createElement('ol');
-		listElement.appendChild(document.createTextNode(transaction.toString()));
-		return listElement;
+		var tableElement = document.createElement('tr');
+
+		var dateElement = document.createElement('td');
+		dateElement.appendChild(document.createTextNode(transaction.dateToString()));
+
+		var descriptionElement = document.createElement('td');
+		descriptionElement.appendChild(document.createTextNode(transaction.description));
+
+		var costElement = document.createElement('td');
+		costElement.appendChild(document.createTextNode(transaction.cost.toString()));
+
+		tableElement.appendChild(dateElement);
+		tableElement.appendChild(descriptionElement);
+		tableElement.appendChild(costElement);
+
+		return tableElement;
 	}
 
 	function withdrawalsFilter(transactionsList) {
@@ -83,9 +96,9 @@ var TransactionsList = function()
 	function parseDateValue(dateValue) {
 		// dateValue is MM/DD/YYYY
 		if (dateValue.length == 10) {
-			var year = dateValue.substr(6,10);
-			var month = dateValue.substr(0,2);
-			var day = dateValue.substr(3,5);
+			var year = dateValue.substring(6,10);
+			var month = dateValue.substring(0,2);
+			var day = dateValue.substring(3,5);
 			var yearMonthDay = year + month + day;
 			return parseInt(yearMonthDay);
 		} else {
