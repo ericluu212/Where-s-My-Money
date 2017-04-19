@@ -80,6 +80,19 @@ var TransactionsList = function()
 		});
 	}
 
+	function parseDateValue(dateValue) {
+		// dateValue is MM/DD/YYYY
+		if (dateValue.length == 10) {
+			var year = dateValue.substr(6,10);
+			var month = dateValue.substr(0,2);
+			var day = dateValue.substr(3,5);
+			var yearMonthDay = year + month + day;
+			return parseInt(yearMonthDay);
+		} else {
+			return null;
+		}
+	}
+
 	function getTransactionTypeFilterValue() {
 		var transactionsTypeFilterElement = $('#transactionsTypeFilter')[0];
 		return transactionsTypeFilterElement.options[transactionsTypeFilterElement.selectedIndex].value;
@@ -87,20 +100,17 @@ var TransactionsList = function()
 
 	function getTransactionsStartDate() {
 		var transactionsStartDateElement = $('#transactionsStartDate')[0];
-		if (transactionsStartDateElement.value.length == 8) {
-			return parseInt(transactionsStartDateElement.value);
-		} else {
-			return null;
-		}
+		// dateValue is MM/DD/YYYY
+		var dateValue = transactionsStartDateElement.value;
+		return parseDateValue(dateValue);
 	}
+
 
 	function getTransactionsEndDate() {
 		var transactionsEndDateElement = $('#transactionsEndDate')[0];
-		if (transactionsEndDateElement.value.length == 8) {
-			return parseInt(transactionsEndDateElement.value);
-		} else {
-			return null;
-		}
+		var dateValue = transactionsEndDateElement.value;
+		// dateValue is MM/DD/YYYY
+		return parseDateValue(dateValue);
 	}
 
 	this.filterTransactions = function() {
