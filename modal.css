@@ -51,6 +51,7 @@
 #request-close:hover,
 #request-close:focus {
     color: #000;
+    opacity: .4;
     text-decoration: none;
     cursor: pointer;
 }
