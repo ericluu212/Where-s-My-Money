@@ -96,7 +96,7 @@ function filterTransactions(e) {
   		</tr>
   		<tr>
 		    <td><label for="Amount">Amount</label></td>
-		    <td valign="top"><input id="Amount" type="text" placeholder="0.00" style="width: 130px;"></td>
+		    <td valign="top"><input id="Amount" type="text" placeholder="0.00"; style="width: 130px;"></td>
   		</tr>
     </table>
     <div class="transferModalBtn">
@@ -111,7 +111,7 @@ function filterTransactions(e) {
   <!-- Modal content -->
   <div class="modal-content" id="transferSuccessContent">
     <span class="close" id ="closeTransferSuccess">&times;</span>
-    <p style="font-size: 18px;">Transfer has been made.</p>
+    <p style="font-size: 18px; text-align: center;">Transfer has been made.</p>
   </div>
 </div>
 
@@ -150,6 +150,16 @@ function filterTransactions(e) {
     <div>
   		<input id="create-button" class="btn" type="button" value="Create"/>
   	</div>
+  </div>
+</div>
+
+<!--modal for a successful account addition-->
+<div id="addAccountSuccessModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content" id="addAccountSuccessContent">
+    <span class="close" id ="closeAddAccountSuccess">&times;</span>
+    <p style="font-size: 18px; text-align: center;">Account has been successfully added.</p>
   </div>
 </div>
 

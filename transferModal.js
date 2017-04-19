@@ -10,12 +10,18 @@ function showTransfer(){
 	// When the user clicks on <span> (x), close the modal
 	span.onclick = function() {
 	    modal.style.display = "none";
+	    document.getElementById('fromList').value = 'initial';
+		document.getElementById('toList').value = 'initial';
+		var currency = document.getElementById("Amount").value = '';
 	}
 
 	// When the user clicks anywhere outside of the modal, close it
 	window.onclick = function(event) {
 	    if (event.target == modal) {
 	        modal.style.display = "none";
+	        document.getElementById('fromList').value = 'initial';
+			document.getElementById('toList').value = 'initial';
+			var currency = document.getElementById("Amount").value = '';
 	    }
 	}
 
@@ -34,8 +40,11 @@ function showTransfer(){
 	function validateAccounts(){
 		var account1 = document.getElementById('fromList').value;
 		var account2 = document.getElementById('toList').value;
-		if(account1 == '' || account2 == '' || account1 == account2){
-			alert("Invalid accounts");
+		if(account1 == '' || account2 == ''){
+			alert("Both a To and From account must be selected.");
+			return false;
+		}else if(account1 == account2){
+			alert("Transfer must be between different accounts.");
 			return false;
 		}else{
 			return true;
@@ -61,18 +70,14 @@ function showTransfer(){
 function showTransferSuccess(){
 	// Get the modal
 	var modal = document.getElementById('transferSuccessModal');
-
 	// Get the <span> element that closes the modal
 	var span = document.getElementById("closeTransferSuccess");
-
 	// When the user clicks the button, open the modal 
 	modal.style.display = "block";
-
 	// When the user clicks on <span> (x), close the modal
 	span.onclick = function() {
 	    modal.style.display = "none";
 	}
-
 	// When the user clicks anywhere outside of the modal, close it
 	window.onclick = function(event) {
 	    if (event.target == modal) {
@@ -187,7 +192,7 @@ function showAccounts(){
 				modal.style.display = "none";
 				document.getElementById('accountName').value = '';
 				document.getElementById('accountNumber').value = '';
-				//showAddSuccess();
+				showAddSuccess();
 			}
 		}
 		function validateAccountNumber(){
@@ -200,5 +205,24 @@ function showAccounts(){
 				return false;
 			}
 		}
+	}
+}
+
+function showAddSuccess(){
+	// Get the modal
+	var modal = document.getElementById('addAccountSuccessModal');
+	// Get the <span> element that closes the modal
+	var span = document.getElementById("closeAddAccountSuccess");
+	// When the user clicks the button, open the modal 
+	modal.style.display = "block";
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+	    modal.style.display = "none";
+	}
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+	    if (event.target == modal) {
+	        modal.style.display = "none";
+	    }
 	}
 }
