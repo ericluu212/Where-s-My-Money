@@ -13,19 +13,15 @@ h4{
 #lastColumn {
 }
 
-#transactions-container{
+.data-container{
   border-style: solid;
-  height: 500px;
-  width: 350px;
+  border-color: DimGrey;
+  border-radius: 15px;
+  height: 100%;
+  width: 450px;
+  margin: 0 auto;
 }
 
-
-#expenses-container{
-  border-style: solid;
-  height: 500px;
-  width: 350px;
-  float: right;
-}
 li a:hover {
     cursor: pointer;
 }
@@ -159,19 +155,29 @@ li a:hover {
 .accountButtons{
 	text-align: center;
 }
+
 .accountButtons input{
 	margin-left: 5px;
 	margin-right: 5px;
 }
 
-.pad{
+.data-container{
   padding: 10px;
 }
+
+.date-input {
+
+}
+
 .scrollMoney{
-  height: 350px;
+  height: 450px;
   overflow: auto;
 }
 
 ol{
   padding-left: 0px;
+}
+
+.calendarWidget{
+  width: 20%;
 }

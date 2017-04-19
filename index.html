@@ -156,6 +156,11 @@ $( function() {
   	<div id="accountsList">
   	</div>
   	<table id="accountsTable" class="checkboxTable">
+      <tr>
+        <td>Date</td>
+        <td>Description</td>
+        <td>Amount</td>
+      </tr>
   	</table>
   	<div class="accountButtons">
   		<input id="add-account-button" class="btn" type="button" value="Add"/>
@@ -213,9 +218,6 @@ $( function() {
 
 				</div>
 			</div>
-			<div class="modal-footer" id='request-footer'>
-				<button type="button" class="btn btn-outline-primary request-close">Close</button>
-			</div>
 	</div>
 </div>
 
@@ -229,10 +231,10 @@ $( function() {
 			</div>
 
 			<div class="modal-body row" id='change-amt-body'>
-				<h5>Current amount: <h5 id="current-cost"></h5></h5>
+				<h5 id="current-cost">Current amount: </h5>
 				<form class='form-inline'>
 					<div class='form-group'>
-						<label for='change-amt-text' id='change-amt-label'>New amount:</label>
+						<label for='change-amt-text' id='change-amt-label'>New amount: </label>
 						<input class='form-control' type='text' id='change-amt-text' />
 					</div>
 
@@ -241,8 +243,7 @@ $( function() {
 			</div>
 			<div class="modal-footer" id='change-amt-footer'>
 					<div class='btn-group'>
-						<button type='button' class='btn btn-primary' id='change-amt-confirm'>Update</button>
-						<button type="button" class="btn btn-outline-primary change-amt-close">Close</button>
+						<button type='button' class='btn btn-success' id='change-amt-confirm'>Update</button>
 					</div>
 
 			</div>
@@ -252,52 +253,45 @@ $( function() {
 <div class="container-fluid">
   	<div class="row">
     	<div class="col-sm-6" id="firstColumn">
-    		<div id="firstColumnText">
-    		<!-- Column 1 Code Here -->
-    			<div class = "pad" id="transactions-container">
-    				<div id="transactions-filtering-options">
-    					Viewing
-    					<select id="transactionsTypeFilter" onchange="handleTransactionsListChange()">
-  							<option selected="allTransactions" value="all">All Transactions</option>
-  							<option value="withdrawals">Withdrawals</option>
-  							<option value="deposits">Deposits</option>
-  						</select>
-              <br>
-              <br>
-              From:
-  						<input type="text" class = "calendarWidget" id="transactionsStartDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
-						  <br>
-              <br>
-              To:
-  						<input type="text" class = "calendarWidget" id="transactionsEndDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
-  					</div>
-            <br>
-            <div class = "scrollMoney">
-  					 <table id="transactions-table"></table>
-            </div>
-    			</div>
-    		</div>
+  		<!-- Column 1 Code Here -->
+  			<div id="transactions-container" class="data-container">
+  				<div id="transactions-filtering-options">
+  					Viewing
+  					<select id="transactionsTypeFilter" onchange="handleTransactionsListChange()">
+							<option selected="allTransactions" value="all">All Transactions</option>
+							<option value="withdrawals">Withdrawals</option>
+							<option value="deposits">Deposits</option>
+						</select>
+
+            			&nbsp;From:
+						<input type="text" class="calendarWidget date-input" id="transactionsStartDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
+            			&nbsp;To:
+						<input type="text" class="calendarWidget date-input" id="transactionsEndDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
+
+					</div>
+          		<div class = "scrollMoney">
+						<table id="transactions-table"></table>
+          		</div>
+  			</div>
   		</div>
 
     	<div class="col-sm-6" id="lastColumn">
+    		<div class="data-container" id="expenses-container">
+  				<div id="transactions-filtering-options">
+  					Viewing Expenses &nbsp;&nbsp;&nbsp;&nbsp;
+            From:
+  					<input type="text" class = "calendarWidget date-input" id="expensesStartDate" onblur="handleExpensesListChange()" onchange="handleExpensesListChange()">
+            &nbsp;&nbsp;&nbsp;
+            To:
+  					<input type="text" class = "calendarWidget date-input" id="expensesEndDate" onblur="handleExpensesListChange()" onchange="handleExpensesListChange()">
+					</div>
+          
+					<div class = "scrollMoney">
+     				<table id="expenses-table"></table>
+     			</div>
+    		</div>
+			</div>
 
-    		<div class = "pad" id="expenses-container">
-    				<div id="transactions-filtering-options">
-    					Viewing Expenses
-              <br>
-              <br>
-              From:
-  						<input type="text" class = "calendarWidget" id="expensesStartDate" onblur="handleExpensesListChange()" onchange="handleExpensesListChange()">
-  						<br>
-              <br>
-              To:
-  						<input type="text" class = "calendarWidget" id="expensesEndDate" onblur="handleExpensesListChange()" onchange="handleExpensesListChange()">
-  					</div>
-            <br>
-  					<div class = "scrollMoney">
-             <table id="expenses-table"></table>
-            </div>
-    			</div>
     	</div>
   	</div> <!-- class="row" -->
 </div> <!-- class="container" -->

@@ -22,6 +22,8 @@ var RequestList = function(){
     if(indexOfRequest > -1){
       this.requests.splice(indexOfRequest, 1);
     }
+
+    return request;
   }
 
   this.denyRequest = function(id){
@@ -35,7 +37,7 @@ var RequestList = function(){
       this.requests.splice(indexOfRequest, 1);
     }
 
-
+    return request;
   }
 
   this.changeAmount = function(newCost, id){
@@ -62,7 +64,7 @@ var RequestList = function(){
     info.append(name).append(cost).append(date);
 
     var commands =  $('<div></div>').addClass('btn-group').attr('role', 'group').attr('id', 'btn-container');
-    var approveBtn = $('<button></button>').addClass('btn btn-secondary request-btn').attr("id", "approve-btn").text('Approve request');
+    var approveBtn = $('<button></button>').addClass('btn btn-success request-btn').attr("id", "approve-btn").text('Approve request');
     var changeAmountBtn = $('<button></button>').addClass('btn btn-secondary request-btn').attr("id", "change-amt-btn").attr('data-toggle', 'modal').attr('href', '#change-amt-popup').text('Change amount');
     var denyBtn = $('<button></button>').addClass('btn btn-secondary request-btn').attr('id', 'deny-btn').text('Deny');
     commands.append(approveBtn).append(changeAmountBtn).append(denyBtn);
