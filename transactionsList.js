@@ -39,8 +39,14 @@ var TransactionsList = function()
 
 	this.clearRenderedList = function()
 	{
-		while (this.transactionTableElement.firstChild) {
-			this.transactionTableElement.removeChild(this.transactionTableElement.firstChild);
+		// while (this.transactionTableElement.firstChild) {
+		// 	this.transactionTableElement.removeChild(this.transactionTableElement.firstChild);
+		// }
+		for(var i=0; i< this.transactionTableElement.children.length; i++){
+			if(this.transactionTableElement.children[i].tagName == 'TR'){
+				this.transactionTableElement.removeChild(this.transactionTableElement.children[i]);
+				i--;
+			}
 		}
 	}
 
