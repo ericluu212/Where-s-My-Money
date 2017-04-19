@@ -8,8 +8,6 @@ var Request = function Request(date, description, cost, name, id){
   this.name = name;
 
   this.changeAmount = function(newCost){
-
-    this.cost = newCost
-
+    this.cost = newCost;
   }
 }

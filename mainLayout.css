@@ -16,14 +16,14 @@ h4{
 #transactions-container{
   border-style: solid;
   height: 500px;
-  width: 350px;
+  width: 450px;
 }
 
 
 #expenses-container{
   border-style: solid;
   height: 500px;
-  width: 350px;
+  width: 425px;
   float: right;
 }
 li a:hover {
@@ -127,4 +127,8 @@ li a:hover {
 
 ol{
   padding-left: 0px;
+}
+
+.calendarWidget{
+  width: 20%;
 }

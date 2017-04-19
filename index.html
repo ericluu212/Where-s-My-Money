@@ -160,6 +160,11 @@ $( function() {
   	<div id="accountsList">
   	</div>
   	<table id="accountsTable" class="checkboxTable">
+      <tr>
+        <td>Date</td>
+        <td>Description</td>
+        <td>Amount</td>
+      </tr>
   	</table>
   	<div>
   		<input id="add-account-button" class="btn" type="button" value="Add"/>
@@ -264,13 +269,9 @@ $( function() {
   							<option value="withdrawals">Withdrawals</option>
   							<option value="deposits">Deposits</option>
   						</select>
-              <br>
-              <br>
-              From:
+              &nbsp;From:
   						<input type="text" class = "calendarWidget" id="transactionsStartDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
-						  <br>
-              <br>
-              To:
+              &nbsp;To:
   						<input type="text" class = "calendarWidget" id="transactionsEndDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
   					</div>
             <br>
@@ -285,13 +286,10 @@ $( function() {
 
     		<div class = "pad" id="expenses-container">
     				<div id="transactions-filtering-options">
-    					Viewing Expenses
-              <br>
-              <br>
+    					Viewing Expenses &nbsp;&nbsp;&nbsp;&nbsp;
               From:
   						<input type="text" class = "calendarWidget" id="expensesStartDate" onblur="handleExpensesListChange()" onchange="handleExpensesListChange()">
-  						<br>
-              <br>
+              &nbsp;&nbsp;&nbsp;
               To:
   						<input type="text" class = "calendarWidget" id="expensesEndDate" onblur="handleExpensesListChange()" onchange="handleExpensesListChange()">
   					</div>
