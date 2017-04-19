@@ -126,11 +126,21 @@ var TransactionsList = function()
 		return parseDateValue(dateValue);
 	}
 
+	function getAccounts() {
+		var accounts = [];
+		$('.transactions-account-check').each(function(i, el) {
+			if (el.checked) {
+    			accounts.push(el.value);
+    		}
+		});
+		return accounts;
+	}
+
 	this.filterTransactions = function() {
 		// var Transaction = function(date, description, cost, account, id)
 		var transactionType, accountsList, startDate, endDate;
 		transactionType = getTransactionTypeFilterValue();
-		accountsList = this.accounts;
+		accountsList = getAccounts();
 		startDate = getTransactionsStartDate();
 		endDate = getTransactionsEndDate();
 
