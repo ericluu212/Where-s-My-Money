@@ -129,10 +129,10 @@ $(document).on('change', 'input[name="expenses-account"]', function() {
   <div class="container-fluid">
     <div class="navbar-header">
       <img src="wheres-my-money-logo.png" style="width:100px;height:50px; float: left;">
-      <a class="navbar-brand" href="#">Where's My Money?</a>
+      <a class="navbar-brand" href="#" style="color:green;">Where's My Money?</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a onclick="showTransfer()">Transfer</a></li>
+      <li><a style="" onclick="showTransfer()">Transfer</a></li>
       <li><a onclick="incoming_requests()" id="request-btn"></a></li>
       <li><a onclick="showAccounts()">Manage Accounts</a></li>
     </ul>
@@ -143,17 +143,16 @@ $(document).on('change', 'input[name="expenses-account"]', function() {
 
   <!-- Modal content -->
   <div class="modal-content" id="transferContent">
-    <span class="close" id ="closeTransfer">&times;</span>
-    <p class="modalHeader">Transfer</p>
+  <div class="popupHeader">
+  	<span class="close" id ="closeTransfer">&times;</span>
+    <h2 class="modalHeader">Transfer</h2>
+  </div>
     <table class="paddingBetweenCols">
     	<tr>
 	    	<td><label for="fromList">From</label></td>
 	    	<td valign="top">
 	    		<select id="fromList">
 		    		<option value="" disabled selected="selected">Select one</option>
-		    		<option value="Bank of America">Bank of America</option>
-		    		<option value="Chase">Chase</option>
-		    		<option value="MITFCU">MITFCU</option>
 	    		</select>
 	    	</td>
 		</tr>
@@ -162,9 +161,6 @@ $(document).on('change', 'input[name="expenses-account"]', function() {
     		<td valign="top">
     			<select id="toList">
 			    	<option value="" disabled selected="selected">Select one</option>
-			    	<option value="Bank of America">Bank of America</option>
-			    	<option value="Chase">Chase</option>
-			    	<option value="MITFCU">MITFCU</option>
 	    		</select>
     		</td>
   		</tr>
@@ -192,15 +188,20 @@ $(document).on('change', 'input[name="expenses-account"]', function() {
 <!--modal for managing accounts-->
 <div id="accountsModal" class="modal">
   <div class="modal-content" id="accountsContent">
-  	<span class="close" id ="closeAccounts">&times;</span>
-  	<p class="modalHeader">Accounts</p>
-  	<!--<ul id="accountsList">
-  	</ul>-->
+  	<div class="popupHeader">
+  		<span class="close" id ="closeAccounts">&times;</span>
+  		<h2>Accounts</h2>
+  	</div>
   	<div id="accountsList">
   	</div>
   	<table id="accountsTable" class="checkboxTable">
+      <tr>
+        <td>Date</td>
+        <td>Description</td>
+        <td>Amount</td>
+      </tr>
   	</table>
-  	<div>
+  	<div class="accountButtons">
   		<input id="add-account-button" class="btn" type="button" value="Add"/>
   		<input id="remove-account-button" class="btn" type="button" value="Remove"/>
 
@@ -212,8 +213,10 @@ $(document).on('change', 'input[name="expenses-account"]', function() {
 <div id="addAccountModal" class="modal">
   <!-- Modal content -->
   <div class="modal-content" id="addAccountContent">
-    <span class="close" id ="closeAddAccount">&times;</span>
-    <p class="modalHeader">Add Account</p>
+  	<div class="popupHeader">
+    	<span class="close" id ="closeAddAccount">&times;</span>
+    	<h2>Add Account</h2>
+    </div>
     <table class="paddingBetweenCols">
   		<tr>
 		    <td><label for="accountName">Account Name</label></td>
@@ -254,9 +257,6 @@ $(document).on('change', 'input[name="expenses-account"]', function() {
 
 				</div>
 			</div>
-			<div class="modal-footer" id='request-footer'>
-				<button type="button" class="btn btn-outline-primary request-close">Close</button>
-			</div>
 	</div>
 </div>
 
@@ -270,10 +270,10 @@ $(document).on('change', 'input[name="expenses-account"]', function() {
 			</div>
 
 			<div class="modal-body row" id='change-amt-body'>
-				<h5>Current amount: <h5 id="current-cost"></h5></h5>
+				<h5 id="current-cost">Current amount: </h5>
 				<form class='form-inline'>
 					<div class='form-group'>
-						<label for='change-amt-text' id='change-amt-label'>New amount:</label>
+						<label for='change-amt-text' id='change-amt-label'>New amount: </label>
 						<input class='form-control' type='text' id='change-amt-text' />
 					</div>
 
@@ -282,8 +282,7 @@ $(document).on('change', 'input[name="expenses-account"]', function() {
 			</div>
 			<div class="modal-footer" id='change-amt-footer'>
 					<div class='btn-group'>
-						<button type='button' class='btn btn-primary' id='change-amt-confirm'>Update</button>
-						<button type="button" class="btn btn-outline-primary change-amt-close">Close</button>
+						<button type='button' class='btn btn-success' id='change-amt-confirm'>Update</button>
 					</div>
 
 			</div>
@@ -293,6 +292,7 @@ $(document).on('change', 'input[name="expenses-account"]', function() {
 <div class="container-fluid">
   	<div class="row">
     	<div class="col-sm-6" id="firstColumn">
+<<<<<<< HEAD
     		<div id="firstColumnText">
     		<!-- Column 1 Code Here -->
     			<div id="transactions-container" class="data-container">
@@ -316,26 +316,53 @@ $(document).on('change', 'input[name="expenses-account"]', function() {
             		</div>
     			</div>
     		</div>
+=======
+  		<!-- Column 1 Code Here -->
+  			<div id="transactions-container" class="data-container">
+  				<div id="transactions-filtering-options">
+  					Viewing
+  					<select id="transactionsTypeFilter" onchange="handleTransactionsListChange()">
+							<option selected="allTransactions" value="all">All Transactions</option>
+							<option value="withdrawals">Withdrawals</option>
+							<option value="deposits">Deposits</option>
+						</select>
+
+            			&nbsp;From:
+						<input type="text" class="calendarWidget date-input" id="transactionsStartDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
+            			&nbsp;To:
+						<input type="text" class="calendarWidget date-input" id="transactionsEndDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
+
+					</div>
+          		<div class = "scrollMoney">
+						<table id="transactions-table"></table>
+          		</div>
+  			</div>
+>>>>>>> 40a4a0de1f3f4f177650d5f1dc2610206b32613e
   		</div>
 
     	<div class="col-sm-6" id="lastColumn">
-
     		<div class="data-container" id="expenses-container">
-				<div id="transactions-filtering-options">
-					Viewing Expenses
-          			From:
-					<input type="text" class = "calendarWidget date-input" id="expensesStartDate" onblur="handleExpensesListChange()" onchange="handleExpensesListChange()">
-          			To:
-					<input type="text" class = "calendarWidget date-input" id="expensesEndDate" onblur="handleExpensesListChange()" onchange="handleExpensesListChange()">
+  				<div id="transactions-filtering-options">
+  					Viewing Expenses &nbsp;&nbsp;&nbsp;&nbsp;
+            From:
+  					<input type="text" class = "calendarWidget date-input" id="expensesStartDate" onblur="handleExpensesListChange()" onchange="handleExpensesListChange()">
+            &nbsp;&nbsp;&nbsp;
+            To:
+  					<input type="text" class = "calendarWidget date-input" id="expensesEndDate" onblur="handleExpensesListChange()" onchange="handleExpensesListChange()">
 					</div>
+<<<<<<< HEAD
 					In Accounts
 					<div id="elementsAccountsFilter">
 					</div>
+=======
+          
+>>>>>>> 40a4a0de1f3f4f177650d5f1dc2610206b32613e
 					<div class = "scrollMoney">
-         				<table id="expenses-table"></table>
-         			</div>
-        		</div>
+     				<table id="expenses-table"></table>
+     			</div>
+    		</div>
 			</div>
+
     	</div>
   	</div> <!-- class="row" -->
 </div> <!-- class="container" -->
