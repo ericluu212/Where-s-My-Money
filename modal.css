@@ -66,3 +66,70 @@
     background-color: #5cb85c;
     color: white;
 }
+
+
+/**********list element css ****************************************/
+
+/*******Make list scrollable***************************************/
+#incoming-requests-list{
+  height: 500px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+/**Column 1 **/
+#buttons-col{
+
+}
+
+#buttons-col:after{
+  content:"";
+  background-color: #ddd;
+  position: absolute;
+  width: 2px;
+  height: 155px;
+  top: 0px;
+  left: 91%;
+  display: block;
+}
+/** description list css **/
+#description-list{
+  padding-left: 5px;
+  display: table;
+  width: 458px;
+  table-layout: fixed;
+
+}
+
+.description-item{
+  display: table-cell;
+  width: 33%;
+}
+/** btn row css **/
+#btn-container{
+  width: 100%;
+}
+
+.request-btn{
+  border: 1px solid #000;
+}
+#approve-btn{
+
+}
+
+#change-amt-btn{
+
+}
+
+#deny-btn{
+
+}
+/**Column 2**/
+
+#description-col{
+
+}
+
+#description-text{
+  height: 95px;
+  border: 1px solid #ddd;
+}

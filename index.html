@@ -29,6 +29,9 @@ Eric Luu
 <script src="transferModal.js"></script>
 <script src="expensesList.js"></script>
 <script src="expense.js"></script>
+<script src="incoming_requests.js"></script>
+<script src="requestList.js"></script>
+<script src="request.js"></script>
 <script>
 
 var transactionsList, expensesList, requestsList;
@@ -47,6 +50,7 @@ $(document).ready(function()
 	expensesList.render();
 
 	requestsList = new RequestList();
+	updateBtnDescription();
 });
 
 function handleTransactionsListChange() {
@@ -63,9 +67,7 @@ function handleExpensesListChange() {
 
 </script>
 
-<script src="incoming_requests.js"></script>
-<script src="requestList.js"></script>
-<script src="request.js"></script>
+
 
 </head>
 
@@ -78,7 +80,7 @@ function handleExpensesListChange() {
     </div>
     <ul class="nav navbar-nav">
       <li><a onclick="showTransfer()">Transfer</a></li>
-      <li><a onclick="incoming_requests()">Incoming Requests</a></li>
+      <li><a onclick="incoming_requests()" id="request-btn"></a></li>
       <li><a onclick="showAccounts()">Manage Accounts</a></li>
     </ul>
   </div>
@@ -145,7 +147,7 @@ function handleExpensesListChange() {
 	<div class="request-modal-content modal-content">
 			<div class="modal-header" id="request-header">
 				<h2>Incoming Requests</h2>
-				<span class="close" id="request-close">&times;</span>
+				<span class="close request-close" id="request-close">&times;</span>
 			</div>
 
 			<div class="modal-body" id='request-body'>
@@ -154,6 +156,7 @@ function handleExpensesListChange() {
 				</div>
 			</div>
 			<div class="modal-footer" id='request-footer'>
+				<button "type="button" class="btn btn-outline-primary request-close">Close</button>
 			</div>
 	</div>
 </div>

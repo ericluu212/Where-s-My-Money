@@ -1,19 +1,25 @@
-
+function updateBtnDescription(){
+  console.log('updating description');
+  var desc = requestsList.requests.length + " Incoming requests";
+  console.log(desc);
+  $('#request-btn').text(desc);
+}
 function incoming_requests(){
   var modal = document.getElementById('incoming-requests-popup');
   requestsList.render();
   modal.style.display = "block";
 
-  var close = document.getElementsByClassName('close')[2];
 
-  close.onclick = function(){
+}
+
+$(document).on('click', '.request-close', function(){
+    var modal = document.getElementById('incoming-requests-popup');
     modal.style.display = "none"
     var list = document.getElementById('incoming-requests-list');
     while(list.hasChildNodes()){
       list.removeChild(list.lastChild);
     }
-  };
-}
+});
 
 $(document).on('click', '#approve-btn', function(evt){
   var parentId = $(evt.target).parent().parent().parent();
@@ -24,6 +30,7 @@ $(document).on('click', '#approve-btn', function(evt){
     btn_group[0].removeChild(btn_group[0].lastChild);
   }
   btn_group.text("APPROVED");
+  updateBtnDescription();
 });
 
 $(document).on('click', '#change-amt-btn', function(evt){
@@ -45,4 +52,5 @@ $(document).on('click', '#deny-btn', function(evt){
     btn_group[0].removeChild(btn_group[0].lastChild);
   }
   btn_group.text("DENIED");
+  updateBtnDescription();
 });
