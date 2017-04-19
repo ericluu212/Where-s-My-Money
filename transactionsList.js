@@ -37,6 +37,9 @@ var TransactionsList = function()
 	{
 		for (var i=0; i<this.filteredTransactions.length; i++)
 		{
+			this.filteredTransactions.sort(function(a, b) {
+				return a.date - b.date;
+			});
 			this.transactionTableElement.appendChild(createTableElement(this.filteredTransactions[i]));
 		}
 	}

@@ -19,6 +19,9 @@ var ExpensesList = function()
 	{
 		for (var i=0; i<this.filteredexpenses.length; i++)
 		{
+			this.filteredexpenses.sort(function(a, b) {
+				return a.date - b.date;
+			});
 			this.expenseTableElement.appendChild(createTableElement(this.filteredexpenses[i]));
 		}
 	}
