@@ -66,13 +66,6 @@ function handleExpensesListChange() {
 	expensesList.clearRenderedList();
 	expensesList.render();
 }
-/*
-function expensesCalendarWidget(){
-  $( "#datepicker" ).datepicker({
-      numberOfMonths: 2,
-      showButtonPanel: true,
-  });
-}*/
 
 //Allow for selecting date with calendar widget
 $( function() {
@@ -194,11 +187,11 @@ $( function() {
   						<br>
               <br>
               From: 
-  						<input type="text" class = "calendarWidget" id="transactionsStartDate" onblur="handleTransactionsListChange()">
+  						<input type="text" class = "calendarWidget" id="transactionsStartDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
 						  <br>
               <br>
               To: 
-  						<input type="text" class = "calendarWidget" id="transactionsEndDate" onblur="handleTransactionsListChange()">
+  						<input type="text" class = "calendarWidget" id="transactionsEndDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
   					</div>
   					<ul id="transactions-list"></ul>
     			</div>
@@ -213,11 +206,11 @@ $( function() {
               <br>
               <br>
               From: 
-  						<input type="text" class = "calendarWidget" id="expensesStartDate" onblur="handleExpensesListChange()">
+  						<input type="text" class = "calendarWidget" id="expensesStartDate" onblur="handleExpensesListChange()" onchange="handleExpensesListChange()">
   						<br>
               <br>
               To:
-  						<input type="text" class = "calendarWidget" id="expensesEndDate" onblur="handleExpensesListChange()">
+  						<input type="text" class = "calendarWidget" id="expensesEndDate" onblur="handleExpensesListChange()" onchange="handleExpensesListChange()">
   					</div>
   					<ul id="expenses-list"></ul>
     			</div>

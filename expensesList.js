@@ -55,17 +55,24 @@ var ExpensesList = function()
 
 	function getExpensesStartDate() {
 		var expensesStartDateElement = $('#expensesStartDate')[0];
-		if (expensesStartDateElement.value.length == 8) {
-			return parseInt(expensesStartDateElement.value);
-		} else {
-			return null;
-		}
+		var dateValue = expensesStartDateElement.value;
+		return parseDateValue(dateValue);
 	}
 
 	function getExpensesEndDate() {
 		var expensesEndDateElement = $('#expensesEndDate')[0];
-		if (expensesEndDateElement.value.length == 8) {
-			return parseInt(expensesEndDateElement.value);
+		var dateValue = expensesEndDateElement.value;
+		return parseDateValue(dateValue);
+	}
+
+	function parseDateValue(dateValue) {
+		// dateValue is MM/DD/YYYY
+		if (dateValue.length == 10) {
+			var year = dateValue.substr(6,10);
+			var month = dateValue.substr(0,2);
+			var day = dateValue.substr(3,5);
+			var yearMonthDay = year + month + day;
+			return parseInt(yearMonthDay);
 		} else {
 			return null;
 		}
