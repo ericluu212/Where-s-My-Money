@@ -71,6 +71,7 @@ function filterTransactions(e) {
   <!-- Modal content -->
   <div class="modal-content" id="transferContent">
     <span class="close" id ="closeTransfer">&times;</span>
+    <p class="modalHeader">Transfer</p>
     <table class="paddingBetweenCols">
     	<tr>
 	    	<td><label for="fromList">From</label></td>
@@ -119,11 +120,13 @@ function filterTransactions(e) {
 <div id="accountsModal" class="modal">
   <div class="modal-content" id="accountsContent">
   	<span class="close" id ="closeAccounts">&times;</span>
-  	<h1>Accounts</h1>
+  	<p class="modalHeader">Accounts</p>
   	<!--<ul id="accountsList">
   	</ul>-->
   	<div id="accountsList">
   	</div>
+  	<table id="accountsTable" class="checkboxTable">
+  	</table>
   	<div>
   		<input id="add-account-button" class="btn" type="button" value="Add"/>
   		<input id="remove-account-button" class="btn" type="button" value="Remove"/>
@@ -136,7 +139,7 @@ function filterTransactions(e) {
   <!-- Modal content -->
   <div class="modal-content" id="addAccountContent">
     <span class="close" id ="closeAddAccount">&times;</span>
-    <h1>Add</h1>
+    <p class="modalHeader">Add Account</p>
     <table class="paddingBetweenCols">
   		<tr>
 		    <td><label for="accountName">Account Name</label></td>

@@ -49,13 +49,32 @@ li a:hover {
 	margin-top: 10px;
 	text-align: center;
 }
-/*adding space between table columns*/
+/*padding space between table columns*/
+.paddingBetweenCols{
+	margin-top:15px;
+}
 .paddingBetweenCols td
 {
     padding:0 30px 0 30px;
 }
 
+/*padding space between accounts table columns*/
+.checkboxTable{
+	margin-top:15px;
+	margin-bottom: 15px;
+}
+.checkboxTable td
+{
+    padding:0 10px 0 10px;
+}
+
 #transferBtn{
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+	display: block;
+}
+#create-button{
 	margin-left: auto;
 	margin-right: auto;
 	width: 50%;
@@ -75,4 +94,12 @@ li a:hover {
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+
+/*modal header*/
+.modalHeader{
+	
+	font-size: 20px;
+	text-decoration: underline;
+	font-weight: bold;
 }

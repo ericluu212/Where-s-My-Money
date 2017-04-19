@@ -90,16 +90,12 @@ function showTransferSuccess(){
 function showAccounts(){
 	// Get the modal
 	var modal = document.getElementById('accountsModal');
-
 	// Get the <span> element that closes the modal
 	var span = document.getElementById("closeAccounts")
-
 	//remove button
 	var removeBtn = document.getElementById('remove-account-button');
-
 	//add button
 	var addBtn = document.getElementById('add-account-button');
-
 	// When the user clicks the button, open the modal 
 	modal.style.display = "block";
 
@@ -108,7 +104,7 @@ function showAccounts(){
 	while (accountsList.firstChild) {
     	accountsList.removeChild(accountsList.firstChild);
 	}
-	for (var i = 0; i < accountsArray.length; i++) {
+	/*for (var i = 0; i < accountsArray.length; i++) {
   		var checkbox = document.createElement('input');
   		checkbox.type = "checkbox";
 		checkbox.name = accountsArray[i];
@@ -119,8 +115,8 @@ function showAccounts(){
 		label.appendChild(document.createTextNode(accountsArray[i]));
 		accountsList.appendChild(checkbox);
 		accountsList.appendChild(label);
-	}
-
+	}*/
+	makeTable();
 	// When the user clicks on <span> (x), close the modal
 	span.onclick = function() {
 	    modal.style.display = "none";
@@ -136,7 +132,7 @@ function showAccounts(){
 	removeBtn.onclick = function(){
 	    if (confirm("Are you sure you want to remove all of the selected accounts?") == true) {
 	        var accountsList = document.getElementById("accountsList");
-			for(var i=0; i<accountsList.children.length; i++){
+			/*for(var i=0; i<accountsList.children.length; i++){
 				if(accountsList.children[i].tagName == 'LABEL'){
 					var elem = document.getElementById(accountsList.children[i].htmlFor);
 					if(elem.checked){
@@ -144,14 +140,21 @@ function showAccounts(){
 						accountsList.removeChild(elem);
 					}
 				}
+			}*/
+			for(var i=0; i<accountsArray.length; i++){
+				if(document.getElementById(accountsArray[i]+"checkbox").checked){
+					var row = document.getElementById(accountsArray[i]+"row");
+					row.parentNode.removeChild(row);
+					accountsArray.splice(i, 1);
+				}
 			}
 			//update array of accounts
-			accountsArray = [];
+			/*accountsArray = [];
 			for(var i=0; i<accountsList.children.length; i++){
 				if(accountsList.children[i].tagName == 'INPUT'){
 					accountsArray.push(accountsList.children[i].id);
 				}
-			}
+			}*/
 	    }
 		
 	}
@@ -172,6 +175,7 @@ function showAccounts(){
 		window.onclick = function(event) {
 		    if (event.target == modal) {
 		        modal.style.display = "none";
+		        showAccounts();
 		    }
 		}
 		btn.onclick = function(){
@@ -179,7 +183,8 @@ function showAccounts(){
 			if(validNumber){
 				var accountName = document.getElementById('accountName').value;
 				accountsArray.push(accountName);
-				var checkbox = document.createElement('input');
+				makeTable();
+				/*var checkbox = document.createElement('input');
 		  		checkbox.type = "checkbox";
 				checkbox.name = accountName;
 				checkbox.value = accountName;
@@ -188,7 +193,7 @@ function showAccounts(){
 				label.htmlFor = accountName;
 				label.appendChild(document.createTextNode(accountName));
 				accountsList.appendChild(checkbox);
-				accountsList.appendChild(label);
+				accountsList.appendChild(label);*/
 				modal.style.display = "none";
 				document.getElementById('accountName').value = '';
 				document.getElementById('accountNumber').value = '';
@@ -208,6 +213,34 @@ function showAccounts(){
 	}
 }
 
+function makeTable(){
+	var table = document.getElementById("accountsTable");
+	$("#accountsTable tr").remove(); 
+	for (var i = 0; i < accountsArray.length; i++) {
+  		var checkbox = document.createElement('input');
+  		checkbox.type = "checkbox";
+		checkbox.name = accountsArray[i];
+		checkbox.value = accountsArray[i];
+		checkbox.id = accountsArray[i]+"checkbox";
+		var label = document.createElement('label');
+		label.htmlFor = accountsArray[i]+"checkbox";
+		label.appendChild(document.createTextNode(accountsArray[i]));
+		label.style.fontSize = "16px";
+		checkbox.style.transform = "scale(1.1)";
+		var row = document.createElement("tr");
+		row.id = accountsArray[i]+"row";
+		var labelCell = document.createElement("td");
+		var checkboxCell = document.createElement("td");
+		//labelCell.id = accountsArray[i]+"label";
+		//checkboxCell.id = accountsArray[i]+"checkbox";
+		checkboxCell.appendChild(checkbox);
+		labelCell.appendChild(label);
+		row.appendChild(checkboxCell);
+		row.appendChild(labelCell);
+		table.appendChild(row);
+	}
+}
+
 function showAddSuccess(){
 	// Get the modal
 	var modal = document.getElementById('addAccountSuccessModal');
@@ -218,6 +251,7 @@ function showAddSuccess(){
 	// When the user clicks on <span> (x), close the modal
 	span.onclick = function() {
 	    modal.style.display = "none";
+	    showAccounts();
 	}
 	// When the user clicks anywhere outside of the modal, close it
 	window.onclick = function(event) {
