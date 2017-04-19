@@ -32,8 +32,12 @@ Eric Luu
 <script src="transferModal.js"></script>
 <script src="expensesList.js"></script>
 <script src="expense.js"></script>
+
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="incoming_requests.js"></script>
+<script src="requestList.js"></script>
+<script src="request.js"></script>
 
 <script>
 
@@ -53,6 +57,7 @@ $(document).ready(function()
 	expensesList.render();
 
 	requestsList = new RequestList();
+	updateBtnDescription();
 });
 
 function handleTransactionsListChange() {
@@ -76,9 +81,7 @@ $( function() {
   } );
 </script>
 
-<script src="incoming_requests.js"></script>
-<script src="requestList.js"></script>
-<script src="request.js"></script>
+
 
 </head>
 
@@ -91,7 +94,7 @@ $( function() {
     </div>
     <ul class="nav navbar-nav">
       <li><a onclick="showTransfer()">Transfer</a></li>
-      <li><a onclick="incoming_requests()">Incoming Requests</a></li>
+      <li><a onclick="incoming_requests()" id="request-btn"></a></li>
       <li><a onclick="showAccounts()">Manage Accounts</a></li>
     </ul>
   </div>
@@ -158,7 +161,7 @@ $( function() {
 	<div class="request-modal-content modal-content">
 			<div class="modal-header" id="request-header">
 				<h2>Incoming Requests</h2>
-				<span class="close" id="request-close">&times;</span>
+				<span class="close request-close" id="request-close">&times;</span>
 			</div>
 
 			<div class="modal-body" id='request-body'>
@@ -167,6 +170,37 @@ $( function() {
 				</div>
 			</div>
 			<div class="modal-footer" id='request-footer'>
+				<button type="button" class="btn btn-outline-primary request-close">Close</button>
+			</div>
+	</div>
+</div>
+
+<div id="change-amt-popup" class="change-amt-modal modal" style="display: none">
+	<!--modal content -->
+
+	<div class="change-amt-modal-content modal-content">
+			<div class="modal-header" id="change-amt-header">
+				<h2>Change amount</h2>
+				<span class="close change-amt-close" id="change-amt-close">&times;</span>
+			</div>
+
+			<div class="modal-body row" id='change-amt-body'>
+				<h5>Current amount: <h5 id="current-cost"></h5></h5>
+				<form class='form-inline'>
+					<div class='form-group'>
+						<label for='change-amt-text' id='change-amt-label'>New amount:</label>
+						<input class='form-control' type='text' id='change-amt-text' />
+					</div>
+
+				</form>
+
+			</div>
+			<div class="modal-footer" id='change-amt-footer'>
+					<div class='btn-group'>
+						<button type='button' class='btn btn-primary' id='change-amt-confirm'>Update</button>
+						<button type="button" class="btn btn-outline-primary change-amt-close">Close</button>
+					</div>
+
 			</div>
 	</div>
 </div>
@@ -186,11 +220,11 @@ $( function() {
   						</select>
               <br>
               <br>
-              From: 
+              From:
   						<input type="text" class = "calendarWidget" id="transactionsStartDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
 						  <br>
               <br>
-              To: 
+              To:
   						<input type="text" class = "calendarWidget" id="transactionsEndDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
   					</div>
             <br>
@@ -208,7 +242,7 @@ $( function() {
     					Viewing Expenses
               <br>
               <br>
-              From: 
+              From:
   						<input type="text" class = "calendarWidget" id="expensesStartDate" onblur="handleExpensesListChange()" onchange="handleExpensesListChange()">
   						<br>
               <br>
