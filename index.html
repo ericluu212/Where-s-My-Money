@@ -75,20 +75,20 @@ function filterTransactions(e) {
 
 </div>
 <!-- modal for incoming requests -->
-<div id="incoming-requests-popup" class="modal" style="display: none">
+<div id="incoming-requests-popup" class="request-modal" style="display: none">
 	<!--modal content -->
-	<div class="incoming-requests-modal-content modal-content">
-			<div class="modal-header">
+	<div class="request-modal-content modal-content">
+			<div class="modal-header" id="request-header">
 				<h2>Incoming Requests</h2>
 				<span class="close">&times;</span>
 			</div>
 
-			<div class="modal-body">
+			<div class="modal-body" id='request-body'>
 				<div class="list-group" id="incoming-requests-list">
 
 				</div>
 			</div>
-			<div class="modal-footer">
+			<div class="modal-footer" id='request-footer'>
 			</div>
 	</div>
 </div>
