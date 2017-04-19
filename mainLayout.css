@@ -16,14 +16,14 @@ h4{
 #transactions-container{
   border-style: solid;
   height: 500px;
-  width: 250px;
+  width: 350px;
 }
 
 
 #expenses-container{
   border-style: solid;
   height: 500px;
-  width: 250px;
+  width: 350px;
   float: right;
 }
 li a:hover {
@@ -89,4 +89,16 @@ li a:hover {
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+
+.pad{
+  padding: 10px;
+}
+.scrollMoney{
+  height: 350px;
+  overflow: auto;
+}
+
+ol{
+  padding-left: 0px;
 }

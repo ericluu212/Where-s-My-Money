@@ -183,7 +183,7 @@ $( function() {
     	<div class="col-sm-6" id="firstColumn">
     		<div id="firstColumnText">
     		<!-- Column 1 Code Here -->
-    			<div id="transactions-container">
+    			<div class = "pad" id="transactions-container">
     				<div id="transactions-filtering-options">
     					Viewing
     					<select id="transactionsTypeFilter" onchange="handleTransactionsListChange()">
@@ -191,27 +191,41 @@ $( function() {
   							<option value="withdrawals">Withdrawals</option>
   							<option value="deposits">Deposits</option>
   						</select>
-  						From
-  						<input type="text" id="transactionsStartDate" onblur="handleTransactionsListChange()">
-						To
-  						<input type="text" id="transactionsEndDate" onblur="handleTransactionsListChange()">
+              <br>
+              <br>
+  						From:
+  						<input type="text" class = "calendarWidget" id="transactionsStartDate" onblur="handleTransactionsListChange()">
+						  <br>
+              <br>
+              To:
+  						<input type="text" class = "calendarWidget" id="transactionsEndDate" onblur="handleTransactionsListChange()">
   					</div>
-  					<ul id="transactions-list"></ul>
+            <br>
+            <div class = "scrollMoney">
+  					 <ul id="transactions-list"></ul>
+            </div>
     			</div>
     		</div>
   		</div>
 
     	<div class="col-sm-6" id="lastColumn">
 
-    		<div id="expenses-container">
+    		<div class = "pad" id="expenses-container">
     				<div id="transactions-filtering-options">
-    					Viewing Expenses<br>From
+    					Viewing Expenses
+              <br>
+              <br>
+              From:
   						<input type="text" class = "calendarWidget" id="expensesStartDate" onblur="handleExpensesListChange()">
-						<br>
-            To
+  						<br>
+              <br>
+              To:
   						<input type="text" class = "calendarWidget" id="expensesEndDate" onblur="handleExpensesListChange()">
   					</div>
-  					<ul id="expenses-list"></ul>
+            <br>
+  					<div class = "scrollMoney">
+             <ul id="expenses-list"></ul>
+            </div>
     			</div>
     	</div>
   	</div> <!-- class="row" -->

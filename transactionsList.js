@@ -1,12 +1,19 @@
+var ENDYEAR = 2050;
+var MONTH_AND_DATE = 0501;
+
 var TransactionsList = function()
 {
 	this.transactionListElement = $('#transactions-list')[0];
 
-	this.transactions = [
+	this.transactions = generateTransactions();
+	/*
+	[
 		new Transaction(20170101, "Coffee", -2.49, "Chase", 1), 
 		new Transaction(20170131, "UROP Deposit", 450, "Bank of America", 2),
 		new Transaction(20170211, "UROP Deposit", 423, "Bank of America", 3)
 		];
+	*/
+
 	this.filteredTransactions = this.transactions;
 	this.accounts = [];
 
@@ -25,10 +32,18 @@ var TransactionsList = function()
 		}
 	}
 
+	function generateTransactions(){
+		transactionsList = []
+		for (var i = 2017; i < ENDYEAR; i++) {
+			transactionsList.push(new Expense(parseInt(i.toString() + MONTH_AND_DATE.toString()), "UROP Deposit", 450, "Bank of America", i-2016));
+		}
+		return transactionsList;
+	}
+
 	function createListElement(transaction)
 	{
 		var listElement = document.createElement('ol');
-		listElement.appendChild(document.createTextNode(transaction.cost.toString()));
+		listElement.appendChild(document.createTextNode(transaction.toString()));
 		return listElement;
 	}
 
