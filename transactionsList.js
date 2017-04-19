@@ -5,14 +5,23 @@ var TransactionsList = function()
 {
 	this.transactionTableElement = $('#transactions-table')[0];
 
-	this.transactions = generateTransactions();
-	/*
+	this.transactions =
+
 	[
-		new Transaction(20170101, "Coffee", -2.49, "Chase", 1), 
-		new Transaction(20170131, "UROP Deposit", 450, "Bank of America", 2),
-		new Transaction(20170211, "UROP Deposit", 423, "Bank of America", 3)
-		];
-	*/
+		new Transaction(20160101, "Coffee", -2.49, "Chase", 1), 
+		new Transaction(20160131, "UROP Deposit", 450, "Bank of America", 2),
+		new Transaction(20160231, "UROP Deposit", 423, "Bank of America", 3),
+		new Transaction(20160331, "UROP Deposit", 450, "Bank of America", 10),
+		new Transaction(20160431, "UROP Deposit", 460, "Bank of America", 11),
+		new Transaction(20160531, "UROP Deposit", 411, "Bank of America", 12),
+		new Transaction(20160215, "La Verde's", -8.42, "MITFCU", 4),
+		new Transaction(20160216, "La Verde's", -3.45, "MITFCU", 5),
+		new Transaction(20160216, "La Verde's", -5.49, "MITFCU", 6),
+		new Transaction(20160217, "La Verde's", -2.11, "MITFCU", 7),
+		new Transaction(20160217, "La Verde's", -18.13, "MITFCU", 8),
+		new Transaction(20160218, "La Verde's", -20.02, "MITFCU", 9)
+
+	];
 
 	this.filteredTransactions = this.transactions;
 	this.accounts = [];
