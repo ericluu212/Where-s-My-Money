@@ -1,4 +1,4 @@
-#incoming-requests-popup{
+.request-modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -13,7 +13,7 @@
 }
 
 /* Modal Content */
-#incoming-requests-modal-content{
+.request-modal-content {
     position: relative;
     background-color: #fefefe;
     margin: auto;
@@ -39,29 +39,29 @@
 }
 
 /* The Close Button */
-.close {
+#request-close {
     color: white;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+#request-close:hover,
+#request-close:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
 }
 
-.incoming-requests-modal-header {
+#request-header{
     padding: 2px 16px;
     background-color: #5cb85c;
     color: white;
 }
 
-.incoming-requests-modal-body {padding: 2px 16px;}
+#request-body {padding: 2px 16px;}
 
-.incoming-requests-modal-footer {
+#request-footer {
     padding: 2px 16px;
     background-color: #5cb85c;
     color: white;
