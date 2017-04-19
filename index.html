@@ -292,29 +292,32 @@ $(document).on('change', 'input[name="expenses-account"]', function() {
 <div class="container-fluid">
   	<div class="row">
     	<div class="col-sm-6" id="firstColumn">
-    		<div id="firstColumnText">
-    		<!-- Column 1 Code Here -->
-    			<div id="transactions-container" class="data-container">
-    				<div id="transactions-filtering-options">
-    					Viewing
-    					<select id="transactionsTypeFilter" onchange="handleTransactionsListChange()">
-  							<option selected="allTransactions" value="all">All Transactions</option>
-  							<option value="withdrawals">Withdrawals</option>
-  							<option value="deposits">Deposits</option>
-  						</select>
-              			From:
-  						<input type="text" class="calendarWidget date-input" id="transactionsStartDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
-              			To:
-  						<input type="text" class="calendarWidget date-input" id="transactionsEndDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
-  						In Accounts
-  						<div id="transactionsAccountsFilter">
-  						</div>
-  					</div>
-            		<div class = "scrollMoney">
-  						<table id="transactions-table"></table>
-            		</div>
-    			</div>
-    		</div>
+  		<!-- Column 1 Code Here -->
+  			<div id="transactions-container" class="data-container">
+  				<div id="transactions-filtering-options">
+  					Viewing
+  					<select id="transactionsTypeFilter" onchange="handleTransactionsListChange()">
+							<option selected="allTransactions" value="all">All Transactions</option>
+							<option value="withdrawals">Withdrawals</option>
+							<option value="deposits">Deposits</option>
+						</select>
+
+            			&nbsp;From:
+						<input type="text" class="calendarWidget date-input" id="transactionsStartDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
+            			&nbsp;To:
+						<input type="text" class="calendarWidget date-input" id="transactionsEndDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
+
+					</div>
+          		<div class = "scrollMoney">
+						<table id="transactions-table" class="moneyTables">
+						<tr>
+							<th>Date</th>
+							<th>Description</th> 
+							<th>Amount</th>
+						</tr>
+						</table>
+          		</div>
+  			</div>
   		</div>
 
     	<div class="col-sm-6" id="lastColumn">
@@ -331,7 +334,13 @@ $(document).on('change', 'input[name="expenses-account"]', function() {
 					<div id="elementsAccountsFilter">
 					</div>
 					<div class = "scrollMoney">
-     				<table id="expenses-table"></table>
+     				<table id="expenses-table" class="moneyTables">
+     					<tr>
+							<th>Date</th>
+							<th>Description</th> 
+							<th>Amount</th>
+						</tr>
+     				</table>
      			</div>
     		</div>
 			</div>
