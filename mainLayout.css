@@ -18,7 +18,7 @@ h4{
   border-color: DimGrey;
   border-radius: 15px;
   height: 100%;
-  width: 450px;
+  width: 90%;
   margin: 0 auto;
 }
 
@@ -83,6 +83,16 @@ li a:hover {
 .paddingBetweenCols td
 {
     padding:5px 30px 5px 30px;
+}
+
+/*money tables*/
+.moneyTables{
+	width:100%;
+	border:1px solid black;
+	margin-top: 5px;
+}
+.moneyTables td, th{
+	border:1px solid black;
 }
 
 /*padding space between accounts table columns*/
@@ -167,6 +177,7 @@ li a:hover {
 
 .data-container{
   padding: 10px;
+  border-color: #5cb85c;
 }
 
 .date-input {
