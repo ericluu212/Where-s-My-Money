@@ -87,9 +87,12 @@ li a:hover {
 
 /*padding space between accounts table columns*/
 .checkboxTable{
+	display: block;
 	margin-top:15px;
 	margin-bottom: 15px;
 	margin-left: 15px;
+	overflow: scroll;
+	max-height: 200px;
 }
 .checkboxTable td
 {
