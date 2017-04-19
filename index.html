@@ -58,7 +58,37 @@ $(document).ready(function()
 
 	requestsList = new RequestList();
 	updateBtnDescription();
+
+	var transactionsAccountsFilterElement = $('#transactionsAccountsFilter')[0];
+	var elementsAccountsFilterElement = $('#elementsAccountsFilter')[0];
+	renderAccountsOptions(transactionsAccountsFilterElement);
+	renderAccountsOptions(elementsAccountsFilterElement);
+	
 });
+
+function renderAccountsOptions(element) {
+	for (var i=0; i<accountsArray.length; i++) {
+		var span = document.createElement('span');
+		var input = document.createElement('input');
+		var inputClassName;
+		if (element == $('#transactionsAccountsFilter')[0]) {
+			inputClassName = "transactions-account-check";
+			input.name = "transactions-account"
+		} else if (element == $('#elementsAccountsFilter')[0]){
+			inputClassName = "expenses-account-check";
+			input.name = "expenses-account";
+		}
+		span.className = "account-check";
+		input.type = "checkbox";
+		input.value = accountsArray[i];
+		input.defaultChecked = true;
+		input.className = inputClassName;
+
+		span.appendChild(input);
+		span.innerHTML += accountsArray[i];
+		element.appendChild(span);
+	}
+}
 
 function handleTransactionsListChange() {
 	transactionsList.filterTransactions();
@@ -79,6 +109,15 @@ $( function() {
       showButtonPanel: true,
     });
   } );
+
+$(document).on('change', 'input[name="transactions-account"]', function() {
+    handleTransactionsListChange();
+});
+
+$(document).on('change', 'input[name="expenses-account"]', function() {
+    handleExpensesListChange();
+});
+
 </script>
 
 
@@ -291,7 +330,9 @@ $( function() {
             To:
   					<input type="text" class = "calendarWidget date-input" id="expensesEndDate" onblur="handleExpensesListChange()" onchange="handleExpensesListChange()">
 					</div>
-          
+					In Accounts
+					<div id="elementsAccountsFilter">
+					</div>
 					<div class = "scrollMoney">
      				<table id="expenses-table" class="moneyTables">
      					<tr>

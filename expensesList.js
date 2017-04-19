@@ -53,6 +53,16 @@ var ExpensesList = function()
 
 	}
 
+	function getAccounts() {
+		var accounts = [];
+		$('.expenses-account-check').each(function(i, el) {
+			if (el.checked) {
+    			accounts.push(el.value);
+    		}
+		});
+		return accounts;
+	}
+
 	function accountsFilter(expensesList, accountsList) {
 		return expensesList.filter(function(expense) {
 			return $.inArray(expense.account, accountsList) > -1;
@@ -102,7 +112,7 @@ var ExpensesList = function()
 	this.filterExpenses = function() {
 		// var expense = function(date, description, cost, account, id)
 		var accountsList, startDate, endDate;
-		accountsList = this.accounts;
+		accountsList = getAccounts();
 		startDate = getExpensesStartDate();
 		endDate = getExpensesEndDate();
 
