@@ -4,7 +4,43 @@ var ExpensesList = function()
 {
 	this.expenseTableElement = $('#expenses-table')[0];
 
-	this.expenses = generateExpenses();
+	//this.expenses = generateExpenses();
+	this.expenses =
+
+	[
+		new Transaction(20170401, "Rent Boston", -2000, "Chase", 1),
+		new Transaction(20170401, "Housing", -1000, "MITFCU", 2),
+		new Transaction(20170401, "Food Money", -100, "MITFCU", 3),
+		new Transaction(20170501, "Rent Boston", -2000, "Chase", 4),
+		new Transaction(20170501, "Housing", -1000, "MITFCU", 5),
+		new Transaction(20170501, "Food Money", -100, "MITFCU", 6),
+		new Transaction(20170601, "Rent Boston", -2000, "Chase", 7),
+		new Transaction(20170701, "Rent Boston", -2000, "Chase", 8),
+		new Transaction(20170801, "Rent Boston", -2000, "Chase", 9),
+		new Transaction(20170901, "Rent Boston", -2000, "Chase", 10),
+		new Transaction(20170901, "Housing", -1000, "MITFCU", 11),
+		new Transaction(20170901, "Food Money", -100, "MITFCU", 12),
+		new Transaction(20171001, "Rent Boston", -2000, "Chase", 13),
+		new Transaction(20171001, "Housing", -1000, "MITFCU", 14),
+		new Transaction(20171001, "Food Money", -100, "MITFCU", 15),
+		new Transaction(20171101, "Rent Boston", -2000, "Chase", 16),
+		new Transaction(20171201, "Housing", -1000, "MITFCU", 17),
+		new Transaction(20171201, "Food Money", -100, "MITFCU", 18),
+		new Transaction(20171201, "Rent Boston", -2000, "Chase", 19), 
+		new Transaction(20171201, "Housing", -1000, "MITFCU", 20),
+		new Transaction(20171201, "Food Money", -100, "MITFCU", 21),
+		new Transaction(20170416, "MIT Tuition", -200, "Bank of America", 22),
+		new Transaction(20170516, "MIT Tuition", -200, "Bank of America", 23),
+		new Transaction(20170616, "MIT Tuition", -200, "Bank of America", 24),
+		new Transaction(20170716, "MIT Tuition", -200, "Bank of America", 25),
+		new Transaction(20170816, "MIT Tuition", -200, "Bank of America", 26),
+		new Transaction(20170901, "Meal Plan", -2000, "MITFCU", 27),
+		new Transaction(20170916, "MIT Tuition", -200, "Bank of America", 28),
+		new Transaction(20171016, "MIT Tuition", -200, "Bank of America", 29),
+		new Transaction(20171116, "MIT Tuition", -200, "Bank of America", 30),
+		new Transaction(20171216, "MIT Tuition", -200, "Bank of America", 31),
+
+	];
 	this.filteredexpenses = this.expenses;
 	this.accounts = [];
 
