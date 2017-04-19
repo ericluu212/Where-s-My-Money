@@ -215,9 +215,6 @@ $( function() {
 
 				</div>
 			</div>
-			<div class="modal-footer" id='request-footer'>
-				<button type="button" class="btn btn-outline-primary request-close">Close</button>
-			</div>
 	</div>
 </div>
 
@@ -231,10 +228,10 @@ $( function() {
 			</div>
 
 			<div class="modal-body row" id='change-amt-body'>
-				<h5>Current amount: <h5 id="current-cost"></h5></h5>
+				<h5 id="current-cost">Current amount: </h5>
 				<form class='form-inline'>
 					<div class='form-group'>
-						<label for='change-amt-text' id='change-amt-label'>New amount:</label>
+						<label for='change-amt-text' id='change-amt-label'>New amount: </label>
 						<input class='form-control' type='text' id='change-amt-text' />
 					</div>
 
@@ -243,8 +240,7 @@ $( function() {
 			</div>
 			<div class="modal-footer" id='change-amt-footer'>
 					<div class='btn-group'>
-						<button type='button' class='btn btn-primary' id='change-amt-confirm'>Update</button>
-						<button type="button" class="btn btn-outline-primary change-amt-close">Close</button>
+						<button type='button' class='btn btn-success' id='change-amt-confirm'>Update</button>
 					</div>
 
 			</div>

@@ -26,13 +26,15 @@ $(document).on('click', '.request-close', function(){
 
 $(document).on('click', '#approve-btn', function(evt){
   var parentId = $(evt.target).parent().parent().parent();
-  requestsList.approveRequest(parentId.attr('id'));
+  var request = requestsList.approveRequest(parentId.attr('id'));
 
   var btn_group = $(evt.target).parent();
   while(btn_group[0].hasChildNodes()){
     btn_group[0].removeChild(btn_group[0].lastChild);
   }
-  btn_group.text("APPROVED");
+
+  var feedback = "Approved: " + request.description;
+  btn_group.text(feedback);
   updateBtnDescription();
 });
 
@@ -44,7 +46,7 @@ $(document).on('click', '#change-amt-btn', function(evt){
   modal.style.display = 'block';
 
   var current_cost = $(clickedListItemId).find('#buttons-col').find('#description-list').find('#cost').text();
-  $('#current-cost').text(current_cost);
+  $('#current-cost').text("Current amount: " + current_cost);
 
 
 });
@@ -52,13 +54,15 @@ $(document).on('click', '#change-amt-btn', function(evt){
 $(document).on('click', '#deny-btn', function(evt){
   var parent = $(evt.target).parent().parent().parent();
 
-  requestsList.denyRequest(parent.attr('id'));
+  var request = requestsList.denyRequest(parent.attr('id'));
 
   var btn_group = $(evt.target).parent();
   while(btn_group[0].hasChildNodes()){
     btn_group[0].removeChild(btn_group[0].lastChild);
   }
-  btn_group.text("DENIED");
+
+  var feedback = "Denied: " + request.description;
+  btn_group.text(feedback);
   updateBtnDescription();
 });
 
