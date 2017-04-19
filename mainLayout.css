@@ -117,9 +117,14 @@ li a:hover {
 	text-decoration: underline;
 	font-weight: bold;
 }
-.pad{
+.data-container{
   padding: 10px;
 }
+
+.date-input {
+
+}
+
 .scrollMoney{
   height: 350px;
   overflow: auto;
