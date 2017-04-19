@@ -90,3 +90,7 @@ li a:hover {
     text-decoration: none;
     cursor: pointer;
 }
+
+.dateSelection {
+  margin: 5px;
+}
