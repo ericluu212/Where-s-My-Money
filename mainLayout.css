@@ -32,7 +32,19 @@ li a:hover {
 
 .navbar-default .navbar-nav>li>a:hover {
     color: white;
-    background-color: #5cb85c;;
+    background-color: #5cb85c;
+}
+
+#addAccountContent{
+	padding: 0px 0px 10px 0px;
+}
+
+#accountsContent{
+	padding: 0px 0px 10px 0px;
+}
+
+#transferContent{
+	padding: 0px 0px 10px 0px;
 }
 
 .btn{
@@ -87,6 +99,12 @@ li a:hover {
     padding:0 10px 0 10px;
 }
 
+.checkboxTable td label
+{
+    padding-bottom: 0px;
+    padding-top: 5px;
+}
+
 #transferBtn{
 	margin-left: auto;
 	margin-right: auto;
@@ -116,12 +134,36 @@ li a:hover {
 }
 
 /*modal header*/
-.modalHeader{
-	
+.popupHeader{
+	width: 100%;
+	padding-top: 5px;
 	font-size: 20px;
-	text-decoration: underline;
+	border-radius: 5px 5px 0px 0px;
 	font-weight: bold;
+	background-color: #5cb85c;
+    color: white;
 }
+.popupHeader h2{
+	padding-left: 10px;
+	padding-bottom: 10px;
+	text-align: left;
+}
+.popupHeader span{
+	padding-right: 5px;
+	padding-top:20px;
+	padding-bottom:0px;
+	color: white;
+	opacity: 1;
+}
+/*account button*/
+.accountButtons{
+	text-align: center;
+}
+.accountButtons input{
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
 .pad{
   padding: 10px;
 }
