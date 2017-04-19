@@ -42,7 +42,6 @@ var RequestList = function(){
     var request = $.grep(this.requests, function(e){
       return e.id == id
     })[0];
-
     request.changeAmount(newCost);
   }
 
@@ -64,7 +63,7 @@ var RequestList = function(){
 
     var commands =  $('<div></div>').addClass('btn-group').attr('role', 'group').attr('id', 'btn-container');
     var approveBtn = $('<button></button>').addClass('btn btn-secondary request-btn').attr("id", "approve-btn").text('Approve request');
-    var changeAmountBtn = $('<button></button>').addClass('btn btn-secondary request-btn').attr("id", "change-amt-btn").text('Change amount');
+    var changeAmountBtn = $('<button></button>').addClass('btn btn-secondary request-btn').attr("id", "change-amt-btn").attr('data-toggle', 'modal').attr('href', '#change-amt-popup').text('Change amount');
     var denyBtn = $('<button></button>').addClass('btn btn-secondary request-btn').attr('id', 'deny-btn').text('Deny');
     commands.append(approveBtn).append(changeAmountBtn).append(denyBtn);
 
@@ -82,10 +81,7 @@ var RequestList = function(){
   }
 
   this.render = function(){
-    console.log("rendering")
     for (var i = 0; i < this.requests.length; i++){
-      console.log(i)
-      console.log(this.requests[i]);
       createListElement(this.requests[i], i);
     }
   }

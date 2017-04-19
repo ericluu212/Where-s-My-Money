@@ -156,7 +156,37 @@ function handleExpensesListChange() {
 				</div>
 			</div>
 			<div class="modal-footer" id='request-footer'>
-				<button "type="button" class="btn btn-outline-primary request-close">Close</button>
+				<button type="button" class="btn btn-outline-primary request-close">Close</button>
+			</div>
+	</div>
+</div>
+
+<div id="change-amt-popup" class="change-amt-modal modal" style="display: none">
+	<!--modal content -->
+
+	<div class="change-amt-modal-content modal-content">
+			<div class="modal-header" id="change-amt-header">
+				<h2>Change amount</h2>
+				<span class="close change-amt-close" id="change-amt-close">&times;</span>
+			</div>
+
+			<div class="modal-body row" id='change-amt-body'>
+				<h5>Current amount: <h5 id="current-cost"></h5></h5>
+				<form class='form-inline'>
+					<div class='form-group'>
+						<label for='change-amt-text' id='change-amt-label'>New amount:</label>
+						<input class='form-control' type='text' id='change-amt-text' />
+					</div>
+
+				</form>
+
+			</div>
+			<div class="modal-footer" id='change-amt-footer'>
+					<div class='btn-group'>
+						<button type='button' class='btn btn-primary' id='change-amt-confirm'>Update</button>
+						<button type="button" class="btn btn-outline-primary change-amt-close">Close</button>
+					</div>
+
 			</div>
 	</div>
 </div>

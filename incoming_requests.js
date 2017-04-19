@@ -1,15 +1,16 @@
+var clickedListItemId = "";
+
 function updateBtnDescription(){
   console.log('updating description');
   var desc = requestsList.requests.length + " Incoming requests";
   console.log(desc);
   $('#request-btn').text(desc);
 }
+
 function incoming_requests(){
   var modal = document.getElementById('incoming-requests-popup');
   requestsList.render();
   modal.style.display = "block";
-
-
 }
 
 $(document).on('click', '.request-close', function(){
@@ -20,6 +21,8 @@ $(document).on('click', '.request-close', function(){
       list.removeChild(list.lastChild);
     }
 });
+
+
 
 $(document).on('click', '#approve-btn', function(evt){
   var parentId = $(evt.target).parent().parent().parent();
@@ -35,9 +38,13 @@ $(document).on('click', '#approve-btn', function(evt){
 
 $(document).on('click', '#change-amt-btn', function(evt){
   var request_id = $(evt.target).parent().parent().parent().attr('id');
+  clickedListItemId = '#' + request_id;
 
-  var element_to_update = $(evt.target).parent().parent().find('#cost').text()
-  requestsList.changeAmount(request_id);
+  var modal = document.getElementById('change-amt-popup');
+  modal.style.display = 'block';
+
+  var current_cost = $(clickedListItemId).find('#buttons-col').find('#description-list').find('#cost').text();
+  $('#current-cost').text(current_cost);
 
 
 });
@@ -53,4 +60,22 @@ $(document).on('click', '#deny-btn', function(evt){
   }
   btn_group.text("DENIED");
   updateBtnDescription();
+});
+
+
+$(document).on('click', '.change-amt-close', function(){
+    var modal = document.getElementById('change-amt-popup');
+    modal.style.display = "none";
+
+    $('#change-amt-text').val("");
+    clickedListItemId = '';
+});
+
+$(document).on('click', '#change-amt-confirm', function(){
+  var newCost = $('#change-amt-text').val();
+  var id = clickedListItemId.slice(1);
+
+  requestsList.changeAmount(newCost, id);
+  $(clickedListItemId).find('#buttons-col').find('#description-list').find('#cost').text("$" + newCost);
+
 });
