@@ -6,6 +6,10 @@ function showTransfer(){
 	//transfer button
 	var btn = document.getElementById('transferBtn');
 	// When the user clicks the button, open the modal 
+	var transferError = document.getElementById("transferAlert");
+	transferError.style.visibility = "hidden";
+	transferError.innerHTML ="";
+
 	modal.style.display = "block";
 	// When the user clicks on <span> (x), close the modal
 	populateDropdown();
@@ -57,6 +61,8 @@ function showTransfer(){
 	}
 
 	btn.onclick = function(){
+		transferError.style.visibility = "hidden";
+		transferError.innerHTML ="";
 		a = validateAccounts();
 		c = validateCurrency();
 		if(a && c){
@@ -72,10 +78,14 @@ function showTransfer(){
 		var account1 = document.getElementById('fromList').value;
 		var account2 = document.getElementById('toList').value;
 		if(account1 == '' || account2 == ''){
-			alert("Both a To and From account must be selected.");
+			//alert("Both a To and From account must be selected.");
+			transferError.innerHTML = "Both a 'To' and 'From' account must be selected."
+			transferError.style.visibility = "visible";
 			return false;
 		}else if(account1 == account2){
-			alert("Transfer must be between different accounts.");
+			//alert("Transfer must be between different accounts.");
+			transferError.innerHTML = "Transfer must be between different accounts."
+			transferError.style.visibility = "visible";
 			return false;
 		}else{
 			return true;
@@ -91,7 +101,10 @@ function showTransfer(){
 		if(regex.test(currency)){
 			return true;
 		}else{
-			alert("Invalid currency value.");
+			//alert("Invalid currency value.");
+			var transferError = document.getElementById("transferAlert");
+			transferError.innerHTML = "Invalid currency value."
+			transferError.style.visibility = "visible";
 			return false;
 		}
 	}
