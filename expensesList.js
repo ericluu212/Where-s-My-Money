@@ -46,8 +46,14 @@ var ExpensesList = function()
 
 	this.clearRenderedList = function()
 	{
-		while (this.expenseTableElement.firstChild) {
-			this.expenseTableElement.removeChild(this.expenseTableElement.firstChild);
+		// while (this.expenseTableElement.firstChild) {
+		// 	this.expenseTableElement.removeChild(this.expenseTableElement.firstChild);
+		// }
+		for(var i=0; i< this.expenseTableElement.children.length; i++){
+			if(this.expenseTableElement.children[i].tagName == 'TR'){
+				this.expenseTableElement.removeChild(this.expenseTableElement.children[i]);
+				i--;
+			}
 		}
 	}
 
@@ -63,13 +69,13 @@ var ExpensesList = function()
 	}
 
 
-	function generateExpenses(){
-		expenseList = []
-		for (var i = 2017; i < ENDYEAR; i++){
-			expenseList.push(new Expense(parseInt(i.toString() + MONTH_AND_DATE.toString()), "Rent Boston", -3000, "Chase", i - 2016));
-		}
-		return expenseList;
-	}
+	//function generateExpenses(){
+	// 	expenseList = []
+	// 	for (var i = 2017; i < ENDYEAR; i++){
+	// 		expenseList.push(new Expense(parseInt(i.toString() + MONTH_AND_DATE.toString()), "Rent Boston", -3000, "Chase", i - 2016));
+	// 	}
+	// 	return expenseList;
+	// }
 
 	function createTableElement(expense)
 	{
