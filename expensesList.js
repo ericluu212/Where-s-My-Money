@@ -1,12 +1,10 @@
+var ENDYEAR = 2050;
+var MONTH_AND_DATE = "0501";
 var ExpensesList = function()
 {
 	this.expenseListElement = $('#expenses-list')[0];
 
-	this.expenses = [
-		new Expense(20170501, "Rent Boston", -1500, "Chase", 1), 
-		new Expense(20170601, "Rent Boston", -1500, "Chase", 2),
-		new Expense(20170721, "Rent San Francisco", -3000, "Chase", 3)
-		];
+	this.expenses = generateExpenses();
 	this.filteredexpenses = this.expenses;
 	this.accounts = [];
 
@@ -25,10 +23,18 @@ var ExpensesList = function()
 		}
 	}
 
+	function generateExpenses(){
+		expenseList = []
+		for (var i = 2017; i < ENDYEAR; i++){
+			expenseList.push(new Expense(parseInt(i.toString() + MONTH_AND_DATE.toString()), "Rent Boston", -3000, "Chase", i - 2016));
+		}
+		return expenseList;
+	}
+
 	function createListElement(expense)
 	{
 		var listElement = document.createElement('ol');
-		listElement.appendChild(document.createTextNode(expense.cost.toString()));
+		listElement.appendChild(document.createTextNode(expense.toString()));
 		return listElement;
 	}
 
