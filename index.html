@@ -90,10 +90,10 @@ $( function() {
   <div class="container-fluid">
     <div class="navbar-header">
       <img src="wheres-my-money-logo.png" style="width:100px;height:50px; float: left;">
-      <a class="navbar-brand" href="#">Where's My Money?</a>
+      <a class="navbar-brand" href="#" style="color:green;">Where's My Money?</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a onclick="showTransfer()">Transfer</a></li>
+      <li><a style="" onclick="showTransfer()">Transfer</a></li>
       <li><a onclick="incoming_requests()" id="request-btn"></a></li>
       <li><a onclick="showAccounts()">Manage Accounts</a></li>
     </ul>
@@ -104,17 +104,16 @@ $( function() {
 
   <!-- Modal content -->
   <div class="modal-content" id="transferContent">
-    <span class="close" id ="closeTransfer">&times;</span>
-    <p class="modalHeader">Transfer</p>
+  <div class="popupHeader">
+  	<span class="close" id ="closeTransfer">&times;</span>
+    <h2 class="modalHeader">Transfer</h2>
+  </div>
     <table class="paddingBetweenCols">
     	<tr>
 	    	<td><label for="fromList">From</label></td>
 	    	<td valign="top">
 	    		<select id="fromList">
 		    		<option value="" disabled selected="selected">Select one</option>
-		    		<option value="Bank of America">Bank of America</option>
-		    		<option value="Chase">Chase</option>
-		    		<option value="MITFCU">MITFCU</option>
 	    		</select>
 	    	</td>
 		</tr>
@@ -123,9 +122,6 @@ $( function() {
     		<td valign="top">
     			<select id="toList">
 			    	<option value="" disabled selected="selected">Select one</option>
-			    	<option value="Bank of America">Bank of America</option>
-			    	<option value="Chase">Chase</option>
-			    	<option value="MITFCU">MITFCU</option>
 	    		</select>
     		</td>
   		</tr>
@@ -153,10 +149,10 @@ $( function() {
 <!--modal for managing accounts-->
 <div id="accountsModal" class="modal">
   <div class="modal-content" id="accountsContent">
-  	<span class="close" id ="closeAccounts">&times;</span>
-  	<p class="modalHeader">Accounts</p>
-  	<!--<ul id="accountsList">
-  	</ul>-->
+  	<div class="popupHeader">
+  		<span class="close" id ="closeAccounts">&times;</span>
+  		<h2>Accounts</h2>
+  	</div>
   	<div id="accountsList">
   	</div>
   	<table id="accountsTable" class="checkboxTable">
@@ -166,7 +162,7 @@ $( function() {
         <td>Amount</td>
       </tr>
   	</table>
-  	<div>
+  	<div class="accountButtons">
   		<input id="add-account-button" class="btn" type="button" value="Add"/>
   		<input id="remove-account-button" class="btn" type="button" value="Remove"/>
 
@@ -178,8 +174,10 @@ $( function() {
 <div id="addAccountModal" class="modal">
   <!-- Modal content -->
   <div class="modal-content" id="addAccountContent">
-    <span class="close" id ="closeAddAccount">&times;</span>
-    <p class="modalHeader">Add Account</p>
+  	<div class="popupHeader">
+    	<span class="close" id ="closeAddAccount">&times;</span>
+    	<h2>Add Account</h2>
+    </div>
     <table class="paddingBetweenCols">
   		<tr>
 		    <td><label for="accountName">Account Name</label></td>

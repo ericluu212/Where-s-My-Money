@@ -40,7 +40,8 @@
 
 /* The Close Button */
 #request-close {
-    color: black;
+    color: white;
+    opacity: 1;
     float: right;
     font-size: 35px;
     font-weight: bold;
@@ -55,7 +56,11 @@
 }
 
 #request-header{
-    padding: 2px 16px;
+    width: 100%;
+    padding-top: 5px;
+    font-size: 20px;
+    border-radius: 5px 5px 0px 0px;
+    font-weight: bold;
     background-color: #5cb85c;
     color: white;
 }

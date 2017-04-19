@@ -8,6 +8,37 @@ function showTransfer(){
 	// When the user clicks the button, open the modal 
 	modal.style.display = "block";
 	// When the user clicks on <span> (x), close the modal
+	populateDropdown();
+	function populateDropdown(){
+		var fromDropdown = document.getElementById("fromList");
+		var toDropdown = document.getElementById("toList");
+		for(var i=0; i<fromDropdown.children.length;i++){
+			if(!fromDropdown.children[i].disabled){
+				fromDropdown.removeChild(fromDropdown.children[i]);
+				i--;
+			}else{
+				fromDropdown.children[i].selected = true;
+			}
+		}
+		for(var i=0; i<toDropdown.children.length;i++){
+			if(!toDropdown.children[i].disabled){
+				toDropdown.removeChild(toDropdown.children[i]);
+				i--;
+			}else{
+				toDropdown.children[i].selected = true;
+			}
+		}
+		for(var i=0; i<accountsArray.length;i++){
+			var account = document.createElement("option");
+			var accountCopy = document.createElement("option");
+			account.value = accountsArray[i];
+			account.innerHTML = accountsArray[i];
+			accountCopy.value = accountsArray[i];
+			accountCopy.innerHTML = accountsArray[i];
+			fromDropdown.appendChild(account);
+			toDropdown.appendChild(accountCopy);
+		}
+	}
 	span.onclick = function() {
 	    modal.style.display = "none";
 	    document.getElementById('fromList').value = 'initial';
