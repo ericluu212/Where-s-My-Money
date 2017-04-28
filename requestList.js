@@ -53,9 +53,9 @@ var RequestList = function(){
     var outerFlexDiv = $('<div></div>').addClass('list-group-item list-group-item-action align-items-start row').attr('id', request.id);
 
     //var rowDiv = $('<div></div>').addClass('row');
-    var innerFlexColDivButtons = $('<div></div>').addClass('col-sm-6 flex-first justify-content-between').attr('id', 'buttons-col');
+    var innerFlexColDivButtons = $('<div></div>').addClass('col-sm-12 flex-first justify-content-between').attr('id', 'buttons-col');
 
-    var title = $('<h5></h5>').addClass('mb-1').text('Request ' + (i + 1));
+    var title = $('<h3></h3>').addClass('mb-1').text('Request: ' + request.description);
 
     var info = $('<ul></ul>').addClass('list-inline list-group').attr('id', 'description-list');
     var name = $('<li></li>').addClass('list-group-item description-item p-2').attr('id', 'name').text(request.name);
@@ -66,18 +66,13 @@ var RequestList = function(){
     var commands =  $('<div></div>').addClass('btn-group').attr('role', 'group').attr('id', 'btn-container');
     var approveBtn = $('<button></button>').addClass('btn btn-success request-btn').attr("id", "approve-btn").text('Approve request');
     var changeAmountBtn = $('<button></button>').addClass('btn btn-secondary request-btn').attr("id", "change-amt-btn").attr('data-toggle', 'modal').attr('href', '#change-amt-popup').text('Change amount');
-    var denyBtn = $('<button></button>').addClass('btn btn-secondary request-btn').attr('id', 'deny-btn').text('Deny');
+    var denyBtn = $('<button></button>').addClass('btn btn-danger request-btn').attr('id', 'deny-btn').text('Deny');
     commands.append(approveBtn).append(changeAmountBtn).append(denyBtn);
 
     innerFlexColDivButtons.append(title).append(info).append(commands);
 
-    var innerFlexColDivDescription = $('<div></div>').addClass('col-sm-6 flex-last justify-content-between').attr('id', 'description-col');
 
-    var descriptionTitle = $('<h3></h3>').text('Request description:');
-    var description = $('<div></div>').attr('id', 'description-text').text(request.description);
-    innerFlexColDivDescription.append(descriptionTitle).append(description);
-
-    outerFlexDiv.append(innerFlexColDivButtons).append(innerFlexColDivDescription);
+    outerFlexDiv.append(innerFlexColDivButtons);
 
     $('#incoming-requests-list').append(outerFlexDiv);
   }

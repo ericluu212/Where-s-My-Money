@@ -2,9 +2,9 @@ var clickedListItemId = "";
 
 function updateBtnDescription(){
   console.log('updating description');
-  var desc = requestsList.requests.length + " Incoming requests";
+  var desc = requestsList.requests.length;
   console.log(desc);
-  $('#request-btn').text(desc);
+  $('.button-badge').text(desc);
 }
 
 function incoming_requests(){
@@ -22,7 +22,16 @@ $(document).on('click', '.request-close', function(){
     }
 });
 
-
+window.onclick = function(event) {
+    var modal = document.getElementById('incoming-requests-popup');
+    if (event.target == modal) {
+        modal.style.display = "none";
+        var list = document.getElementById('incoming-requests-list');
+        while(list.hasChildNodes()){
+          list.removeChild(list.lastChild);
+        }
+    }
+}
 
 $(document).on('click', '#approve-btn', function(evt){
   var parentId = $(evt.target).parent().parent().parent();

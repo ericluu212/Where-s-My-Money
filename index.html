@@ -63,7 +63,7 @@ $(document).ready(function()
 	var elementsAccountsFilterElement = $('#elementsAccountsFilter')[0];
 	renderAccountsOptions(transactionsAccountsFilterElement);
 	renderAccountsOptions(elementsAccountsFilterElement);
-	
+
 });
 
 function renderAccountsOptions(element) {
@@ -133,7 +133,8 @@ $(document).on('change', 'input[name="expenses-account"]', function() {
     </div>
     <ul class="nav navbar-nav">
       <li><a style="" onclick="showTransfer()">Transfer</a></li>
-      <li><a onclick="incoming_requests()" id="request-btn"></a></li>
+      <li><a onclick="incoming_requests()" id="request-btn">Incoming requests</a>
+				<span class="button-badge"></span></li>
       <li><a onclick="showAccounts()">Manage Accounts</a></li>
     </ul>
   </div>
@@ -310,7 +311,7 @@ $(document).on('change', 'input[name="expenses-account"]', function() {
 						<input type="text" class="calendarWidget date-input" id="transactionsEndDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
 
 				</div>
-				
+
 					<div id="transactionsAccountsFilter">
 						In Accounts:
 					</div>
@@ -318,7 +319,7 @@ $(document).on('change', 'input[name="expenses-account"]', function() {
 					<table id="transactions-table" class="moneyTables">
 					<tr>
 						<th>Date</th>
-						<th>Description</th> 
+						<th>Description</th>
 						<th>Amount</th>
 					</tr>
 					</table>
@@ -343,7 +344,7 @@ $(document).on('change', 'input[name="expenses-account"]', function() {
      				<table id="expenses-table" class="moneyTables">
      					<tr>
 							<th>Date</th>
-							<th>Description</th> 
+							<th>Description</th>
 							<th>Amount</th>
 						</tr>
      				</table>
