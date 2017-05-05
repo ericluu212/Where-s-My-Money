@@ -13,6 +13,7 @@ function incoming_requests(){
   modal.style.display = "block";
 }
 
+//handles closing for x button
 $(document).on('click', '.request-close', function(){
     var modal = document.getElementById('incoming-requests-popup');
     modal.style.display = "none"
@@ -20,9 +21,11 @@ $(document).on('click', '.request-close', function(){
     while(list.hasChildNodes()){
       list.removeChild(list.lastChild);
     }
+
+    console.log("Closed request");
 });
 
-window.onclick = function(event) {
+$(window).click(function(event) {
     var modal = document.getElementById('incoming-requests-popup');
     if (event.target == modal) {
         modal.style.display = "none";
@@ -31,7 +34,7 @@ window.onclick = function(event) {
           list.removeChild(list.lastChild);
         }
     }
-}
+});
 
 $(document).on('click', '#approve-btn', function(evt){
   var parentId = $(evt.target).parent().parent().parent();
