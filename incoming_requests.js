@@ -95,3 +95,4 @@ $(document).on('click', '#change-amt-confirm', function(){
   $(clickedListItemId).find('#buttons-col').find('#description-list').find('#cost').text("$" + newCost);
 
 });
+

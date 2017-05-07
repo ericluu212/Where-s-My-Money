@@ -60,6 +60,11 @@ li a:hover {
 	padding: 0px 0px 10px 0px;
 }
 
+#accountsTable{
+  overflow: auto;
+}
+
+
 #transferContent{
 	padding: 0px 0px 10px 0px;
 }
@@ -91,7 +96,7 @@ li a:hover {
     border: 1px solid #888;
     width: 350px;
     max-height: calc(100vh - 200px);
-    overflow-y: hidden;
+    overflow: hidden;
 }
 /*Divs inside the transfer modal*/
 .transferModalBtn{

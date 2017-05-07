@@ -297,10 +297,10 @@ $(document).on('change', 'input[name="expenses-account"]', function() {
 
 			<div class="modal-body row" id='change-amt-body'>
 				<h5 id="current-cost">Current amount: </h5>
-				<form class='form-inline'>
+				<form class='form-inline' onSubmit = 'return false;'>
 					<div class='form-group'>
-						<label for='change-amt-text' id='change-amt-label'>New amount: </label>
-						<input class='form-control' type='text' id='change-amt-text' />
+						<label for='change-amt-text' id='change-amt-label'>New amount: $</label>
+						<input class='form-control' type='text' id='change-amt-text' onSubmit = 'return false;' placeholder = '12.50'/>
 					</div>
 
 				</form>

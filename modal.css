@@ -63,13 +63,15 @@
 /*******Make list scrollable***************************************/
 #incoming-requests-list{
   height: 300px;
-  overflow: hidden;
+  overflow-x: auto;
   overflow-y: scroll;
   max-height: calc(100vh - 200px);
   border: 0px;
 }
 
 .request-list-item{
+  width: 100%;
+  border-right: 0px;
 }
 
 /**Column 1 **/
