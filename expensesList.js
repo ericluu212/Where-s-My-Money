@@ -89,7 +89,12 @@ var ExpensesList = function()
 		descriptionElement.appendChild(document.createTextNode(expense.description));
 
 		var costElement = document.createElement('td');
-		costElement.appendChild(document.createTextNode(expense.cost.toString()));
+		if (expense.cost.toString().substring(0,1) == '-'){
+			costElement.appendChild(document.createTextNode("-$" + expense.cost.toString().substring(1)));
+		}
+		else{
+			costElement.appendChild(document.createTextNode("$" + expense.cost.toString()));
+		}
 
 		tableElement.appendChild(dateElement);
 		tableElement.appendChild(descriptionElement);

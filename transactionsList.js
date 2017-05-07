@@ -29,7 +29,7 @@ var TransactionsList = function()
 		new Transaction(20160831, "Microsoft Internship", 5743, "MITFCU", 19),
 		new Transaction(20160931, "Amazon", -24.22, "Bank of America", 20),
 		new Transaction(20170318, "Amazon", -34.28, "MITFCU", 21),
-		new Transaction(20170318, "Amazon", -74.50, "Chase", 22),
+		new Transaction(20170318, "Amazon", -74.51, "Chase", 22),
 		new Transaction(20170517, "Keg Party Supplier", -429.87, "Chase", 23),
 
 	];
@@ -81,7 +81,13 @@ var TransactionsList = function()
 		descriptionElement.appendChild(document.createTextNode(transaction.description));
 
 		var costElement = document.createElement('td');
-		costElement.appendChild(document.createTextNode(transaction.cost.toString()));
+		if (transaction.cost.toString().substring(0,1) == '-'){
+			costElement.appendChild(document.createTextNode("-$" + transaction.cost.toString().substring(1)));
+		}
+		else{
+			costElement.appendChild(document.createTextNode("$" + transaction.cost.toString()));
+		}
+		//costElement.appendChild(document.createTextNode(transaction.cost.toString()));
 
 		tableElement.appendChild(dateElement);
 		tableElement.appendChild(descriptionElement);
