@@ -37,7 +37,7 @@ li a:hover {
 }
 
 #request-btn{
-	position: relative
+	position: relative;
 }
 
 .button-badge{
@@ -90,6 +90,8 @@ li a:hover {
     padding: 20px;
     border: 1px solid #888;
     width: 350px;
+    max-height: calc(100vh - 200px);
+    overflow-y: hidden;
 }
 /*Divs inside the transfer modal*/
 .transferModalBtn{
@@ -123,6 +125,7 @@ li a:hover {
 	margin-bottom: 15px;
 	margin-left: 15px;
 	overflow: scroll;
+  overflow-x: hidden;
 	max-height: 200px;
 }
 .checkboxTable td
@@ -147,6 +150,16 @@ li a:hover {
 	margin-right: auto;
 	width: 50%;
 	display: block;
+}
+
+#request-body{
+  position: relative;
+  max-height: calc(100vh - 200px);
+}
+
+#incoming-requests-list{
+  position: relative;
+  max-height: calc(100vh - 200px);
 }
 /* The Close Button */
 .close {
