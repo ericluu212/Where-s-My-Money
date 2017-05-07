@@ -41,10 +41,13 @@ Eric Luu
 
 <script>
 
+//constants
 var transactionsList, expensesList, requestsList;
 var accountsArray = ["Bank of America", "Chase", "MITFCU"];
 // 5 pairs of dark/light color pairs
 var colors = [["#66ccff", "#99ddff"], ["#ffa366", "#ffc299"], ["#cc66ff", "#dd99ff"], ["#ffd966","#ffe699"], ["#66ff66", "#99ff99"]];
+var TRANSACTIONS_CONSTRAINT;
+var EXPENSES_CONSTRAINT;
 
 // Final initialization entry point: the Javascript code inside this block
 // runs at the end of start-up when the page has finished loading.
@@ -131,11 +134,55 @@ function handleExpensesListChange() {
 
 //Allow for selecting date with calendar widget
 $( function() {
-    $( ".calendarWidget" ).datepicker({
-      numberOfMonths: 2,
-      showButtonPanel: true,
-    });
-  } );
+/*
+  $( ".calendarWidget" ).datepicker({
+    numberOfMonths: 2,
+    showButtonPanel: true,
+  });
+*/
+
+  $("#transactionsStartDate").datepicker({ 
+    numberOfMonths: 1,
+    showButtonPanel: true,
+    changeMonth: true,
+    changeYear: true,
+    yearRange: "-10:+10",
+    defaultDate: TRANSACTIONS_CONSTRAINT,
+    onSelect: function(date){
+      var selectedDate = new Date(date);
+      var msecsInADay = 86400000;
+      var constraint = new Date(selectedDate.getTime() + msecsInADay);
+      TRANSACTIONS_CONSTRAINT = constraint;
+
+      $("#transactionsEndDate").datepicker( "option", "minDate", TRANSACTIONS_CONSTRAINT );
+      $("#transactionsEndDate").datepicker( "option", "defaultDate", TRANSACTIONS_CONSTRAINT );
+      handleTransactionsListChange();
+    }
+
+  });
+  
+  $("#transactionsEndDate").datepicker({ 
+    numberOfMonths: 1,
+    showButtonPanel: true,
+    changeMonth: true,
+    changeYear: true,
+    yearRange: "-10:+10",
+    defaultDate: TRANSACTIONS_CONSTRAINT,
+    
+    onSelect: function(date){
+      var selectedDate = new Date(date);
+      var msecsInADay = 86400000;
+      var constraint = new Date(selectedDate.getTime() - msecsInADay);
+      TRANSACTIONS_CONSTRAINT = constraint;
+
+      $("#transactionsStartDate").datepicker( "option", "maxDate", TRANSACTIONS_CONSTRAINT );
+      $("#transactionsStartDate").datepicker( "option", "defaultDate", TRANSACTIONS_CONSTRAINT );
+      handleTransactionsListChange();
+    }
+    
+  });
+
+});
 
 $(document).on('change', 'input[name="expenses-account"]', function() {
     handleExpensesListChange();
