@@ -151,8 +151,8 @@ $(document).on('change', 'input[name="expenses-account"]', function() {
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <img src="wheres-my-money-logo.png" style="width:100px;height:50px; float: left;">
-      <a class="navbar-brand" href="#" style="color:green;">Where's My Money?</a>
+      <img src="wheres-my-money-logo.png" onClick="window.location.reload();return false;" style="width:100px;height:50px; float: left;">
+      <a class="navbar-brand" href="#" onClick="window.location.reload();return false;" style="color:green;">Where's My Money?</a>
     </div>
     <ul class="nav navbar-nav">
       <li><a style="" onclick="showTransfer()">Transfer</a></li>
@@ -296,6 +296,7 @@ $(document).on('change', 'input[name="expenses-account"]', function() {
 			</div>
 
 			<div class="modal-body row" id='change-amt-body'>
+        <p id="changeRequestAlert" style="visibility: hidden; color: red; text-align: center;">
 				<h5 id="current-cost">Current amount: </h5>
 				<form class='form-inline' onSubmit = 'return false;'>
 					<div class='form-group'>

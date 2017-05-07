@@ -89,10 +89,33 @@ $(document).on('click', '.change-amt-close', function(){
 
 $(document).on('click', '#change-amt-confirm', function(){
   var newCost = $('#change-amt-text').val();
-  var id = clickedListItemId.slice(1);
+  condition = validateCurrency(newCost);
+  if (condition){
+    var id = clickedListItemId.slice(1);
 
-  requestsList.changeAmount(newCost, id);
-  $(clickedListItemId).find('#buttons-col').find('#description-list').find('#cost').text("$" + newCost);
-
+    requestsList.changeAmount(newCost, id);
+    $(clickedListItemId).find('#buttons-col').find('#description-list').find('#cost').text("$" + newCost);
+  }
 });
+
+
+function validateCurrency(currency){
+    if(!currency.includes('.')){
+      currency = currency + ".00";
+    }
+    var regex  = /^\d+(?:\.\d{2})$/;
+    if(regex.test(currency)){
+      var transferError = document.getElementById("changeRequestAlert");
+      transferError.innerHTML = "Change complete."
+      transferError.style.visibility = "visible";
+      transferError.style.color = "green";
+      return true;
+    }
+    else{
+      var transferError = document.getElementById("changeRequestAlert");
+      transferError.innerHTML = "Invalid currency value."
+      transferError.style.visibility = "visible";
+      return false;
+    }
+  }
 
