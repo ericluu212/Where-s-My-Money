@@ -36,6 +36,7 @@ var TransactionsList = function()
 
 	this.filteredTransactions = this.transactions;
 	this.accounts = [];
+	this.colors = [];
 
 	this.clearRenderedList = function()
 	{
@@ -57,7 +58,7 @@ var TransactionsList = function()
 			this.filteredTransactions.sort(function(a, b) {
 				return a.date - b.date;
 			});
-			this.transactionTableElement.appendChild(createTableElement(this.filteredTransactions[i]));
+			this.transactionTableElement.appendChild(this.createTableElement(this.filteredTransactions[i]));
 		}
 	}
 
@@ -69,7 +70,7 @@ var TransactionsList = function()
 	// 	return transactionsList;
 	// }
 
-	function createTableElement(transaction)
+	this.createTableElement = function(transaction)
 	{
 		var tableElement = document.createElement('tr');
 
@@ -85,6 +86,10 @@ var TransactionsList = function()
 		tableElement.appendChild(dateElement);
 		tableElement.appendChild(descriptionElement);
 		tableElement.appendChild(costElement);
+
+		var account = transaction.account;
+		var colorIndex = this.accounts.indexOf(account);
+		tableElement.style.backgroundColor = this.colors[colorIndex][1];
 
 		return tableElement;
 	}
@@ -159,7 +164,8 @@ var TransactionsList = function()
 		var accounts = [];
 		$('.transactions-account-check').each(function(i, el) {
 			if (el.checked) {
-    			accounts.push(el.value);
+    			// accounts.push(el.value);
+    			accounts.push(el.innerHTML);
     		}
 		});
 		return accounts;

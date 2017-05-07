@@ -43,6 +43,8 @@ Eric Luu
 
 var transactionsList, expensesList, requestsList;
 var accountsArray = ["Bank of America", "Chase", "MITFCU"];
+// 5 pairs of dark/light color pairs
+var colors = [["#66ccff", "#99ddff"], ["#ffa366", "#ffc299"], ["#cc66ff", "#dd99ff"], ["#ffd966","#ffe699"], ["#66ff66", "#99ff99"]];
 
 // Final initialization entry point: the Javascript code inside this block
 // runs at the end of start-up when the page has finished loading.
@@ -50,8 +52,10 @@ $(document).ready(function()
 {
 	transactionsList = new TransactionsList();
 	transactionsList.accounts = accountsArray;
+  transactionsList.colors = colors;
 	expensesList = new ExpensesList();
 	expensesList.accounts = accountsArray;
+  expensesList.colors = colors;
 
 	transactionsList.render();
 	expensesList.render();
@@ -68,26 +72,49 @@ $(document).ready(function()
 
 function renderAccountsOptions(element) {
 	for (var i=0; i<accountsArray.length; i++) {
-		var span = document.createElement('span');
-		var input = document.createElement('input');
 		var inputClassName;
+    var button = document.createElement('button');
+    button.classList.add('btn-default');
+    button.classList.add('btn');
+    button.hover = colors[i][0];
+    button.color = colors[i][1];
 		if (element == $('#transactionsAccountsFilter')[0]) {
-			inputClassName = "transactions-account-check";
-			input.name = "transactions-account"
+      button.name = "transactions-account";
+      button.classList.add("transactions-account-check");
 		} else if (element == $('#elementsAccountsFilter')[0]){
-			inputClassName = "expenses-account-check";
-			input.name = "expenses-account";
-		}
-		span.className = "account-check";
-		input.type = "checkbox";
-		input.value = accountsArray[i];
-		input.defaultChecked = true;
-		input.className = inputClassName;
+      button.name = "expenses-account";
+      button.classList.add("expenses-account-check");
+    }
 
-		span.appendChild(input);
-		span.innerHTML += accountsArray[i];
-		element.appendChild(span);
-	}
+    button.onclick = function(event) {
+      event.target.checked = !event.target.checked;
+      if (event.target.checked) {
+        event.target.style.background = event.target.color;
+      } else {
+        event.target.style.background = "white";
+      }
+      if (event.target.name == "transactions-account") {
+        handleTransactionsListChange();
+      } else {
+        handleExpensesListChange();
+      }
+    }
+      
+    button.style.background = button.color;
+    button.onmouseover = function(event) {
+      if (event.target.checked){
+        event.target.style.background = event.target.hover;
+      }
+    }
+    button.onmouseout = function(event) {
+      if (event.target.checked) {
+        event.target.style.background = event.target.color;
+      }
+    }
+    button.innerHTML = accountsArray[i];
+    button.checked = true;
+    element.appendChild(button);
+  }
 }
 
 function handleTransactionsListChange() {
@@ -109,10 +136,6 @@ $( function() {
       showButtonPanel: true,
     });
   } );
-
-$(document).on('change', 'input[name="transactions-account"]', function() {
-    handleTransactionsListChange();
-});
 
 $(document).on('change', 'input[name="expenses-account"]', function() {
     handleExpensesListChange();

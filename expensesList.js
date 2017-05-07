@@ -43,6 +43,7 @@ var ExpensesList = function()
 	];
 	this.filteredexpenses = this.expenses;
 	this.accounts = [];
+	this.colors = [];
 
 	this.clearRenderedList = function()
 	{
@@ -64,7 +65,7 @@ var ExpensesList = function()
 			this.filteredexpenses.sort(function(a, b) {
 				return a.date - b.date;
 			});
-			this.expenseTableElement.appendChild(createTableElement(this.filteredexpenses[i]));
+			this.expenseTableElement.appendChild(this.createTableElement(this.filteredexpenses[i]));
 		}
 	}
 
@@ -77,7 +78,7 @@ var ExpensesList = function()
 	// 	return expenseList;
 	// }
 
-	function createTableElement(expense)
+	this.createTableElement = function(expense)
 	{
 		var tableElement = document.createElement('tr');
 
@@ -94,6 +95,10 @@ var ExpensesList = function()
 		tableElement.appendChild(descriptionElement);
 		tableElement.appendChild(costElement);
 
+		var account = expense.account;
+		var colorIndex = this.accounts.indexOf(account);
+		tableElement.style.backgroundColor = this.colors[colorIndex][1];
+
 		return tableElement;
 
 	}
@@ -102,7 +107,7 @@ var ExpensesList = function()
 		var accounts = [];
 		$('.expenses-account-check').each(function(i, el) {
 			if (el.checked) {
-    			accounts.push(el.value);
+    			accounts.push(el.innerHTML);
     		}
 		});
 		return accounts;
