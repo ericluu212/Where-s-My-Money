@@ -19,7 +19,7 @@
     margin: auto;
     padding: 0;
     border: 1px solid #888;
-    width: 40%;
+    width: 50%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
 
 }
@@ -62,10 +62,16 @@
 
 /*******Make list scrollable***************************************/
 #incoming-requests-list{
-  height: 500px;
+  height: 300px;
   overflow: hidden;
   overflow-y: scroll;
+  max-height: calc(100vh - 200px);
+  border: 0px;
 }
+
+.request-list-item{
+}
+
 /**Column 1 **/
 #buttons-col{
 
@@ -77,7 +83,7 @@
   display: table;
   width: 458px;
   table-layout: fixed;
-
+  border-color: white;
 }
 
 .description-item{

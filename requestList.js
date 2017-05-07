@@ -50,7 +50,7 @@ var RequestList = function(){
   function createListElement(request, i){
     console.log("creating element")
     //var listElementHTML = '<div class="list-group-item list-group-item-action flex-column align-items-start"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">List group item heading</h5><small>3 days ago</small></div><p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p><small>Donec id elit non mi porta.</small></div>';
-    var outerFlexDiv = $('<div></div>').addClass('list-group-item list-group-item-action align-items-start row').attr('id', request.id);
+    var outerFlexDiv = $('<div></div>').addClass('list-group-item list-group-item-action align-items-start row request-list-item').attr('id', request.id);
 
     //var rowDiv = $('<div></div>').addClass('row');
     var innerFlexColDivButtons = $('<div></div>').addClass('col-sm-12 flex-first justify-content-between').attr('id', 'buttons-col');
