@@ -157,9 +157,11 @@ $( function() {
       $("#transactionsEndDate").datepicker( "option", "minDate", TRANSACTIONS_CONSTRAINT );
       $("#transactionsEndDate").datepicker( "option", "defaultDate", TRANSACTIONS_CONSTRAINT );
       handleTransactionsListChange();
-      setTimeout(function(){
-        $( "#transactionsEndDate" ).datepicker('show');
-      }, 200);     
+      if (!$("#transactionsEndDate").val()){
+        setTimeout(function(){
+          $( "#transactionsEndDate" ).datepicker('show');
+        }, 200);     
+      }   
     }
   });
   
@@ -181,9 +183,61 @@ $( function() {
       $("#transactionsStartDate").datepicker( "option", "defaultDate", TRANSACTIONS_CONSTRAINT );
       handleTransactionsListChange();
 
-      setTimeout(function(){
-        $( "#transactionsStartDate" ).datepicker('show');
-      }, 200);   
+      if (!$("#transactionsStartDate").val()){
+        setTimeout(function(){
+          $( "#transactionsStartDate" ).datepicker('show');
+        }, 200);     
+      }
+    }
+  });
+
+  $("#expensesStartDate").datepicker({ 
+    numberOfMonths: 1,
+    showButtonPanel: true,
+    changeMonth: true,
+    changeYear: true,
+    yearRange: "-10:+10",
+    defaultDate: EXPENSES_CONSTRAINT,
+    onSelect: function(date){
+      var selectedDate = new Date(date);
+      var msecsInADay = 86400000;
+      var constraint = new Date(selectedDate.getTime() + msecsInADay);
+      EXPENSES_CONSTRAINT = constraint;
+
+      $("#expensesEndDate").datepicker( "option", "minDate", EXPENSES_CONSTRAINT );
+      $("#expensesEndDate").datepicker( "option", "defaultDate", EXPENSES_CONSTRAINT );
+      handleExpensesListChange();
+      if (!$("#expensesEndDate").val()){
+        setTimeout(function(){
+          $( "#expensesEndDate" ).datepicker('show');
+        }, 200);     
+      }
+    }
+  });
+  
+  $("#expensesEndDate").datepicker({ 
+    numberOfMonths: 1,
+    showButtonPanel: true,
+    changeMonth: true,
+    changeYear: true,
+    yearRange: "-10:+10",
+    defaultDate: EXPENSES_CONSTRAINT,
+    
+    onSelect: function(date){
+      var selectedDate = new Date(date);
+      var msecsInADay = 86400000;
+      var constraint = new Date(selectedDate.getTime() - msecsInADay);
+      EXPENSES_CONSTRAINT = constraint;
+
+      $("#transactionsStartDate").datepicker( "option", "maxDate", EXPENSES_CONSTRAINT );
+      $("#transactionsStartDate").datepicker( "option", "defaultDate", EXPENSES_CONSTRAINT );
+      handleExpensesListChange();
+
+      if (!$("#expensesStartDate").val()){
+        setTimeout(function(){
+          $( "#expensesStartDate" ).datepicker('show');
+        }, 200);     
+      } 
     }
   });
 

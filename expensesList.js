@@ -20,7 +20,7 @@ var ExpensesList = function()
 		new Transaction(20170901, "Rent Boston", -2000, "Chase", 10),
 		new Transaction(20170901, "Housing", -1000, "MITFCU", 11),
 		new Transaction(20170901, "Food Money", -100, "MITFCU", 12),
-		new Transaction(20171001, "Rent Boston", -2000, "Chase", 13),
+		new Transaction(20171003, "Rent Boston", -2000, "Chase", 13),
 		new Transaction(20171001, "Housing", -1000, "MITFCU", 14),
 		new Transaction(20171001, "Food Money", -100, "MITFCU", 15),
 		new Transaction(20171101, "Rent Boston", -2000, "Chase", 16),
