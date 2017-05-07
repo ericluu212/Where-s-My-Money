@@ -157,8 +157,10 @@ $( function() {
       $("#transactionsEndDate").datepicker( "option", "minDate", TRANSACTIONS_CONSTRAINT );
       $("#transactionsEndDate").datepicker( "option", "defaultDate", TRANSACTIONS_CONSTRAINT );
       handleTransactionsListChange();
+      setTimeout(function(){
+        $( "#transactionsEndDate" ).datepicker('show');
+      }, 200);     
     }
-
   });
   
   $("#transactionsEndDate").datepicker({ 
@@ -178,8 +180,11 @@ $( function() {
       $("#transactionsStartDate").datepicker( "option", "maxDate", TRANSACTIONS_CONSTRAINT );
       $("#transactionsStartDate").datepicker( "option", "defaultDate", TRANSACTIONS_CONSTRAINT );
       handleTransactionsListChange();
+
+      setTimeout(function(){
+        $( "#transactionsStartDate" ).datepicker('show');
+      }, 200);   
     }
-    
   });
 
 });
