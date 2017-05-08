@@ -123,7 +123,7 @@ li a:hover {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    padding-top: 60px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -140,7 +140,7 @@ li a:hover {
     padding: 20px;
     border: 1px solid #888;
     width: 350px;
-    max-height: calc(100vh - 200px);
+    max-height: calc(150vh - 200px);
     overflow: hidden;
 }
 /*Divs inside the transfer modal*/
