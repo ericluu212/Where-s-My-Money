@@ -133,14 +133,21 @@ $(window).click(function(event) {
 });
 
 $(document).on('click', '#change-amt-confirm', function(){
-  var newCost = $('#change-amt-text').val();
+  var newCost = $('#change-amt-text').val().replace(/^0+/, ''); //from http://stackoverflow.com/questions/6676488/remove-leading-zeros-from-a-number-in-javascript
   condition = validateCurrency(newCost);
   if (condition){
     var id = clickedListItemId.slice(1);
     var modal = document.getElementById('change-amt-popup');
-    modal.style.display = "none";
     requestsList.changeAmount(newCost, id);
     $(clickedListItemId).find('#buttons-col').find('#description-list').find('#cost').text("$" + newCost);
+    $('#change-amt-confirm').prop('disabled', true);
+    setTimeout(function() {
+      modal.style.display = "none";
+      var transferError = document.getElementById("changeRequestAlert");
+      transferError.innerHTML = "";
+      $('#change-amt-text').val("");
+      $('#change-amt-confirm').prop('disabled', false);
+    }, 1000);
   }
 });
 
@@ -150,7 +157,7 @@ function validateCurrency(currency){
       currency = currency + ".00";
     }
     var regex  = /^\d+(?:\.\d{2})$/;
-    if(regex.test(currency)){
+    if(regex.test(currency) && parseInt(currency) != 0){ //don't want user to input a bunch of meaningless 0s
       var transferError = document.getElementById("changeRequestAlert");
       transferError.innerHTML = "Change complete."
       transferError.style.visibility = "visible";
@@ -161,6 +168,7 @@ function validateCurrency(currency){
       var transferError = document.getElementById("changeRequestAlert");
       transferError.innerHTML = "Invalid currency value."
       transferError.style.visibility = "visible";
+      transferError.style.color = "red";
       return false;
     }
   }

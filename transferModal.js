@@ -97,8 +97,9 @@ function showTransfer(){
 		if(!currency.includes('.')){
 			currency = currency + ".00";
 		}
+		currency = currency.replace(/^0+/, '');
 		var regex  = /^\d+(?:\.\d{2})$/;
-		if(regex.test(currency)){
+		if(regex.test(currency) && parseInt(currency) != 0){
 			return true;
 		}else{
 			//alert("Invalid currency value.");
