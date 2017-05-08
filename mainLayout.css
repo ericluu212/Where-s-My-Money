@@ -11,21 +11,53 @@ img{
   cursor: pointer;
 }
 
-#firstColumn {
+/* Style the buttons inside the tab */
+div.tab button {
+	background-color: inherit;
+	float: left;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 16px;
+	transition: .2s;
 }
 
-#lastColumn {
+/* Change background color of buttons on hover */
+div.tab button:hover {
+	background-color: #ddd;
 }
 
+/* Create an active/current tablink class */
+div.tab button.active {
+	background-color: #ccc;
+}
+
+/* Style the data containers */
 .data-container{
+  display: none;
   border-style: solid;
   border-radius: 15px;
   height: 100%;
   width: 90%;
+<<<<<<< HEAD
   margin: 0 auto;
 
   padding: 10px;
   border-color: #5cb85c;
+=======
+  margin-top: 60px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  border-color: #5cb85c;
+}
+
+#firstColumn {
+}
+
+#lastColumn {
+>>>>>>> tabs
 }
 
 li a:hover {
@@ -226,10 +258,13 @@ li a:hover {
 	margin-right: 5px;
 }
 
+<<<<<<< HEAD
 .data-container{
 
 }
 
+=======
+>>>>>>> tabs
 .date-input {
 
 }
