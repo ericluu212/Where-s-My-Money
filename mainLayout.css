@@ -19,11 +19,13 @@ img{
 
 .data-container{
   border-style: solid;
-  border-color: DimGrey;
   border-radius: 15px;
   height: 100%;
   width: 90%;
   margin: 0 auto;
+
+  padding: 10px;
+  border-color: #5cb85c;
 }
 
 li a:hover {
@@ -225,8 +227,7 @@ li a:hover {
 }
 
 .data-container{
-  padding: 10px;
-  border-color: #5cb85c;
+
 }
 
 .date-input {
@@ -234,7 +235,7 @@ li a:hover {
 }
 
 .scrollMoney{
-  height: 450px;
+  height: 275px;
   overflow: auto;
 }
 
