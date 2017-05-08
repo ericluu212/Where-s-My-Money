@@ -75,6 +75,9 @@ $(document).ready(function()
 });
 
 function renderAccountsOptions(element) {
+  while (element.firstChild) {
+    element.removeChild(element.firstChild);
+  }
 	for (var i=0; i<accountsArray.length; i++) {
 		var inputClassName;
     var button = document.createElement('button');

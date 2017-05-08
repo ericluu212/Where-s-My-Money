@@ -65,7 +65,10 @@ var ExpensesList = function()
 			this.filteredexpenses.sort(function(a, b) {
 				return a.date - b.date;
 			});
-			this.expenseTableElement.appendChild(this.createTableElement(this.filteredexpenses[i]));
+			//this.expenseTableElement.appendChild(this.createTableElement(this.filteredexpenses[i]));
+			if($.inArray(this.filteredexpenses[i].account, accountsArray) != -1){
+				this.expenseTableElement.appendChild(this.createTableElement(this.filteredexpenses[i]));
+			}
 		}
 	}
 

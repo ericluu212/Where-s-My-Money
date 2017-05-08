@@ -190,6 +190,12 @@ function showAccounts(){
 					var row = document.getElementById(accountsArray[i]+"row");
 					row.parentNode.removeChild(row);
 					accountsArray.splice(i, 1);
+					transactionsList.accounts = accountsArray;
+					expensesList.accounts = accountsArray;
+					renderAccountsOptions($('#transactionsAccountsFilter')[0]);
+					renderAccountsOptions($('#elementsAccountsFilter')[0]);
+					transactionsList.render();
+					i--;
 				}
 			}
 			//update array of accounts

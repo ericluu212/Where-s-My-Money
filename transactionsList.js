@@ -58,7 +58,10 @@ var TransactionsList = function()
 			this.filteredTransactions.sort(function(a, b) {
 				return a.date - b.date;
 			});
-			this.transactionTableElement.appendChild(this.createTableElement(this.filteredTransactions[i]));
+			//check if account exists
+			if($.inArray(this.filteredTransactions[i].account, accountsArray) != -1){
+				this.transactionTableElement.appendChild(this.createTableElement(this.filteredTransactions[i]));
+			}
 		}
 	}
 
