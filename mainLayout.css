@@ -39,12 +39,6 @@ div.tab button.active {
   border-radius: 15px;
   height: 100%;
   width: 90%;
-<<<<<<< HEAD
-  margin: 0 auto;
-
-  padding: 10px;
-  border-color: #5cb85c;
-=======
   margin-top: 60px;
   margin-bottom: 10px;
   margin-left: auto;
@@ -57,7 +51,6 @@ div.tab button.active {
 }
 
 #lastColumn {
->>>>>>> tabs
 }
 
 li a:hover {
@@ -258,13 +251,6 @@ li a:hover {
 	margin-right: 5px;
 }
 
-<<<<<<< HEAD
-.data-container{
-
-}
-
-=======
->>>>>>> tabs
 .date-input {
 
 }
