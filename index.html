@@ -72,6 +72,8 @@ $(document).ready(function()
 	renderAccountsOptions(transactionsAccountsFilterElement);
 	renderAccountsOptions(elementsAccountsFilterElement);
 
+  document.getElementById('transactions-container').style.display = "block";
+  document.getElementsByClassName('tablinks')[0].className += " active";
 });
 
 function renderAccountsOptions(element) {
@@ -247,9 +249,26 @@ $( function() {
 
 });
 
-$(document).on('change', 'input[name="expenses-account"]', function() {
-    handleExpensesListChange();
-});
+function openTable(evt, dataType)
+{
+  var i, dataContainers, tablinks;
+
+  // Hide all data containers
+  dataContainers = document.getElementsByClassName("data-container");
+  for (i = 0; i < dataContainers.length; i++) {
+    dataContainers[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(dataType).style.display = "block";
+  evt.currentTarget.className += " active";
+}
 
 </script>
 
@@ -430,74 +449,66 @@ $(document).on('change', 'input[name="expenses-account"]', function() {
   <br>
   	<div class="row">
     	<div class="col-sm-6" id="firstColumn">
-        <ul class="nav nav-pills">
-          <li class = "active"><a onclick = "revealTransactions()"><span id = "show-transactions">Show Transactions</span></a></li>
-        </ul>
-        <br>
-        <!--
-        <input id="transferBtn" class="btn" type="button" value="Show Bank Transactions">
-        <br>
-  		 Column 1 Code Here -->
-  			<div id="transactions-container" style="visibility: hidden;" class="data-container">
+  		<!-- Column 1 Code Here -->
+
+        <div class="tab">
+          <button class="tablinks" onclick="openTable(event, 'transactions-container')">Transactions</button>
+          <button class="tablinks" onclick="openTable(event, 'expenses-container')">Expenses</button>
+        </div>
+
+  			<div id="transactions-container" class="data-container">
   				<div id="transactions-filtering-options">
   					Viewing
   					<select id="transactionsTypeFilter" onchange="handleTransactionsListChange()">
-						<option selected="allTransactions" value="all">All Transactions</option>
-						<option value="withdrawals">Withdrawals</option>
-						<option value="deposits">Deposits</option>
-					</select>
-
-            			&nbsp;From:
+  						<option selected="allTransactions" value="all">All Transactions</option>
+  						<option value="withdrawals">Withdrawals</option>
+  						<option value="deposits">Deposits</option>
+					  </select>
 						<input type="text" class="calendarWidget date-input" id="transactionsStartDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
             			&nbsp;To:
 						<input type="text" class="calendarWidget date-input" id="transactionsEndDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
-
 				  </div>
-        <br>
 
 					<div id="transactionsAccountsFilter">
-						In Accounts:
 					</div>
-          		<div class = "scrollMoney">
-					<table id="transactions-table" class="moneyTables">
-					<tr>
-						<th>Date</th>
-						<th>Description</th>
-						<th>Amount</th>
-					</tr>
-					</table>
-          		</div>
+      		<div class = "scrollMoney">
+					  <table id="transactions-table" class="moneyTables">
+    					<tr>
+    						<th>Date</th>
+    						<th>Description</th>
+    						<th>Amount</th>
+    					</tr>
+					   </table>
+      		</div>
   			</div>
+
+        <div class="data-container" id="expenses-container">
+          <div id="transactions-filtering-options">
+            Viewing Expenses &nbsp;&nbsp;&nbsp;&nbsp;
+            From:
+            <input type="text" class = "calendarWidget date-input" id="expensesStartDate" onblur="handleExpensesListChange()" onchange="handleExpensesListChange()">
+            &nbsp;&nbsp;&nbsp;
+            To:
+            <input type="text" class = "calendarWidget date-input" id="expensesEndDate" onblur="handleExpensesListChange()" onchange="handleExpensesListChange()">
+          </div>
+          <div id="elementsAccountsFilter">
+          In Accounts:
+          </div>
+          <div class = "scrollMoney">
+            <table id="expenses-table" class="moneyTables">
+              <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Amount</th>
+            </tr>
+            </table>
+          </div>
+        </div>
+
+
   		</div>
 
     	<div class="col-sm-6" id="lastColumn">
-        <ul class="nav nav-pills">
-          <li class = "active"><a onclick = "revealExpenses()"><span id = "show-expenses">Show Expenses</span></a></li>
-        </ul>
-        <br>
-    		<div class="data-container" style="visibility: hidden;" id="expenses-container">
-  				<div id="transactions-filtering-options">
-  					Viewing Expenses &nbsp;&nbsp;&nbsp;&nbsp;
-            From:
-  					<input type="text" class = "calendarWidget date-input" id="expensesStartDate" onblur="handleExpensesListChange()" onchange="handleExpensesListChange()">
-            &nbsp;&nbsp;&nbsp;
-            To:
-  					<input type="text" class = "calendarWidget date-input" id="expensesEndDate" onblur="handleExpensesListChange()" onchange="handleExpensesListChange()">
-					</div>
-          <br>
-					<div id="elementsAccountsFilter">
-					In Accounts:
-					</div>
-					<div class = "scrollMoney">
-     				<table id="expenses-table" class="moneyTables">
-     					<tr>
-							<th>Date</th>
-							<th>Description</th>
-							<th>Amount</th>
-						</tr>
-     				</table>
-     			</div>
-    		</div>
 			</div>
 
     	</div>

@@ -56,22 +56,15 @@ var TransactionsList = function()
 		for (var i=0; i<this.filteredTransactions.length; i++)
 		{
 			this.filteredTransactions.sort(function(a, b) {
-				return a.date - b.date;
+				return b.date - a.date;
 			});
 			//check if account exists
 			if($.inArray(this.filteredTransactions[i].account, accountsArray) != -1){
-				this.transactionTableElement.appendChild(this.createTableElement(this.filteredTransactions[i]));
+				var nextTransaction = this.filteredTransactions[i];
+				this.transactionTableElement.appendChild(this.createTableElement(nextTransaction));
 			}
 		}
 	}
-
-	// function generateTransactions(){
-	// 	transactionsList = []
-	// 	for (var i = 2017; i < ENDYEAR; i++) {
-	// 		transactionsList.push(new Expense(parseInt(i.toString() + MONTH_AND_DATE.toString()), "UROP Deposit", 450, "Bank of America", i-2016));
-	// 	}
-	// 	return transactionsList;
-	// }
 
 	this.createTableElement = function(transaction)
 	{
@@ -84,17 +77,25 @@ var TransactionsList = function()
 		descriptionElement.appendChild(document.createTextNode(transaction.description));
 
 		var costElement = document.createElement('td');
-		if (transaction.cost.toString().substring(0,1) == '-'){
+		if (transaction.cost < 0){
 			costElement.appendChild(document.createTextNode("-$" + transaction.cost.toString().substring(1)));
 		}
 		else{
 			costElement.appendChild(document.createTextNode("$" + transaction.cost.toString()));
 		}
-		//costElement.appendChild(document.createTextNode(transaction.cost.toString()));
+
+		// var balanceElement = document.createElement('td');
+		// if (transaction.balance < 0) {
+		// 	balanceElement.appendChild(document.createTextNode("-$" + transaction.balance.toString().substring(1)));
+		// }
+		// else{
+		// 	balanceElement.appendChild(document.createTextNode("$" + transaction.balance.toString()));
+		// }
 
 		tableElement.appendChild(dateElement);
 		tableElement.appendChild(descriptionElement);
 		tableElement.appendChild(costElement);
+		// tableElement.appendChild(balanceElement);
 
 		var account = transaction.account;
 		var colorIndex = this.accounts.indexOf(account);
