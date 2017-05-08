@@ -72,6 +72,8 @@ $(document).ready(function()
 	renderAccountsOptions(transactionsAccountsFilterElement);
 	renderAccountsOptions(elementsAccountsFilterElement);
 
+  document.getElementById('transactions-container').style.display = "block";
+  document.getElementsByClassName('tablinks')[0].className += " active";
 });
 
 function renderAccountsOptions(element) {
