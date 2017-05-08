@@ -92,7 +92,8 @@ $(document).on('click', '#change-amt-confirm', function(){
   condition = validateCurrency(newCost);
   if (condition){
     var id = clickedListItemId.slice(1);
-
+    var modal = document.getElementById('change-amt-popup');
+    modal.style.display = "none";
     requestsList.changeAmount(newCost, id);
     $(clickedListItemId).find('#buttons-col').find('#description-list').find('#cost').text("$" + newCost);
   }
@@ -118,4 +119,3 @@ function validateCurrency(currency){
       return false;
     }
   }
-
