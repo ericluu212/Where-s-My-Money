@@ -245,3 +245,16 @@ ol{
 .calendarWidget{
   width: 20%;
 }
+
+/*
+CSS for the tabbing on home page
+*/
+.nav-pills > li {
+    float:none;
+    display:inline-block;
+    zoom:1;
+}
+
+.nav-pills {
+    text-align:center;
+}

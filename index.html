@@ -38,6 +38,7 @@ Eric Luu
 <script src="incoming_requests.js"></script>
 <script src="requestList.js"></script>
 <script src="request.js"></script>
+<script src="tabDisplay.js"></script>
 
 <script>
 
@@ -423,23 +424,18 @@ $(document).on('change', 'input[name="expenses-account"]', function() {
 </div>
 
 <div class="container-fluid">
-  <div class = "tab-row">
-    <ul class="nav nav-tabs">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Menu 1</a></li>
-      <li><a href="#">Menu 2</a></li>
-      <li><a href="#">Menu 3</a></li>
-    </ul>
-  </div>
-
   <br>
   	<div class="row">
     	<div class="col-sm-6" id="firstColumn">
+        <ul class="nav nav-pills">
+          <li class = "active"><a onclick = "revealTransactions()"><span id = "show-transactions">Show Transactions</span></a></li>
+        </ul>
+        <br>
         <!--
         <input id="transferBtn" class="btn" type="button" value="Show Bank Transactions">
         <br>
   		 Column 1 Code Here -->
-  			<div id="transactions-container"  class="data-container">
+  			<div id="transactions-container" style="visibility: hidden;" class="data-container">
   				<div id="transactions-filtering-options">
   					Viewing
   					<select id="transactionsTypeFilter" onchange="handleTransactionsListChange()">
@@ -472,7 +468,11 @@ $(document).on('change', 'input[name="expenses-account"]', function() {
   		</div>
 
     	<div class="col-sm-6" id="lastColumn">
-    		<div class="data-container" id="expenses-container">
+        <ul class="nav nav-pills">
+          <li class = "active"><a onclick = "revealExpenses()"><span id = "show-expenses">Show Expenses</span></a></li>
+        </ul>
+        <br>
+    		<div class="data-container" style="visibility: hidden;" id="expenses-container">
   				<div id="transactions-filtering-options">
   					Viewing Expenses &nbsp;&nbsp;&nbsp;&nbsp;
             From:
