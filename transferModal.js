@@ -62,9 +62,12 @@ function showTransfer(){
 
 	btn.onclick = function(){
 		transferError.style.visibility = "hidden";
+		var currencyInput = document.getElementById("Amount");
 		transferError.innerHTML ="";
-		a = validateAccounts();
+		currencyInput.style.borderColor = "initial";
+		currencyInput.style.borderStyle = "inset";
 		c = validateCurrency();
+		a = validateAccounts();
 		if(a && c){
 			modal.style.display = "none";
 			document.getElementById('fromList').value = 'initial';
@@ -79,18 +82,17 @@ function showTransfer(){
 		var account1 = document.getElementById('fromList').value;
 		var account2 = document.getElementById('toList').value;
 		if(account1 == '' || account2 == ''){
-			//alert("Both a To and From account must be selected.");
 			transferError.innerHTML = "Both a 'To' and 'From' account must be selected."
 			transferError.style.visibility = "visible";
 			return false;
-		}else if(account1 == account2){
-			//alert("Transfer must be between different accounts.");
+		}
+		if(account1 == account2){
 			transferError.innerHTML = "Transfer must be between different accounts."
 			transferError.style.visibility = "visible";
 			return false;
-		}else{
-			return true;
 		}
+		return true;
+		
 	}
 
 	function validateCurrency(){
@@ -106,6 +108,9 @@ function showTransfer(){
 			var transferError = document.getElementById("transferAlert");
 			transferError.innerHTML = "Invalid currency value."
 			transferError.style.visibility = "visible";
+			var currencyInput = document.getElementById("Amount");
+			currencyInput.style.borderColor = "red";
+			currencyInput.style.borderStyle = "solid";
 			return false;
 		}
 	}
