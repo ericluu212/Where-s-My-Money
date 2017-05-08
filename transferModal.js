@@ -71,6 +71,7 @@ function showTransfer(){
 			document.getElementById('toList').value = 'initial';
 			var currency = document.getElementById("Amount").value = '';
 			showTransferSuccess();
+			setTimeout(closeTransferSuccess, 1000);
 		}
 	}
 
@@ -312,4 +313,10 @@ function showAddSuccess(){
 	        modal.style.display = "none";
 	    }
 	}
+}
+
+function closeTransferSuccess(){
+	// Get the modal
+	var modal = document.getElementById('transferSuccessModal');
+	modal.style.display = "none";
 }
