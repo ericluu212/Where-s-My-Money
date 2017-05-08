@@ -1,5 +1,42 @@
 var clickedListItemId = "";
 
+var approveCache = [];
+var denyCache = [];
+var changeCache = [];
+
+//Saves any changes when confirm is clicked in requests modal
+function saveChanges(){
+  for(i=0; i<approveCache.length; i++){
+    requestsList.approveRequest(approveCache[i])
+  }
+  for(i=0; i<denyCache.length; i++){
+    requestsList.denyRequest(denyCache[i])
+  }
+  for(i=0; i<changeCache.length; i++){
+    console.log('change');
+  }
+  emptyCache();
+}
+// Empties all the caches
+function emptyCache(){
+  approveCache = [];
+  denyCache = [];
+  changeCache = [];
+}
+
+$(document).on('click', '#request-confirm-btn', function(){
+
+    saveChanges();
+
+    var modal = document.getElementById('incoming-requests-popup');
+    modal.style.display = "none";
+    var list = document.getElementById('incoming-requests-list');
+    while(list.hasChildNodes()){
+      list.removeChild(list.lastChild);
+    }
+    updateBtnDescription();
+});
+
 function updateBtnDescription(){
   console.log('updating description');
   var desc = requestsList.requests.length;
@@ -38,7 +75,8 @@ $(window).click(function(event) {
 
 $(document).on('click', '#approve-btn', function(evt){
   var parentId = $(evt.target).parent().parent().parent();
-  var request = requestsList.approveRequest(parentId.attr('id'));
+  approveCache.push(parentId.attr('id'));
+  var request = requestsList.getRequest(parentId.attr('id'));
 
   var btn_group = $(evt.target).parent();
   while(btn_group[0].hasChildNodes()){
@@ -47,7 +85,6 @@ $(document).on('click', '#approve-btn', function(evt){
 
   var feedback = "Approved: " + request.description;
   btn_group.text(feedback);
-  updateBtnDescription();
 });
 
 $(document).on('click', '#change-amt-btn', function(evt){
@@ -64,8 +101,8 @@ $(document).on('click', '#change-amt-btn', function(evt){
 
 $(document).on('click', '#deny-btn', function(evt){
   var parent = $(evt.target).parent().parent().parent();
-
-  var request = requestsList.denyRequest(parent.attr('id'));
+  denyCache.push(parent.attr('id'))
+  var request = requestsList.getRequest(parent.attr('id'));
 
   var btn_group = $(evt.target).parent();
   while(btn_group[0].hasChildNodes()){
