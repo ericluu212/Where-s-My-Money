@@ -53,7 +53,6 @@ $(document).on('click', '#approve-btn', function(evt){
 $(document).on('click', '#change-amt-btn', function(evt){
   var request_id = $(evt.target).parent().parent().parent().attr('id');
   clickedListItemId = '#' + request_id;
-
   var modal = document.getElementById('change-amt-popup');
   modal.style.display = 'block';
 
@@ -85,6 +84,15 @@ $(document).on('click', '.change-amt-close', function(){
 
     $('#change-amt-text').val("");
     clickedListItemId = '';
+});
+
+$(window).click(function(event) {
+    var modal = document.getElementById('change-amt-popup');
+    if (event.target == modal) {
+        modal.style.display = "none";
+        $('#change-amt-text').val("");
+        clickedListItemId = '';
+    }
 });
 
 $(document).on('click', '#change-amt-confirm', function(){
