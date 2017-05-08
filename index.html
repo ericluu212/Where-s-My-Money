@@ -423,10 +423,23 @@ $(document).on('change', 'input[name="expenses-account"]', function() {
 </div>
 
 <div class="container-fluid">
+  <div class = "tab-row">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Menu 1</a></li>
+      <li><a href="#">Menu 2</a></li>
+      <li><a href="#">Menu 3</a></li>
+    </ul>
+  </div>
+
+  <br>
   	<div class="row">
     	<div class="col-sm-6" id="firstColumn">
-  		<!-- Column 1 Code Here -->
-  			<div id="transactions-container" class="data-container">
+        <!--
+        <input id="transferBtn" class="btn" type="button" value="Show Bank Transactions">
+        <br>
+  		 Column 1 Code Here -->
+  			<div id="transactions-container"  class="data-container">
   				<div id="transactions-filtering-options">
   					Viewing
   					<select id="transactionsTypeFilter" onchange="handleTransactionsListChange()">
@@ -441,6 +454,7 @@ $(document).on('change', 'input[name="expenses-account"]', function() {
 						<input type="text" class="calendarWidget date-input" id="transactionsEndDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
 
 				</div>
+        <br>
 
 					<div id="transactionsAccountsFilter">
 						In Accounts:
@@ -467,6 +481,7 @@ $(document).on('change', 'input[name="expenses-account"]', function() {
             To:
   					<input type="text" class = "calendarWidget date-input" id="expensesEndDate" onblur="handleExpensesListChange()" onchange="handleExpensesListChange()">
 					</div>
+          <br>
 					<div id="elementsAccountsFilter">
 					In Accounts:
 					</div>
