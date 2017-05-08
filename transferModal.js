@@ -194,7 +194,10 @@ function showAccounts(){
 					expensesList.accounts = accountsArray;
 					renderAccountsOptions($('#transactionsAccountsFilter')[0]);
 					renderAccountsOptions($('#elementsAccountsFilter')[0]);
+					transactionsList.clearRenderedList();
+					expensesList.clearRenderedList();
 					transactionsList.render();
+					expensesList.render();
 					i--;
 				}
 			}
