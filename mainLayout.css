@@ -44,7 +44,6 @@ div.tab button.active {
 .data-container{
   display: none;
   border-style: solid;
-  /*border-radius: 15px;*/
   height: 100%;
   width: 90%;
   margin-top: 50px;

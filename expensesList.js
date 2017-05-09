@@ -73,7 +73,10 @@ var ExpensesList = function()
 				this.expenseTableElement.appendChild(this.createTableElement(this.filteredexpenses[i]));
 			}
 		}
-		$(this).triggerHandler("render");
+		var details = {
+			expenses: this.filteredexpenses
+		};
+		$(this).triggerHandler("render", details);
 	}
 
 

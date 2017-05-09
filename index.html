@@ -76,6 +76,8 @@ $(document).ready(function()
 
   document.getElementById('transactions-container').style.display = "block";
   document.getElementsByClassName('tablinks')[0].className += " active";
+
+  $('body').tooltip({title: "Hooray!", selector: ".input"});
 });
 
 function renderAccountsOptions(element) {
@@ -140,14 +142,72 @@ function handleExpensesListChange() {
 	expensesList.render();
 }
 
+function parseDateValue(dateValue) {
+  // dateValue is YYYYMMDD
+  dateValue = dateValue.toString();
+  if (dateValue.length == 8) {
+    var year = dateValue.substring(0,4);
+    var month = dateValue.substring(4,6);
+    var day = dateValue.substring(6,8);
+    return  month + '/' + day + '/' + year;
+  } else {
+    return null;
+  }
+}
+
+$(transactionsList).on('render', function(evt, info) {
+  var tsd = document.getElementById("transactionsStartDate");
+  if (tsd.value == "") {
+    var date = info.transactions[info.transactions.length - 1].date;
+    tsd.value = parseDateValue(date);
+  }
+
+  var ted = document.getElementById("transactionsEndDate");
+  if (ted.value == "") {
+    var date = info.transactions[0].date;
+    ted.value = parseDateValue(date);
+  }
+});
+
+$(expensesList).on('render', function(evt, info) {
+  var esd = document.getElementById("expensesStartDate");
+  if (esd.value == "") {
+    var date = info.expenses[info.expenses.length - 1].date;
+    esd.value = parseDateValue(date);
+  }
+
+  var eed = document.getElementById("expensesEndDate");
+  if (eed.value == "") {
+    var date = info.expenses[0].date;
+    eed.value = parseDateValue(date);
+  }
+});
+
 //Allow for selecting date with calendar widget
 $( function() {
-/*
-  $( ".calendarWidget" ).datepicker({
-    numberOfMonths: 2,
-    showButtonPanel: true,
-  });
-*/
+
+$('.date-input').keydown(function(evt){
+  var target = evt.currentTarget;
+  var key = evt.which;
+  var value = target.value;
+  var valueNumLength = value.replace(/[^0-9]/g,"").length;
+  var selected = (target.selectionEnd - target.selectionStart > 0);
+
+  if (key == 9 || key == 13) {
+    // tab or enter was pressed
+
+  } else if (key == 8) {
+    // backspace
+
+  } else if (key > 47 && key < 58) {
+    // number
+
+  } else if (key == 191) {
+    // / was pressed
+  }
+
+  evt.preventDefault();
+});
 
   $("#transactionsStartDate").datepicker({
     numberOfMonths: 1,
@@ -271,10 +331,6 @@ function openTable(evt, dataType)
   document.getElementById(dataType).style.display = "block";
   evt.currentTarget.className += " active";
 }
-
-$(transactionsList).on('render', function(e, info) {
-  console.log(info);
-});
 
 </script>
 
@@ -519,6 +575,12 @@ $(transactionsList).on('render', function(e, info) {
   		</div>
 
     	<div class="col-sm-6" id="lastColumn">
+        <table>
+          <tr>
+            <th>Account</th>
+            <th>Balance</th>
+          </tr>
+        </table>
 			</div>
 
     	</div>
