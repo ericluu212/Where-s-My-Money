@@ -12,6 +12,14 @@ var RequestList = function(){
       new Request(new Date("2017-06-29"), "MIT summer housing", 3500.00, "John", 'req_3')
   ];
 
+  this.getRequest= function(id){
+    var request = $.grep(this.requests, function(e){
+      return e.id == id;
+    })[0];
+
+    return request;
+  }
+
   this.approveRequest = function(id){
     var request = $.grep(this.requests, function(e){
       return e.id == id;

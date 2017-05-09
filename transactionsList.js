@@ -8,7 +8,7 @@ var TransactionsList = function()
 	this.transactions =
 
 	[
-		new Transaction(20160101, "Coffee", -2.49, "Chase", 1), 
+		new Transaction(20160101, "Coffee", -2.49, "Chase", 1),
 		new Transaction(20160131, "UROP Deposit", 450, "Bank of America", 2),
 		new Transaction(20160231, "UROP Deposit", 423, "Bank of America", 3),
 		new Transaction(20160331, "UROP Deposit", 450, "Bank of America", 10),
@@ -35,6 +35,7 @@ var TransactionsList = function()
 	];
 
 	this.filteredTransactions = this.transactions;
+
 	this.accounts = [];
 	this.colors = [];
 
@@ -43,6 +44,7 @@ var TransactionsList = function()
 		// while (this.transactionTableElement.firstChild) {
 		// 	this.transactionTableElement.removeChild(this.transactionTableElement.firstChild);
 		// }
+		console.log(this.transactionTableElement.children);
 		for(var i=0; i< this.transactionTableElement.children.length; i++){
 			if(this.transactionTableElement.children[i].tagName == 'TR'){
 				this.transactionTableElement.removeChild(this.transactionTableElement.children[i]);
@@ -53,11 +55,14 @@ var TransactionsList = function()
 
 	this.render = function()
 	{
+		this.filteredTransactions.sort(function(a, b) {
+			if((b.date - a.date) == 0){
+				return a.id - b.id;
+			}
+			return b.date - a.date;
+		});
 		for (var i=0; i<this.filteredTransactions.length; i++)
 		{
-			this.filteredTransactions.sort(function(a, b) {
-				return b.date - a.date;
-			});
 			//check if account exists
 			if($.inArray(this.filteredTransactions[i].account, accountsArray) != -1){
 				var nextTransaction = this.filteredTransactions[i];
@@ -156,17 +161,21 @@ var TransactionsList = function()
 	}
 
 	function getTransactionsStartDate() {
+
 		var transactionsStartDateElement = $('#transactionsStartDate')[0];
 		// dateValue is MM/DD/YYYY
 		var dateValue = transactionsStartDateElement.value;
+
 		return parseDateValue(dateValue);
 	}
 
 
 	function getTransactionsEndDate() {
+
 		var transactionsEndDateElement = $('#transactionsEndDate')[0];
 		var dateValue = transactionsEndDateElement.value;
 		// dateValue is MM/DD/YYYY
+
 		return parseDateValue(dateValue);
 	}
 

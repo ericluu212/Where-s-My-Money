@@ -26,7 +26,7 @@ var ExpensesList = function()
 		new Transaction(20171101, "Rent Boston", -2000, "Chase", 16),
 		new Transaction(20171201, "Housing", -1000, "MITFCU", 17),
 		new Transaction(20171201, "Food Money", -100, "MITFCU", 18),
-		new Transaction(20171201, "Rent Boston", -2000, "Chase", 19), 
+		new Transaction(20171201, "Rent Boston", -2000, "Chase", 19),
 		new Transaction(20171201, "Housing", -1000, "MITFCU", 20),
 		new Transaction(20171201, "Food Money", -100, "MITFCU", 21),
 		new Transaction(20170416, "MIT Tuition", -200, "Bank of America", 22),
@@ -60,11 +60,15 @@ var ExpensesList = function()
 
 	this.render = function()
 	{
+		this.filteredexpenses.sort(function(a, b) {
+
+			if(a.date == b.date){
+				return a.id - b.id;
+			}
+			return a.date - b.date;
+		});
 		for (var i=0; i<this.filteredexpenses.length; i++)
 		{
-			this.filteredexpenses.sort(function(a, b) {
-				return a.date - b.date;
-			});
 			//this.expenseTableElement.appendChild(this.createTableElement(this.filteredexpenses[i]));
 			if($.inArray(this.filteredexpenses[i].account, accountsArray) != -1){
 				this.expenseTableElement.appendChild(this.createTableElement(this.filteredexpenses[i]));

@@ -1,5 +1,42 @@
 var clickedListItemId = "";
 
+var approveCache = [];
+var denyCache = [];
+var changeCache = [];
+
+//Saves any changes when confirm is clicked in requests modal
+function saveChanges(){
+  for(i=0; i<approveCache.length; i++){
+    requestsList.approveRequest(approveCache[i])
+  }
+  for(i=0; i<denyCache.length; i++){
+    requestsList.denyRequest(denyCache[i])
+  }
+  for(i=0; i<changeCache.length; i++){
+    console.log('change');
+  }
+  emptyCache();
+}
+// Empties all the caches
+function emptyCache(){
+  approveCache = [];
+  denyCache = [];
+  changeCache = [];
+}
+
+$(document).on('click', '#request-confirm-btn', function(){
+
+    saveChanges();
+
+    var modal = document.getElementById('incoming-requests-popup');
+    modal.style.display = "none";
+    var list = document.getElementById('incoming-requests-list');
+    while(list.hasChildNodes()){
+      list.removeChild(list.lastChild);
+    }
+    updateBtnDescription();
+});
+
 function updateBtnDescription(){
   console.log('updating description');
   var desc = requestsList.requests.length;
@@ -38,7 +75,8 @@ $(window).click(function(event) {
 
 $(document).on('click', '#approve-btn', function(evt){
   var parentId = $(evt.target).parent().parent().parent();
-  var request = requestsList.approveRequest(parentId.attr('id'));
+  approveCache.push(parentId.attr('id'));
+  var request = requestsList.getRequest(parentId.attr('id'));
 
   var btn_group = $(evt.target).parent();
   while(btn_group[0].hasChildNodes()){
@@ -47,13 +85,11 @@ $(document).on('click', '#approve-btn', function(evt){
 
   var feedback = "Approved: " + request.description;
   btn_group.text(feedback);
-  updateBtnDescription();
 });
 
 $(document).on('click', '#change-amt-btn', function(evt){
   var request_id = $(evt.target).parent().parent().parent().attr('id');
   clickedListItemId = '#' + request_id;
-
   var modal = document.getElementById('change-amt-popup');
   modal.style.display = 'block';
 
@@ -65,8 +101,8 @@ $(document).on('click', '#change-amt-btn', function(evt){
 
 $(document).on('click', '#deny-btn', function(evt){
   var parent = $(evt.target).parent().parent().parent();
-
-  var request = requestsList.denyRequest(parent.attr('id'));
+  denyCache.push(parent.attr('id'))
+  var request = requestsList.getRequest(parent.attr('id'));
 
   var btn_group = $(evt.target).parent();
   while(btn_group[0].hasChildNodes()){
@@ -87,14 +123,31 @@ $(document).on('click', '.change-amt-close', function(){
     clickedListItemId = '';
 });
 
+$(window).click(function(event) {
+    var modal = document.getElementById('change-amt-popup');
+    if (event.target == modal) {
+        modal.style.display = "none";
+        $('#change-amt-text').val("");
+        clickedListItemId = '';
+    }
+});
+
 $(document).on('click', '#change-amt-confirm', function(){
-  var newCost = $('#change-amt-text').val();
+  var newCost = $('#change-amt-text').val().replace(/^0+/, ''); //from http://stackoverflow.com/questions/6676488/remove-leading-zeros-from-a-number-in-javascript
   condition = validateCurrency(newCost);
   if (condition){
     var id = clickedListItemId.slice(1);
-
+    var modal = document.getElementById('change-amt-popup');
     requestsList.changeAmount(newCost, id);
     $(clickedListItemId).find('#buttons-col').find('#description-list').find('#cost').text("$" + newCost);
+    $('#change-amt-confirm').prop('disabled', true);
+    setTimeout(function() {
+      modal.style.display = "none";
+      var transferError = document.getElementById("changeRequestAlert");
+      transferError.innerHTML = "";
+      $('#change-amt-text').val("");
+      $('#change-amt-confirm').prop('disabled', false);
+    }, 1000);
   }
 });
 
@@ -104,7 +157,7 @@ function validateCurrency(currency){
       currency = currency + ".00";
     }
     var regex  = /^\d+(?:\.\d{2})$/;
-    if(regex.test(currency)){
+    if(regex.test(currency) && parseInt(currency) != 0){ //don't want user to input a bunch of meaningless 0s
       var transferError = document.getElementById("changeRequestAlert");
       transferError.innerHTML = "Change complete."
       transferError.style.visibility = "visible";
@@ -115,7 +168,7 @@ function validateCurrency(currency){
       var transferError = document.getElementById("changeRequestAlert");
       transferError.innerHTML = "Invalid currency value."
       transferError.style.visibility = "visible";
+      transferError.style.color = "red";
       return false;
     }
   }
-

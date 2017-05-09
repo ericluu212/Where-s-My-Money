@@ -108,7 +108,7 @@ function renderAccountsOptions(element) {
         handleExpensesListChange();
       }
     }
-      
+
     button.style.background = button.color;
     button.onmouseover = function(event) {
       if (event.target.checked){
@@ -147,7 +147,7 @@ $( function() {
   });
 */
 
-  $("#transactionsStartDate").datepicker({ 
+  $("#transactionsStartDate").datepicker({
     numberOfMonths: 1,
     showButtonPanel: true,
     changeMonth: true,
@@ -166,19 +166,19 @@ $( function() {
       if (!$("#transactionsEndDate").val()){
         setTimeout(function(){
           $( "#transactionsEndDate" ).datepicker('show');
-        }, 200);     
-      }   
+        }, 200);
+      }
     }
   });
-  
-  $("#transactionsEndDate").datepicker({ 
+
+  $("#transactionsEndDate").datepicker({
     numberOfMonths: 1,
     showButtonPanel: true,
     changeMonth: true,
     changeYear: true,
     yearRange: "-10:+10",
     defaultDate: TRANSACTIONS_CONSTRAINT,
-    
+
     onSelect: function(date){
       var selectedDate = new Date(date);
       var msecsInADay = 86400000;
@@ -192,12 +192,12 @@ $( function() {
       if (!$("#transactionsStartDate").val()){
         setTimeout(function(){
           $( "#transactionsStartDate" ).datepicker('show');
-        }, 200);     
+        }, 200);
       }
     }
   });
 
-  $("#expensesStartDate").datepicker({ 
+  $("#expensesStartDate").datepicker({
     numberOfMonths: 1,
     showButtonPanel: true,
     changeMonth: true,
@@ -216,19 +216,19 @@ $( function() {
       if (!$("#expensesEndDate").val()){
         setTimeout(function(){
           $( "#expensesEndDate" ).datepicker('show');
-        }, 200);     
+        }, 200);
       }
     }
   });
-  
-  $("#expensesEndDate").datepicker({ 
+
+  $("#expensesEndDate").datepicker({
     numberOfMonths: 1,
     showButtonPanel: true,
     changeMonth: true,
     changeYear: true,
     yearRange: "-10:+10",
     defaultDate: EXPENSES_CONSTRAINT,
-    
+
     onSelect: function(date){
       var selectedDate = new Date(date);
       var msecsInADay = 86400000;
@@ -242,8 +242,8 @@ $( function() {
       if (!$("#expensesStartDate").val()){
         setTimeout(function(){
           $( "#expensesStartDate" ).datepicker('show');
-        }, 200);     
-      } 
+        }, 200);
+      }
     }
   });
 
@@ -412,6 +412,9 @@ function openTable(evt, dataType)
 				<div class="list-group" id="incoming-requests-list">
 
 				</div>
+			</div>
+			<div class="modal-footer" id="request-footer">
+				<button type='button' class='btn btn-success' id='request-confirm-btn'>Confirm</button>
 			</div>
 	</div>
 </div>
