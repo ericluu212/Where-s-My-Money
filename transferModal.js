@@ -6,9 +6,20 @@ function showTransfer(){
 	//transfer button
 	var btn = document.getElementById('transferBtn');
 	// When the user clicks the button, open the modal 
-	var transferError = document.getElementById("transferAlert");
-	transferError.style.visibility = "hidden";
-	transferError.innerHTML ="";
+	var transferErrorAccounts = document.getElementById("transferAlertAccounts");
+	var transferErrorCurrency = document.getElementById("transferAlertCurrency");
+	var currencyInput = document.getElementById("Amount");
+	var toList = document.getElementById('toList');
+	var fromList = document.getElementById('fromList');
+
+	transferErrorAccounts.style.visibility = "hidden";
+	transferErrorAccounts.innerHTML ="";
+	transferErrorCurrency.style.visibility = "hidden";
+	transferErrorCurrency.innerHTML ="";
+	currencyInput.style.borderColor = "initial";
+	currencyInput.style.borderStyle = "inset";
+	toList.style.borderColor = "initial";
+	fromList.style.borderColor = "initial";
 
 	modal.style.display = "block";
 	// When the user clicks on <span> (x), close the modal
@@ -61,16 +72,23 @@ function showTransfer(){
 	}
 
 	btn.onclick = function(){
-		transferError.style.visibility = "hidden";
-		transferError.innerHTML ="";
-		a = validateAccounts();
+		transferErrorCurrency.style.visibility = "hidden";
+		transferErrorAccounts.style.visibility = "hidden";
+		transferErrorCurrency.innerHTML ="";
+		transferErrorAccounts.innerHTML ="";
+		currencyInput.style.borderColor = "initial";
+		currencyInput.style.borderStyle = "inset";
+		toList.style.borderColor = "initial";
+		fromList.style.borderColor = "initial";
 		c = validateCurrency();
+		a = validateAccounts();
 		if(a && c){
 			modal.style.display = "none";
 			document.getElementById('fromList').value = 'initial';
 			document.getElementById('toList').value = 'initial';
 			var currency = document.getElementById("Amount").value = '';
 			showTransferSuccess();
+			setTimeout(closeTransferSuccess, 1000);
 		}
 	}
 
@@ -78,18 +96,25 @@ function showTransfer(){
 		var account1 = document.getElementById('fromList').value;
 		var account2 = document.getElementById('toList').value;
 		if(account1 == '' || account2 == ''){
-			//alert("Both a To and From account must be selected.");
-			transferError.innerHTML = "Both a 'To' and 'From' account must be selected."
-			transferError.style.visibility = "visible";
+			transferErrorAccounts.innerHTML = "Both a 'To' and 'From' account must be selected."
+			transferErrorAccounts.style.visibility = "visible";
+			if(account1 == ''){
+				fromList.style.borderColor = 'red';
+			}
+			if(account2 == ''){
+				toList.style.borderColor = "red";
+			}
 			return false;
-		}else if(account1 == account2){
-			//alert("Transfer must be between different accounts.");
-			transferError.innerHTML = "Transfer must be between different accounts."
-			transferError.style.visibility = "visible";
-			return false;
-		}else{
-			return true;
 		}
+		if(account1 == account2){
+			transferErrorAccounts.innerHTML = "Transfer must be between different accounts."
+			transferErrorAccounts.style.visibility = "visible";
+			toList.style.borderColor = "red";
+			fromList.style.borderColor = "red";
+			return false;
+		}
+		return true;
+		
 	}
 
 	function validateCurrency(){
@@ -103,9 +128,10 @@ function showTransfer(){
 			return true;
 		}else{
 			//alert("Invalid currency value.");
-			var transferError = document.getElementById("transferAlert");
-			transferError.innerHTML = "Invalid currency value."
-			transferError.style.visibility = "visible";
+			transferErrorCurrency.innerHTML = "Invalid currency value."
+			transferErrorCurrency.style.visibility = "visible";
+			currencyInput.style.borderColor = "red";
+			currencyInput.style.borderStyle = "solid";
 			return false;
 		}
 	}
@@ -191,6 +217,15 @@ function showAccounts(){
 					var row = document.getElementById(accountsArray[i]+"row");
 					row.parentNode.removeChild(row);
 					accountsArray.splice(i, 1);
+					transactionsList.accounts = accountsArray;
+					expensesList.accounts = accountsArray;
+					renderAccountsOptions($('#transactionsAccountsFilter')[0]);
+					renderAccountsOptions($('#elementsAccountsFilter')[0]);
+					transactionsList.clearRenderedList();
+					expensesList.clearRenderedList();
+					transactionsList.render();
+					expensesList.render();
+					i--;
 				}
 			}
 			//update array of accounts
@@ -304,4 +339,10 @@ function showAddSuccess(){
 	        modal.style.display = "none";
 	    }
 	}
+}
+
+function closeTransferSuccess(){
+	// Get the modal
+	var modal = document.getElementById('transferSuccessModal');
+	modal.style.display = "none";
 }

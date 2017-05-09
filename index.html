@@ -77,6 +77,9 @@ $(document).ready(function()
 });
 
 function renderAccountsOptions(element) {
+  while (element.firstChild) {
+    element.removeChild(element.firstChild);
+  }
 	for (var i=0; i<accountsArray.length; i++) {
 		var inputClassName;
     var button = document.createElement('button');
@@ -297,7 +300,8 @@ function openTable(evt, dataType)
   	<span class="close" id ="closeTransfer">&times;</span>
     <h2 class="modalHeader">Transfer</h2>
   </div>
-  	<p id="transferAlert" style="visibility: hidden; color: red; text-align: center;">
+  	<p id="transferAlertAccounts" style="visibility: hidden; color: red; text-align: center;">
+    <p id="transferAlertCurrency" style="visibility: hidden; color: red; text-align: center;">
   	</p>
     <table class="paddingBetweenCols">
     	<tr>

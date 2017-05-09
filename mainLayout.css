@@ -69,6 +69,9 @@ li a:hover {
     color: white;
     background-color: #5cb85c;
 }
+.navbar-default .navbar-nav>li>a{
+    color: green;
+}
 /*
 .navbar-brand{
    pointer-events: none;

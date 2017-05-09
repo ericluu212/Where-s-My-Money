@@ -69,7 +69,10 @@ var ExpensesList = function()
 		});
 		for (var i=0; i<this.filteredexpenses.length; i++)
 		{
-			this.expenseTableElement.appendChild(this.createTableElement(this.filteredexpenses[i]));
+			//this.expenseTableElement.appendChild(this.createTableElement(this.filteredexpenses[i]));
+			if($.inArray(this.filteredexpenses[i].account, accountsArray) != -1){
+				this.expenseTableElement.appendChild(this.createTableElement(this.filteredexpenses[i]));
+			}
 		}
 	}
 

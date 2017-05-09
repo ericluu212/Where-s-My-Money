@@ -63,9 +63,11 @@ var TransactionsList = function()
 		});
 		for (var i=0; i<this.filteredTransactions.length; i++)
 		{
-
-			var nextTransaction = this.filteredTransactions[i];
-			this.transactionTableElement.appendChild(this.createTableElement(nextTransaction));
+			//check if account exists
+			if($.inArray(this.filteredTransactions[i].account, accountsArray) != -1){
+				var nextTransaction = this.filteredTransactions[i];
+				this.transactionTableElement.appendChild(this.createTableElement(nextTransaction));
+			}
 		}
 	}
 
