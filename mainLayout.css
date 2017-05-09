@@ -181,6 +181,11 @@ li a:hover {
   overflow-x: hidden;
 	max-height: 200px;
 }
+.checkboxTable tr { cursor: default; }
+.highlight { 
+  background: #dcefdc;
+}
+
 .checkboxTable td
 {
     padding:0 10px 0 10px;

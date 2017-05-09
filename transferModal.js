@@ -1,3 +1,4 @@
+var accountsArray = ["Bank of America", "Chase", "MITFCU"];
 function showTransfer(){
 	// Get the modal
 	var modal = document.getElementById('transferModal');
@@ -170,11 +171,6 @@ function showAccounts(){
 	// When the user clicks the button, open the modal 
 	modal.style.display = "block";
 
-	//create list of bank accounts
-	var accountsList = document.getElementById("accountsList");
-	while (accountsList.firstChild) {
-    	accountsList.removeChild(accountsList.firstChild);
-	}
 	/*for (var i = 0; i < accountsArray.length; i++) {
   		var checkbox = document.createElement('input');
   		checkbox.type = "checkbox";

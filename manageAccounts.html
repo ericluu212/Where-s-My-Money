@@ -1,0 +1,250 @@
+<!--
+6.813 Group Project
+Michael McGraw
+Andrew Montanez
+Sam Nguyen
+Eric Luu
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>Where's My Money?</title>
+
+<!-- Load style sheets -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="mainLayout.css">
+<link rel="stylesheet" href="modal.css">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
+
+
+<!-- Use mobile-aware viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Load any supplemental Javascript libraries here -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.2/seedrandom.js"></script>
+<script src="transactionsList.js"></script>
+<script src="transaction.js"></script>
+<script src="transferModal.js"></script>
+<script src="expensesList.js"></script>
+<script src="expense.js"></script>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="incoming_requests.js"></script>
+<script src="requestList.js"></script>
+<script src="request.js"></script>
+<script src="tabDisplay.js"></script>
+<script src="accounts.js"></script>
+
+<script>
+
+// Final initialization entry point: the Javascript code inside this block
+// runs at the end of start-up when the page has finished loading.
+$(document).ready(function()
+{
+	requestsList = new RequestList();
+  updateBtnDescription();
+  makeTable();
+});
+
+function makeTable(){
+  var table = document.getElementById("accountsTable");
+  $("#accountsTable tr").not(':first').remove(); 
+  for (var i = 0; i < accountsArray.length; i++) {
+    var label = document.createTextNode(accountsArray[i]);
+    var row = document.createElement("tr");
+    row.id = accountsArray[i]+"row";
+    row.style.fontSize = "30px";
+    var labelCell = document.createElement("td");
+    labelCell.appendChild(label);
+    labelCell.id=accountsArray[i];
+    row.appendChild(labelCell);
+    table.appendChild(row);
+  }
+}
+$(document).on('click', '#accountsTable td', function(e){
+  var rows = $('#accountsTable td');
+  var row = $(this);
+  rows.removeClass('highlight');
+  row.addClass('highlight');
+});
+</script>
+
+
+
+</head>
+
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <img src="wheres-my-money-logo.png" onClick="window.location.reload();return false;" style="width:100px;height:50px; float: left;">
+      <a class="navbar-brand" href="index.html" style="color:green;">Where's My Money?</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a style="" onclick="showTransfer()">Transfer</a></li>
+      <li><a onclick="incoming_requests()" id="request-btn">Incoming requests</a>
+				<span class="button-badge"></span></li>
+      <li><a href="manageAccounts.html">Manage Accounts</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div id="transferModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content" id="transferContent">
+  <div class="popupHeader">
+  	<span class="close" id ="closeTransfer">&times;</span>
+    <h2 class="modalHeader">Transfer</h2>
+  </div>
+  	<p id="transferAlertAccounts" style="visibility: hidden; color: red; text-align: center;">
+    <p id="transferAlertCurrency" style="visibility: hidden; color: red; text-align: center;">
+  	</p>
+    <table class="paddingBetweenCols">
+    	<tr>
+	    	<td><label for="fromList">From</label></td>
+	    	<td valign="top">
+	    		<select id="fromList">
+		    		<option value="" disabled selected="selected">Select one</option>
+	    		</select>
+	    	</td>
+		</tr>
+    	<tr>
+    		<td><label for="toList">To</label></td>
+    		<td valign="top">
+    			<select id="toList">
+			    	<option value="" disabled selected="selected">Select one</option>
+	    		</select>
+    		</td>
+  		</tr>
+  		<tr>
+		    <td><label for="Amount">Amount: $</label></td>
+		    <td valign="top"><input id="Amount" type="text" placeholder="11.25"; style="width: 130px;"></td>
+  		</tr>
+    </table>
+    <div class="transferModalBtn">
+    	<input id="transferBtn" class="btn" type="button" value="Transfer">
+    </div>
+  </div>
+</div>
+
+<!--modal for a successful transfer-->
+<div id="transferSuccessModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content" id="transferSuccessContent">
+    <span class="close" id ="closeTransferSuccess">&times;</span>
+    <p style="font-size: 18px; text-align: center;">Transfer has been made.</p>
+  </div>
+</div>
+
+<!--modal for managing accounts-->
+<div id="manageAccounts">
+  	<table id="accountsTable" class="checkboxTable">
+      <tr>
+        <th style="font-size: 40px; border: none;">Accounts</th>
+      </tr>
+  	</table>
+  	<div class="accountButtons">
+  		<input id="add-account-button" onclick="showAddAccounts()" class="btn" type="button" value="Add"/>
+  		<input id="remove-account-button" onclick="removeAccount()" class="btn" type="button" value="Remove"/>
+
+  	</div>
+</div>
+
+<!--Modal for adding account-->
+<div id="addAccountModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content" id="addAccountContent">
+  	<div class="popupHeader">
+    	<span class="close" id ="closeAddAccount">&times;</span>
+    	<h2>Add Account</h2>
+    </div>
+    <table class="paddingBetweenCols">
+  		<tr>
+		    <td><label for="accountName">Account Name</label></td>
+		    <td valign="top"><input id="accountName" type="text" style="width: 130px;"></td>
+  		</tr>
+  		<tr>
+		    <td><label for="accountNumber">Account Number</label></td>
+		    <td valign="top"><input id="accountNumber" type="text" style="width: 130px;"></td>
+  		</tr>
+    </table>
+    <div>
+  		<input id="create-button" class="btn" type="button" value="Create"/>
+  	</div>
+  </div>
+</div>
+
+<!--modal for a successful account addition-->
+<div id="addAccountSuccessModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content" id="addAccountSuccessContent">
+    <span class="close" id ="closeAddAccountSuccess">&times;</span>
+    <p style="font-size: 18px; text-align: center;">Account has been successfully added.</p>
+  </div>
+</div>
+<!-- modal for incoming requests -->
+<div id="incoming-requests-popup" class="request-modal" style="display: none">
+	<!--modal content -->
+
+	<div class="request-modal-content modal-content">
+			<div class="modal-header" id="request-header">
+				<h2>Incoming Requests</h2>
+				<span class="close request-close" id="request-close">&times;</span>
+			</div>
+
+			<div class="modal-body" id='request-body'>
+				<div class="list-group" id="incoming-requests-list">
+
+				</div>
+			</div>
+			<div class="modal-footer" id="request-footer">
+				<button type='button' class='btn btn-success' id='request-confirm-btn'>Confirm</button>
+			</div>
+	</div>
+</div>
+
+<div id="change-amt-popup" class="change-amt-modal modal" style="display: none">
+	<!--modal content -->
+
+	<div class="change-amt-modal-content modal-content">
+			<div class="modal-header" id="change-amt-header">
+				<h2>Change amount</h2>
+				<span class="close change-amt-close" id="change-amt-close">&times;</span>
+			</div>
+
+			<div class="modal-body row" id='change-amt-body'>
+        <p id="changeRequestAlert" style="visibility: hidden; color: red; text-align: center;">
+				<h5 id="current-cost">Current amount: </h5>
+				<form class='form-inline' onSubmit = 'return false;'>
+					<div class='form-group'>
+						<label for='change-amt-text' id='change-amt-label'>New amount: $</label>
+						<input class='form-control' type='text' id='change-amt-text' onSubmit = 'return false;' placeholder = '12.50'/>
+					</div>
+
+				</form>
+
+			</div>
+			<div class="modal-footer" id='change-amt-footer'>
+					<div class='btn-group'>
+						<button type='button' class='btn btn-success' id='change-amt-confirm'>Update</button>
+					</div>
+
+			</div>
+	</div>
+</div>
+
+
+</div> <!-- class="container" -->
+
+</body>
+
+</html>
