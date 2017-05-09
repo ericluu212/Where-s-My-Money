@@ -47,8 +47,11 @@ var transactionsList, expensesList, requestsList;
 var accountsArray = ["Bank of America", "Chase", "MITFCU"];
 // 5 pairs of dark/light color pairs
 var colors = [["#66ccff", "#99ddff"], ["#ffa366", "#ffc299"], ["#cc66ff", "#dd99ff"], ["#ffd966","#ffe699"], ["#66ff66", "#99ff99"]];
-var TRANSACTIONS_CONSTRAINT;
-var EXPENSES_CONSTRAINT;
+var MILLISECS_IN_DAY = 86400000;
+var TRANSACTIONS_FROM_CONSTRAINT;
+var EXPENSES_FROM_CONSTRAINT;
+var TRANSACTIONS_TO_CONSTRAINT;
+var EXPENSES_TO_CONSTRAINT;
 
 // Begin initialization
 transactionsList = new TransactionsList();
@@ -172,42 +175,48 @@ $(transactionsList).on('render', function(evt, info) {
 $(expensesList).on('render', function(evt, info) {
   var esd = document.getElementById("expensesStartDate");
   if (esd.value == "") {
-    var date = info.expenses[info.expenses.length - 1].date;
+    var date = info.expenses[0].date;
     esd.value = parseDateValue(date);
   }
+  console.log(info.expenses);
 
   var eed = document.getElementById("expensesEndDate");
   if (eed.value == "") {
-    var date = info.expenses[0].date;
+    console.log(info.expenses);
+    var date = info.expenses[info.expenses.length - 1].date;
     eed.value = parseDateValue(date);
   }
 });
 
 //Allow for selecting date with calendar widget
 $( function() {
+  TRANSACTIONS_FROM_CONSTRAINT = $("#transactionsEndDate").val();
+  TRANSACTIONS_TO_CONSTRAINT = $("#transactionsStartDate").val();
+  EXPENSES_FROM_CONSTRAINT = $("#expensesEndDate").val();
+  EXPENSES_TO_CONSTRAINT = $("#expensesStartDate").val();
 
-$('.date-input').keydown(function(evt){
-  var target = evt.currentTarget;
-  var key = evt.which;
-  var value = target.value;
-  var valueNumLength = value.replace(/[^0-9]/g,"").length;
-  var selected = (target.selectionEnd - target.selectionStart > 0);
+  $('.date-input').keydown(function(evt){
+    var target = evt.currentTarget;
+    var key = evt.which;
+    var value = target.value;
+    var valueNumLength = value.replace(/[^0-9]/g,"").length;
+    var selected = (target.selectionEnd - target.selectionStart > 0);
 
-  if (key == 9 || key == 13) {
-    // tab or enter was pressed
+    if (key == 9 || key == 13) {
+      // tab or enter was pressed
 
-  } else if (key == 8) {
-    // backspace
+    } else if (key == 8) {
+      // backspace
 
-  } else if (key > 47 && key < 58) {
-    // number
+    } else if (key > 47 && key < 58) {
+      // number
 
-  } else if (key == 191) {
-    // / was pressed
-  }
+    } else if (key == 191) {
+      // / was pressed
+    }
 
-  evt.preventDefault();
-});
+    evt.preventDefault();
+  });
 
   $("#transactionsStartDate").datepicker({
     numberOfMonths: 1,
@@ -215,21 +224,25 @@ $('.date-input').keydown(function(evt){
     changeMonth: true,
     changeYear: true,
     yearRange: "-10:+10",
-    defaultDate: TRANSACTIONS_CONSTRAINT,
+    defaultDate: TRANSACTIONS_FROM_CONSTRAINT,
+    maxDate: new Date(new Date(TRANSACTIONS_FROM_CONSTRAINT).getTime() - MILLISECS_IN_DAY),
+
     onSelect: function(date){
       var selectedDate = new Date(date);
-      var msecsInADay = 86400000;
-      var constraint = new Date(selectedDate.getTime() + msecsInADay);
-      TRANSACTIONS_CONSTRAINT = constraint;
+      var constraint = new Date(selectedDate.getTime() + MILLISECS_IN_DAY);
+      TRANSACTIONS_TO_CONSTRAINT = constraint;
 
-      $("#transactionsEndDate").datepicker( "option", "minDate", TRANSACTIONS_CONSTRAINT );
-      $("#transactionsEndDate").datepicker( "option", "defaultDate", TRANSACTIONS_CONSTRAINT );
+      $("#transactionsEndDate").datepicker( "option", "minDate", TRANSACTIONS_TO_CONSTRAINT );
+      $("#transactionsEndDate").datepicker( "option", "defaultDate", TRANSACTIONS_TO_CONSTRAINT );
       handleTransactionsListChange();
+      $('#transactionsStartDate').datepicker('hide');
+      console.log("asdfdsf");
       if (!$("#transactionsEndDate").val()){
         setTimeout(function(){
           $( "#transactionsEndDate" ).datepicker('show');
         }, 200);
       }
+
     }
   });
 
@@ -239,16 +252,16 @@ $('.date-input').keydown(function(evt){
     changeMonth: true,
     changeYear: true,
     yearRange: "-10:+10",
-    defaultDate: TRANSACTIONS_CONSTRAINT,
+    defaultDate: TRANSACTIONS_TO_CONSTRAINT,
+    minDate: new Date(new Date(TRANSACTIONS_TO_CONSTRAINT).getTime() + MILLISECS_IN_DAY),
 
     onSelect: function(date){
       var selectedDate = new Date(date);
-      var msecsInADay = 86400000;
-      var constraint = new Date(selectedDate.getTime() - msecsInADay);
-      TRANSACTIONS_CONSTRAINT = constraint;
+      var constraint = new Date(selectedDate.getTime() - MILLISECS_IN_DAY);
+      TRANSACTIONS_FROM_CONSTRAINT = constraint;
 
-      $("#transactionsStartDate").datepicker( "option", "maxDate", TRANSACTIONS_CONSTRAINT );
-      $("#transactionsStartDate").datepicker( "option", "defaultDate", TRANSACTIONS_CONSTRAINT );
+      $("#transactionsStartDate").datepicker( "option", "maxDate", TRANSACTIONS_FROM_CONSTRAINT );
+      $("#transactionsStartDate").datepicker( "option", "defaultDate", TRANSACTIONS_FROM_CONSTRAINT );
       handleTransactionsListChange();
 
       if (!$("#transactionsStartDate").val()){
@@ -265,15 +278,16 @@ $('.date-input').keydown(function(evt){
     changeMonth: true,
     changeYear: true,
     yearRange: "-10:+10",
-    defaultDate: EXPENSES_CONSTRAINT,
+    defaultDate: EXPENSES_FROM_CONSTRAINT,
+    maxDate: new Date(new Date(EXPENSES_FROM_CONSTRAINT).getTime() - MILLISECS_IN_DAY),
+
     onSelect: function(date){
       var selectedDate = new Date(date);
-      var msecsInADay = 86400000;
-      var constraint = new Date(selectedDate.getTime() + msecsInADay);
-      EXPENSES_CONSTRAINT = constraint;
+      var constraint = new Date(selectedDate.getTime() + MILLISECS_IN_DAY);
+      EXPENSES_TO_CONSTRAINT = constraint;
 
-      $("#expensesEndDate").datepicker( "option", "minDate", EXPENSES_CONSTRAINT );
-      $("#expensesEndDate").datepicker( "option", "defaultDate", EXPENSES_CONSTRAINT );
+      $("#expensesEndDate").datepicker( "option", "minDate", EXPENSES_TO_CONSTRAINT );
+      $("#expensesEndDate").datepicker( "option", "defaultDate", EXPENSES_TO_CONSTRAINT );
       handleExpensesListChange();
       if (!$("#expensesEndDate").val()){
         setTimeout(function(){
@@ -289,16 +303,16 @@ $('.date-input').keydown(function(evt){
     changeMonth: true,
     changeYear: true,
     yearRange: "-10:+10",
-    defaultDate: EXPENSES_CONSTRAINT,
+    defaultDate: EXPENSES_TO_CONSTRAINT,
+    minDate: new Date(new Date(EXPENSES_TO_CONSTRAINT).getTime() + MILLISECS_IN_DAY),
 
     onSelect: function(date){
       var selectedDate = new Date(date);
-      var msecsInADay = 86400000;
-      var constraint = new Date(selectedDate.getTime() - msecsInADay);
-      EXPENSES_CONSTRAINT = constraint;
+      var constraint = new Date(selectedDate.getTime() - MILLISECS_IN_DAY);
+      EXPENSES_FROM_CONSTRAINT = constraint;
 
-      $("#transactionsStartDate").datepicker( "option", "maxDate", EXPENSES_CONSTRAINT );
-      $("#transactionsStartDate").datepicker( "option", "defaultDate", EXPENSES_CONSTRAINT );
+      $("#transactionsStartDate").datepicker( "option", "maxDate", EXPENSES_FROM_CONSTRAINT );
+      $("#transactionsStartDate").datepicker( "option", "defaultDate", EXPENSES_FROM_CONSTRAINT );
       handleExpensesListChange();
 
       if (!$("#expensesStartDate").val()){
@@ -530,6 +544,7 @@ function openTable(evt, dataType)
   						<option value="withdrawals">Withdrawals</option>
   						<option value="deposits">Deposits</option>
 					  </select>
+            &nbsp;From:
 						<input type="text" class="calendarWidget date-input" id="transactionsStartDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
             			&nbsp;To:
 						<input type="text" class="calendarWidget date-input" id="transactionsEndDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">

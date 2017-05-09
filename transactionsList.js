@@ -57,6 +57,7 @@ var TransactionsList = function()
 			if((b.date - a.date) == 0){
 				return a.id - b.id;
 			}
+			return b.date - a.date;
 		});
 		this.transactionTableElement = $('#transactions-table')[0];
 		for (var i=0; i<this.filteredTransactions.length; i++)

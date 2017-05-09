@@ -151,6 +151,7 @@ var ExpensesList = function()
 
 	function getExpensesStartDate() {
 		var expensesStartDateElement = $('#expensesStartDate')[0];
+		//console.log(expensesStartDateElement.value);
 		var dateValue = expensesStartDateElement.value;
 		return parseDateValue(dateValue);
 	}
@@ -178,8 +179,8 @@ var ExpensesList = function()
 		// var expense = function(date, description, cost, account, id)
 		var accountsList, startDate, endDate;
 		accountsList = getAccounts();
-		startDate = getExpensesStartDate();
-		endDate = getExpensesEndDate();
+		startDate = getExpensesEndDate();
+		endDate = getExpensesStartDate();
 
 		this.filteredexpenses = this.expenses;
 

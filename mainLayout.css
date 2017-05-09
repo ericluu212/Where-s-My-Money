@@ -290,3 +290,7 @@ CSS for the tabbing on home page
 .nav-pills {
     text-align:center;
 }
+
+div.ui-datepicker{
+ font-size: 17px;
+}
