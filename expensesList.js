@@ -179,8 +179,8 @@ var ExpensesList = function()
 		// var expense = function(date, description, cost, account, id)
 		var accountsList, startDate, endDate;
 		accountsList = getAccounts();
-		startDate = getExpensesEndDate();
-		endDate = getExpensesStartDate();
+		startDate = getExpensesStartDate();
+		endDate = getExpensesEndDate();
 
 		this.filteredexpenses = this.expenses;
 
