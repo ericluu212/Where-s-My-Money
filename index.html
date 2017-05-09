@@ -50,16 +50,18 @@ var colors = [["#66ccff", "#99ddff"], ["#ffa366", "#ffc299"], ["#cc66ff", "#dd99
 var TRANSACTIONS_CONSTRAINT;
 var EXPENSES_CONSTRAINT;
 
+// Begin initialization
+transactionsList = new TransactionsList();
+transactionsList.accounts = accountsArray;
+transactionsList.colors = colors;
+expensesList = new ExpensesList();
+expensesList.accounts = accountsArray;
+expensesList.colors = colors;
+
 // Final initialization entry point: the Javascript code inside this block
 // runs at the end of start-up when the page has finished loading.
 $(document).ready(function()
 {
-	transactionsList = new TransactionsList();
-	transactionsList.accounts = accountsArray;
-  transactionsList.colors = colors;
-	expensesList = new ExpensesList();
-	expensesList.accounts = accountsArray;
-  expensesList.colors = colors;
 
 	transactionsList.render();
 	expensesList.render();
@@ -270,6 +272,10 @@ function openTable(evt, dataType)
   evt.currentTarget.className += " active";
 }
 
+$(transactionsList).on('render', function(e, info) {
+  console.log(info);
+});
+
 </script>
 
 
@@ -352,7 +358,7 @@ function openTable(evt, dataType)
   	</div>
   	<table id="accountsTable" class="checkboxTable">
       <tr>
-        <td>Date</td>
+        <td>Date &#x2193; &#8595;</td>
         <td>Description</td>
         <td>Amount</td>
       </tr>
