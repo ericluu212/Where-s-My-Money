@@ -6,9 +6,16 @@ function showTransfer(){
 	//transfer button
 	var btn = document.getElementById('transferBtn');
 	// When the user clicks the button, open the modal 
-	var transferError = document.getElementById("transferAlert");
-	transferError.style.visibility = "hidden";
-	transferError.innerHTML ="";
+	var transferErrorAccounts = document.getElementById("transferAlertAccounts");
+	var transferErrorCurrency = document.getElementById("transferAlertCurrency");
+	var currencyInput = document.getElementById("Amount");
+
+	transferErrorAccounts.style.visibility = "hidden";
+	transferErrorAccounts.innerHTML ="";
+	transferErrorCurrency.style.visibility = "hidden";
+	transferErrorCurrency.innerHTML ="";
+	currencyInput.style.borderColor = "initial";
+	currencyInput.style.borderStyle = "inset";
 
 	modal.style.display = "block";
 	// When the user clicks on <span> (x), close the modal
@@ -61,9 +68,11 @@ function showTransfer(){
 	}
 
 	btn.onclick = function(){
-		transferError.style.visibility = "hidden";
-		var currencyInput = document.getElementById("Amount");
-		transferError.innerHTML ="";
+		transferErrorCurrency.style.visibility = "hidden";
+		transferErrorAccounts.style.visibility = "hidden";
+		
+		transferErrorCurrency.innerHTML ="";
+		transferErrorAccounts.innerHTML ="";
 		currencyInput.style.borderColor = "initial";
 		currencyInput.style.borderStyle = "inset";
 		c = validateCurrency();
@@ -82,13 +91,13 @@ function showTransfer(){
 		var account1 = document.getElementById('fromList').value;
 		var account2 = document.getElementById('toList').value;
 		if(account1 == '' || account2 == ''){
-			transferError.innerHTML = "Both a 'To' and 'From' account must be selected."
-			transferError.style.visibility = "visible";
+			transferErrorAccounts.innerHTML = "Both a 'To' and 'From' account must be selected."
+			transferErrorAccounts.style.visibility = "visible";
 			return false;
 		}
 		if(account1 == account2){
-			transferError.innerHTML = "Transfer must be between different accounts."
-			transferError.style.visibility = "visible";
+			transferErrorAccounts.innerHTML = "Transfer must be between different accounts."
+			transferErrorAccounts.style.visibility = "visible";
 			return false;
 		}
 		return true;
@@ -105,10 +114,8 @@ function showTransfer(){
 			return true;
 		}else{
 			//alert("Invalid currency value.");
-			var transferError = document.getElementById("transferAlert");
-			transferError.innerHTML = "Invalid currency value."
-			transferError.style.visibility = "visible";
-			var currencyInput = document.getElementById("Amount");
+			transferErrorCurrency.innerHTML = "Invalid currency value."
+			transferErrorCurrency.style.visibility = "visible";
 			currencyInput.style.borderColor = "red";
 			currencyInput.style.borderStyle = "solid";
 			return false;
