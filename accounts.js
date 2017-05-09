@@ -43,18 +43,10 @@ function showAddAccounts(){
 		validNumber = validateAccountNumber();
 		if(validNumber){
 			var accountName = document.getElementById('accountName').value;
+			var accountNumber = document.getElementById('accountNumber').value;
 			accountsArray.push(accountName);
+			accountNumbers[accountName] = accountNumber;
 			makeTable();
-			/*var checkbox = document.createElement('input');
-	  		checkbox.type = "checkbox";
-			checkbox.name = accountName;
-			checkbox.value = accountName;
-			checkbox.id = accountName;
-			var label = document.createElement('label')
-			label.htmlFor = accountName;
-			label.appendChild(document.createTextNode(accountName));
-			accountsList.appendChild(checkbox);
-			accountsList.appendChild(label);*/
 			modal.style.display = "none";
 			document.getElementById('accountName').value = '';
 			document.getElementById('accountNumber').value = '';
@@ -65,6 +57,7 @@ function showAddAccounts(){
 			transactionsList.render();
 			expensesList.render();
 			showAddSuccess();
+			setTimeout(closeAddSuccess, 1000);
 		}
 	}
 	function validateAccountNumber(){
@@ -96,4 +89,10 @@ function showAddSuccess(){
 	        modal.style.display = "none";
 	    }
 	}
+}
+
+function closeAddSuccess(){
+	// Get the modal
+	var modal = document.getElementById('addAccountSuccessModal');
+	modal.style.display = "none";
 }

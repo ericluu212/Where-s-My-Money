@@ -159,6 +159,7 @@ li a:hover {
 .paddingBetweenCols td
 {
     padding:5px 30px 5px 30px;
+    border: none;
 }
 
 /*money tables*/
@@ -176,12 +177,16 @@ li a:hover {
 	display: block;
 	margin-top:15px;
 	margin-bottom: 15px;
-	margin-left: 15px;
+	margin-left: auto;
+  margin-right: auto;
 	overflow: scroll;
   overflow-x: hidden;
-	max-height: 200px;
+	max-height: 500px;
 }
-.checkboxTable tr { cursor: default; }
+.checkboxTable tr { 
+  cursor: default; 
+}
+
 .highlight { 
   background: #dcefdc;
 }
@@ -189,6 +194,18 @@ li a:hover {
 .checkboxTable td
 {
     padding:0 10px 0 10px;
+}
+
+.checkboxTable th, td {
+    border: 1px solid #ddd;
+}
+.checkboxTable th{
+    background-color: #5cb85c;
+    padding:0 10px 0 10px;
+    text-align: center;
+    color: white;
+    font-size: 28px; 
+    font-weight: normal;
 }
 
 .checkboxTable td label

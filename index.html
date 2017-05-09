@@ -50,6 +50,8 @@ var transactionsList, expensesList, requestsList;
 var colors = [["#66ccff", "#99ddff"], ["#ffa366", "#ffc299"], ["#cc66ff", "#dd99ff"], ["#ffd966","#ffe699"], ["#66ff66", "#99ff99"]];
 var TRANSACTIONS_CONSTRAINT;
 var EXPENSES_CONSTRAINT;
+var accountsArray = ["Bank of America", "Chase", "MITFCU"];
+var accountNumbers = {"Bank of America":"53789", "Chase":"91203", "MITFCU":"84657"};
 
 // Final initialization entry point: the Javascript code inside this block
 // runs at the end of start-up when the page has finished loading.
@@ -84,13 +86,17 @@ function makeTable(){
   $("#accountsTable tr").not(':first').remove(); 
   for (var i = 0; i < accountsArray.length; i++) {
     var label = document.createTextNode(accountsArray[i]);
+    var number = document.createTextNode(accountNumbers[accountsArray[i]]);
     var row = document.createElement("tr");
     row.id = accountsArray[i]+"row";
-    row.style.fontSize = "30px";
+    row.style.fontSize = "24px";
     var labelCell = document.createElement("td");
+    var accountNumber = document.createElement("td");
     labelCell.appendChild(label);
     labelCell.id=accountsArray[i];
+    accountNumber.appendChild(number);
     row.appendChild(labelCell);
+    row.appendChild(accountNumber);
     table.appendChild(row);
   }
 }
@@ -109,11 +115,12 @@ function showHomePage(){
   homePage.style.display = "block";
 }
 
-$(document).on('click', '#accountsTable td', function(e){
-  var rows = $('#accountsTable td');
+$(document).on('click', '#accountsTable tr:not(:first-child)', function(e){
+  var rows = $('#accountsTable tr');
   var row = $(this);
   rows.removeClass('highlight');
   row.addClass('highlight');
+  document.getElementById("remove-account-button").disabled = false;
 });
 
 function renderAccountsOptions(element) {
@@ -383,14 +390,16 @@ function openTable(evt, dataType)
 
 <!--page for managing accounts-->
 <div id="manageAccounts" style="display: none">
+    <h1 style="text-align: left; padding-left: 10px;">Manage Accounts</h1>
     <table id="accountsTable" class="checkboxTable">
       <tr>
-        <th style="font-size: 40px; border: none;">Accounts</th>
+        <th>Account Name</th>
+        <th>Account Number</th>
       </tr>
     </table>
     <div class="accountButtons">
       <input id="add-account-button" onclick="showAddAccounts()" class="btn" type="button" value="Add"/>
-      <input id="remove-account-button" onclick="removeAccount()" class="btn" type="button" value="Remove"/>
+      <input id="remove-account-button" onclick="removeAccount()" disabled class="btn" type="button" value="Remove"/>
 
     </div>
 </div>

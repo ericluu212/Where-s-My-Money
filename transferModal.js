@@ -1,4 +1,3 @@
-var accountsArray = ["Bank of America", "Chase", "MITFCU"];
 function showTransfer(){
 	// Get the modal
 	var modal = document.getElementById('transferModal');
