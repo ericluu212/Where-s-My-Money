@@ -175,7 +175,7 @@ $(transactionsList).on('render', function(evt, info) {
 $(expensesList).on('render', function(evt, info) {
   var esd = document.getElementById("expensesStartDate");
   if (esd.value == "") {
-    var date = info.expenses[info.expenses.length - 1].date;
+    var date = info.expenses[0].date;
     esd.value = parseDateValue(date);
   }
   console.log(info.expenses);
@@ -183,7 +183,7 @@ $(expensesList).on('render', function(evt, info) {
   var eed = document.getElementById("expensesEndDate");
   if (eed.value == "") {
     console.log(info.expenses);
-    var date = info.expenses[0].date;
+    var date = info.expenses[info.expenses.length - 1].date;
     eed.value = parseDateValue(date);
   }
 });
