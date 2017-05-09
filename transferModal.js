@@ -9,6 +9,8 @@ function showTransfer(){
 	var transferErrorAccounts = document.getElementById("transferAlertAccounts");
 	var transferErrorCurrency = document.getElementById("transferAlertCurrency");
 	var currencyInput = document.getElementById("Amount");
+	var toList = document.getElementById('toList');
+	var fromList = document.getElementById('fromList');
 
 	transferErrorAccounts.style.visibility = "hidden";
 	transferErrorAccounts.innerHTML ="";
@@ -16,6 +18,8 @@ function showTransfer(){
 	transferErrorCurrency.innerHTML ="";
 	currencyInput.style.borderColor = "initial";
 	currencyInput.style.borderStyle = "inset";
+	toList.style.borderColor = "initial";
+	fromList.style.borderColor = "initial";
 
 	modal.style.display = "block";
 	// When the user clicks on <span> (x), close the modal
@@ -70,11 +74,12 @@ function showTransfer(){
 	btn.onclick = function(){
 		transferErrorCurrency.style.visibility = "hidden";
 		transferErrorAccounts.style.visibility = "hidden";
-		
 		transferErrorCurrency.innerHTML ="";
 		transferErrorAccounts.innerHTML ="";
 		currencyInput.style.borderColor = "initial";
 		currencyInput.style.borderStyle = "inset";
+		toList.style.borderColor = "initial";
+		fromList.style.borderColor = "initial";
 		c = validateCurrency();
 		a = validateAccounts();
 		if(a && c){
@@ -93,11 +98,19 @@ function showTransfer(){
 		if(account1 == '' || account2 == ''){
 			transferErrorAccounts.innerHTML = "Both a 'To' and 'From' account must be selected."
 			transferErrorAccounts.style.visibility = "visible";
+			if(account1 == ''){
+				fromList.style.borderColor = 'red';
+			}
+			if(account2 == ''){
+				toList.style.borderColor = "red";
+			}
 			return false;
 		}
 		if(account1 == account2){
 			transferErrorAccounts.innerHTML = "Transfer must be between different accounts."
 			transferErrorAccounts.style.visibility = "visible";
+			toList.style.borderColor = "red";
+			fromList.style.borderColor = "red";
 			return false;
 		}
 		return true;
