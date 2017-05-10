@@ -13,6 +13,7 @@ function removeAccount(){
 				expensesList.clearRenderedList();
 				transactionsList.render();
 				expensesList.render();
+				renderAccountBalances();
 				i--;
 			}
 		}
@@ -56,6 +57,7 @@ function showAddAccounts(){
 			expensesList.clearRenderedList();
 			transactionsList.render();
 			expensesList.render();
+			renderAccountBalances();
 			showAddSuccess();
 			setTimeout(closeAddSuccess, 1000);
 		}
