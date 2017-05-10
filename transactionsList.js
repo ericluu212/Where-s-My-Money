@@ -3,8 +3,6 @@ var MONTH_AND_DATE = 0501;
 
 var TransactionsList = function()
 {
-	this.transactionTableElement = $('#transactions-table')[0];
-
 	this.transactions =
 
 	[
@@ -60,6 +58,7 @@ var TransactionsList = function()
 			}
 			return b.date - a.date;
 		});
+		this.transactionTableElement = $('#transactions-table')[0];
 		for (var i=0; i<this.filteredTransactions.length; i++)
 		{
 			//check if account exists
@@ -68,6 +67,10 @@ var TransactionsList = function()
 				this.transactionTableElement.appendChild(this.createTableElement(nextTransaction));
 			}
 		}
+		var details = {
+			transactions: this.filteredTransactions
+		};
+		$(this).triggerHandler("render", details);
 	}
 
 	this.createTableElement = function(transaction)

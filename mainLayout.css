@@ -44,7 +44,6 @@ div.tab button.active {
 .data-container{
   display: none;
   border-style: solid;
-  /*border-radius: 15px;*/
   height: 100%;
   width: 90%;
   margin-top: 50px;
@@ -322,4 +321,8 @@ CSS for the tabbing on home page
 
 .nav-pills {
     text-align:center;
+}
+
+div.ui-datepicker{
+ font-size: 17px;
 }

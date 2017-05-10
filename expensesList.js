@@ -2,8 +2,6 @@ var ENDYEAR = 2050;
 var MONTH_AND_DATE = "0501";
 var ExpensesList = function()
 {
-	this.expenseTableElement = $('#expenses-table')[0];
-
 	//this.expenses = generateExpenses();
 	this.expenses =
 
@@ -67,6 +65,7 @@ var ExpensesList = function()
 			}
 			return a.date - b.date;
 		});
+		this.expenseTableElement = $('#expenses-table')[0];
 		for (var i=0; i<this.filteredexpenses.length; i++)
 		{
 			//this.expenseTableElement.appendChild(this.createTableElement(this.filteredexpenses[i]));
@@ -74,6 +73,10 @@ var ExpensesList = function()
 				this.expenseTableElement.appendChild(this.createTableElement(this.filteredexpenses[i]));
 			}
 		}
+		var details = {
+			expenses: this.filteredexpenses
+		};
+		$(this).triggerHandler("render", details);
 	}
 
 
@@ -148,6 +151,7 @@ var ExpensesList = function()
 
 	function getExpensesStartDate() {
 		var expensesStartDateElement = $('#expensesStartDate')[0];
+		//console.log(expensesStartDateElement.value);
 		var dateValue = expensesStartDateElement.value;
 		return parseDateValue(dateValue);
 	}
