@@ -194,6 +194,7 @@ li a:hover {
 .checkboxTable{
   width: 50%;
 	margin: 20px auto 0px auto;
+  border: 1px solid #000;
 	overflow: scroll;
   overflow-x: hidden;
 	max-height: 500px;
@@ -215,16 +216,19 @@ li a:hover {
 }
 
 .checkboxTable th, td {
-    border: 1px solid #ddd;
+    border-left: 1px solid #000;
 }
+.checkboxTable tr{
+    border-top: 1px solid #000;
+}
+
+
 .checkboxTable th{
     padding:0 10px 0 10px;
-    border: 1px solid black;
-    background-color: #5cb85c;;
-    color: white;
+    background-color: white;
     text-align: center;
     font-size: 28px; 
-    font-weight: normal;
+    font-weight: bold;
 }
 
 .checkboxTable td label
