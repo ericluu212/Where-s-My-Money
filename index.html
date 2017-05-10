@@ -39,14 +39,17 @@ Eric Luu
 <script src="requestList.js"></script>
 <script src="request.js"></script>
 <script src="tabDisplay.js"></script>
+<script src="accounts.js"></script>
 
 <script>
 
 //constants
 var transactionsList, expensesList, requestsList;
-var accountsArray = ["Bank of America", "Chase", "MITFCU"];
+
 // 5 pairs of dark/light color pairs
 var colors = [["#66ccff", "#99ddff"], ["#ffa366", "#ffc299"], ["#cc66ff", "#dd99ff"], ["#ffd966","#ffe699"], ["#66ff66", "#99ff99"]];
+var accountsArray = ["Bank of America", "Chase", "MITFCU"];
+var accountNumbers = {"Bank of America":"53789", "Chase":"91203", "MITFCU":"84657"};
 var MILLISECS_IN_DAY = 86400000;
 var TRANSACTIONS_FROM_CONSTRAINT;
 var EXPENSES_FROM_CONSTRAINT;
@@ -72,6 +75,8 @@ $(document).ready(function()
 	requestsList = new RequestList();
 	updateBtnDescription();
 
+  makeTable();
+
 	var transactionsAccountsFilterElement = $('#transactionsAccountsFilter')[0];
 	var elementsAccountsFilterElement = $('#elementsAccountsFilter')[0];
 	renderAccountsOptions(transactionsAccountsFilterElement);
@@ -81,6 +86,48 @@ $(document).ready(function()
   document.getElementsByClassName('tablinks')[0].className += " active";
 
   renderAccountBalances();
+});
+
+function makeTable(){
+  var table = document.getElementById("accountsTable");
+  $("#accountsTable tr").not(':first').remove(); 
+  for (var i = 0; i < accountsArray.length; i++) {
+    var label = document.createTextNode(accountsArray[i]);
+    var number = document.createTextNode(accountNumbers[accountsArray[i]]);
+    var row = document.createElement("tr");
+    row.id = accountsArray[i]+"row";
+    row.style.fontSize = "24px";
+    var labelCell = document.createElement("td");
+    var accountNumber = document.createElement("td");
+    labelCell.appendChild(label);
+    labelCell.id=accountsArray[i];
+    accountNumber.appendChild(number);
+    row.appendChild(labelCell);
+    row.appendChild(accountNumber);
+    table.appendChild(row);
+  }
+}
+
+function showManageAccounts(){
+  var page = document.getElementById("manageAccounts");
+  var homePage = document.getElementById("homePage");
+  page.style.display = "block";
+  homePage.style.display = "none";
+}
+
+function showHomePage(){
+  var page = document.getElementById("manageAccounts");
+  var homePage = document.getElementById("homePage");
+  page.style.display = "none";
+  homePage.style.display = "block";
+}
+
+$(document).on('click', '#accountsTable tr:not(:first-child)', function(e){
+  var rows = $('#accountsTable tr');
+  var row = $(this);
+  rows.removeClass('highlight');
+  row.addClass('highlight');
+  document.getElementById("remove-account-button").disabled = false;
 });
 
 function renderAccountBalances() {
@@ -385,17 +432,17 @@ function openTable(evt, dataType)
 </head>
 
 <body>
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" style="margin-bottom: 0px;">
   <div class="container-fluid">
     <div class="navbar-header">
-      <img src="wheres-my-money-logo.png" onClick="window.location.reload();return false;" style="width:100px;height:50px; float: left;">
-      <a class="navbar-brand" href="#" onClick="window.location.reload();return false;" style="color:green;">Where's My Money?</a>
+      <img src="wheres-my-money-logo.png" onclick="showHomePage()" style="width:100px;height:50px; float: left;">
+      <a class="navbar-brand" href="#" onclick="showHomePage()" style="color:green;">Where's My Money?</a>
     </div>
     <ul class="nav navbar-nav">
       <li><a style="" onclick="showTransfer()">Transfer</a></li>
       <li><a onclick="incoming_requests()" id="request-btn">Incoming requests</a>
 				<span class="button-badge"></span></li>
-      <li><a onclick="showAccounts()">Manage Accounts</a></li>
+      <li><a onclick="showManageAccounts()">Manage Accounts</a></li>
     </ul>
   </div>
 </nav>
@@ -449,28 +496,20 @@ function openTable(evt, dataType)
   </div>
 </div>
 
-<!--modal for managing accounts-->
-<div id="accountsModal" class="modal">
-  <div class="modal-content" id="accountsContent">
-  	<div class="popupHeader">
-  		<span class="close" id ="closeAccounts">&times;</span>
-  		<h2>Accounts</h2>
-  	</div>
-  	<div id="accountsList">
-  	</div>
-  	<table id="accountsTable" class="checkboxTable">
+<!--page for managing accounts-->
+<div id="manageAccounts" style="display: none">
+    <h1 style="text-align: left; padding: 15px 10px 10px 10px; margin-top: 0px; background-color: #5cb85c; color: white;">Manage Accounts</h1>
+    <table id="accountsTable" class="checkboxTable">
       <tr>
-        <td>Date &#x2193; &#8595;</td>
-        <td>Description</td>
-        <td>Amount</td>
+        <th>Account Name</th>
+        <th>Account Number</th>
       </tr>
-  	</table>
-  	<div class="accountButtons">
-  		<input id="add-account-button" class="btn" type="button" value="Add"/>
-  		<input id="remove-account-button" class="btn" type="button" value="Remove"/>
+    </table>
+    <div class="accountButtons">
+      <input id="add-account-button" onclick="showAddAccounts()" class="btn btn-success" type="button" value="Add Account"/>
+      <input id="remove-account-button" onclick="removeAccount()" disabled class="btn btn-danger" type="button" value="Remove"/>
 
-  	</div>
-  </div>
+    </div>
 </div>
 
 <!--Modal for adding account-->
@@ -557,7 +596,7 @@ function openTable(evt, dataType)
 	</div>
 </div>
 
-<div class="container-fluid">
+<div id="homePage" class="container-fluid">
   <br>
   	<div class="row">
     	<div class="col-sm-6" id="firstColumn">
