@@ -91,7 +91,7 @@ $(document).ready(function()
 
 function makeTable(){
   var table = document.getElementById("accountsTable");
-  $("#accountsTable tr").not(':first').remove(); 
+  $("#accountsTable tr").not(':first').remove();
   for (var i = 0; i < accountsArray.length; i++) {
     var label = document.createTextNode(accountsArray[i]);
     var number = document.createTextNode(accountNumbers[accountsArray[i]]);
@@ -135,11 +135,11 @@ function renderAccountBalances() {
   var table = document.getElementById("balanceTable");
   for(var i=0; i< table.children.length; i++){
     if(table.children[i].tagName == 'TR'){
-      table.removeChild(this.expenseTableElement.children[i]);
+      table.removeChild(table.children[i]);
       i--;
     }
   }
-  
+
   for (var i=0; i < accountsArray.length; i++) {
     var account = accountsArray[i];
     var accountColor = colors[i][1];

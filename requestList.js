@@ -9,7 +9,7 @@ var RequestList = function(){
       new Request(new Date("2017-02-10"), "Pack of ramen", 10.00, "Jack", "req_0"),
       new Request(new Date("2017-03-15"), "Beer for party", 150.00, "Rob", "req_1"),
       new Request(new Date("2017-04-05"), "Persona 5", 100.00, "Yoon", "req_2"),
-      new Request(new Date("2017-06-29"), "MIT summer housing", 3500.00, "John", 'req_3')
+      new Request(new Date("2017-04-29"), "MIT summer housing", 3500.00, "John", 'req_3')
   ];
 
   this.getRequest= function(id){
@@ -20,16 +20,41 @@ var RequestList = function(){
     return request;
   }
 
+  function dateToString(date){
+    var year = date.getFullYear().toString();
+
+    var month = (date.getMonth() + 1);
+    if(month > 11){
+      month = "0";
+    }
+    var month = month.toString();
+    var day = date.getDate().toString();
+
+    if(month.length  == 1){
+      month = "0" + month;
+     }
+     if(day.length == 1){
+       day = "0" + day;
+     }
+     setEndDate("#transactionsEndDate", day, month, year);
+     return year + month + day;
+   }
+
+  function setEndDate(calendar_id, day, month, year){
+      $(calendar_id).val(day + "/" + month + "/" + year);
+  }
   this.approveRequest = function(id){
     var request = $.grep(this.requests, function(e){
       return e.id == id;
     })[0];
-    console.log(request.description + " for " + request.name + " approved.");
 
     var indexOfRequest = this.requests.indexOf(request);
     if(indexOfRequest > -1){
       this.requests.splice(indexOfRequest, 1);
     }
+    var dateStr = dateToString(new Date());
+    transactionsList.addTransaction(dateStr, request.description, -1 * request.cost, accountsArray[0]);
+
 
     return request;
   }
@@ -38,7 +63,6 @@ var RequestList = function(){
     var request = $.grep(this.requests, function(e){
       return e.id == id;
     })[0];
-    console.log(request.description + " for " + request.name + " denied.");
 
     var indexOfRequest = this.requests.indexOf(request);
     if(indexOfRequest > -1){
@@ -56,7 +80,6 @@ var RequestList = function(){
   }
 
   function createListElement(request, i){
-    console.log("creating element")
     //var listElementHTML = '<div class="list-group-item list-group-item-action flex-column align-items-start"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">List group item heading</h5><small>3 days ago</small></div><p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p><small>Donec id elit non mi porta.</small></div>';
     var outerFlexDiv = $('<div></div>').addClass('list-group-item list-group-item-action align-items-start row request-list-item').attr('id', request.id);
 

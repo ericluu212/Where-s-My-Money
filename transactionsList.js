@@ -20,7 +20,7 @@ var TransactionsList = function()
 		new Transaction(20160418, "La Verde's", -20.02, "MITFCU", 9),
 		new Transaction(20170101, "Tuition Payment", -3528, "Chase", 13),
 		new Transaction(20160101, "Tuition Payment", -3487, "Chase", 14),
-		new Transaction(20170601, "Tuition Payment", -4792, "Chase", 15),
+		new Transaction(20170501, "Tuition Payment", -4792, "Chase", 15),
 		new Transaction(20160601, "Tuition Payment", -4523, "Chase", 16),
 		new Transaction(20160631, "Microsoft Internship", 5567, "MITFCU", 17),
 		new Transaction(20160731, "Microsoft Internship", 5603, "MITFCU", 18),
@@ -28,7 +28,7 @@ var TransactionsList = function()
 		new Transaction(20160931, "Amazon", -24.22, "Bank of America", 20),
 		new Transaction(20170318, "Amazon", -34.28, "MITFCU", 21),
 		new Transaction(20170318, "Amazon", -74.51, "Chase", 22),
-		new Transaction(20170517, "Keg Party Supplier", -429.87, "Chase", 23),
+		new Transaction(20170509, "Keg Party Supplier", -429.87, "Chase", 23),
 
 	];
 
@@ -37,6 +37,18 @@ var TransactionsList = function()
 	this.accounts = [];
 	this.colors = [];
 
+
+	this.addTransaction = function(date, description, amount, bank)
+	{
+		var id = this.transactions.length + 1;
+
+		var t = new Transaction(date, description, amount, bank, id);
+		this.transactions.push(t);
+
+		handleTransactionsListChange();
+		console.log("changing balnaces");
+		renderAccountBalances();
+	}
 	this.clearRenderedList = function()
 	{
 		// while (this.transactionTableElement.firstChild) {
@@ -78,12 +90,16 @@ var TransactionsList = function()
 		if ($.inArray(account, this.accounts) > -1) {
 			var sum = 0;
 			var accountTransactions = accountsFilter(this.transactions, [account]);
+			console.log(accountTransactions);
 			for (var i = 0; i < accountTransactions.length; i++) {
+				console.log(accountTransactions[i].description)
 				sum += accountTransactions[i].cost;
 			}
 			if (sum < 0) {
+				console.log(sum);
 				return '-$' + Math.abs(sum.toFixed(2));
 			} else {
+				console.log(sum);
 				return '$' + Math.abs(sum.toFixed(2));
 			}
 		} else {
