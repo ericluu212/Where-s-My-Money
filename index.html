@@ -85,7 +85,7 @@ $(document).ready(function()
   document.getElementById('transactions-container').style.display = "block";
   document.getElementsByClassName('tablinks')[0].className += " active";
 
-  $('body').tooltip({title: "Hooray!", selector: ".input"});
+  renderAccountBalances();
 });
 
 function makeTable(){
@@ -129,6 +129,38 @@ $(document).on('click', '#accountsTable tr:not(:first-child)', function(e){
   row.addClass('highlight');
   document.getElementById("remove-account-button").disabled = false;
 });
+
+function renderAccountBalances() {
+  var table = document.getElementById("balanceTable");
+  for(var i=0; i< table.children.length; i++){
+    if(table.children[i].tagName == 'TR'){
+      table.removeChild(this.expenseTableElement.children[i]);
+      i--;
+    }
+  }
+  
+  for (var i=0; i < accountsArray.length; i++) {
+    var account = accountsArray[i];
+    var accountColor = colors[i][1];
+
+    var tableElement = document.createElement('tr');
+
+    var accountElement = document.createElement('td');
+    var balanceElement = document.createElement('td');
+
+    accountElement.appendChild(document.createTextNode(account));
+    balanceElement.appendChild(document.createTextNode(transactionsList.getBalance(account)));
+
+    tableElement.appendChild(accountElement);
+    tableElement.appendChild(balanceElement);
+
+    var colorIndex = accountsArray.indexOf(account);
+    tableElement.style.backgroundColor = this.colors[colorIndex][1];
+
+    table.appendChild(tableElement);
+
+  }
+}
 
 function renderAccountsOptions(element) {
   while (element.firstChild) {
@@ -629,12 +661,14 @@ function openTable(evt, dataType)
   		</div>
 
     	<div class="col-sm-6" id="lastColumn">
-        <table>
-          <tr>
-            <th>Account</th>
-            <th>Balance</th>
-          </tr>
-        </table>
+        <div class="balances-container">
+          <table id="balanceTable" class="moneyTables">
+            <tr>
+              <th>Account</th>
+              <th>Balance</th>
+            </tr>
+          </table>
+        </div>
 			</div>
 
     	</div>
