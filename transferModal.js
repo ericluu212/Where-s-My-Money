@@ -84,9 +84,34 @@ function showTransfer(){
 		a = validateAccounts();
 		if(a && c){
 			modal.style.display = "none";
+			var toAccount = document.getElementById('fromList').value;
+			var fromAccount = document.getElementById('toList').value;
+			var amount = document.getElementById('Amount').value;
+			var today = new Date();
+			var year = today.getFullYear().toString();
+			var month = (today.getMonth()+1).toString();
+			if(parseInt(month) < 10){
+				month = "0" + month;
+			}
+			var day = today.getDate().toString();
+			if(parseInt(day) < 10){
+				day = "0" + day;
+			}
+			date = parseInt(year+month+day);
+			var currency = document.getElementById("Amount").value = '';
+			var toAmount = parseInt(amount);
+			var fromAmount = parseInt("-" + amount);
+			var toId = transactionsList.length + 2;
+			var fromId = transactionsList.length + 1;
+			var fromTransaction = new Transaction(date, "Transfer", fromAmount, toAccount, fromId);
+			var toTransaction = new Transaction(date, "Transfer", toAmount, fromAccount, toId);
+			transactionsList.transactions.push(fromTransaction);
+			transactionsList.transactions.push(toTransaction);
+			transactionsList.clearRenderedList();
+			transactionsList.render();
+			renderAccountBalances();
 			document.getElementById('fromList').value = 'initial';
 			document.getElementById('toList').value = 'initial';
-			var currency = document.getElementById("Amount").value = '';
 			showTransferSuccess();
 			setTimeout(closeTransferSuccess, 1000);
 		}
