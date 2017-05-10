@@ -257,11 +257,9 @@ $(expensesList).on('render', function(evt, info) {
     var date = info.expenses[0].date;
     esd.value = parseDateValue(date);
   }
-  console.log(info.expenses);
 
   var eed = document.getElementById("expensesEndDate");
   if (eed.value == "") {
-    console.log(info.expenses);
     var date = info.expenses[info.expenses.length - 1].date;
     eed.value = parseDateValue(date);
   }
@@ -315,7 +313,6 @@ $( function() {
       $("#transactionsEndDate").datepicker( "option", "defaultDate", TRANSACTIONS_TO_CONSTRAINT );
       handleTransactionsListChange();
       $('#transactionsStartDate').datepicker('hide');
-      console.log("asdfdsf");
       if (!$("#transactionsEndDate").val()){
         setTimeout(function(){
           $( "#transactionsEndDate" ).datepicker('show');
