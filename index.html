@@ -91,7 +91,7 @@ $(document).ready(function()
 
 function makeTable(){
   var table = document.getElementById("accountsTable");
-  $("#accountsTable tr").not(':first').remove(); 
+  $("#accountsTable tr").not(':first').remove();
   for (var i = 0; i < accountsArray.length; i++) {
     var label = document.createTextNode(accountsArray[i]);
     var number = document.createTextNode(accountNumbers[accountsArray[i]]);
@@ -164,7 +164,7 @@ function renderAccountBalances() {
       i--;
     }
   }
-  
+
   for (var i=0; i < accountsArray.length; i++) {
     var account = accountsArray[i];
     var accountColor = colors[i][1];
