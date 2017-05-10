@@ -139,7 +139,9 @@ li a:hover {
 
 .btn{
 	height: 100%;
-	width: 150px;
+	width: 33%;
+	margin-bottom: 5px;
+	margin-top: 5px;
 }
 /* Code for madals (popups)*/
 .modal {
@@ -320,6 +322,7 @@ ol{
 
 .calendarWidget{
   width: 20%;
+  margin-top: 5px;
 }
 
 /*

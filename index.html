@@ -615,9 +615,10 @@ function openTable(evt, dataType)
   						<option value="withdrawals">Withdrawals</option>
   						<option value="deposits">Deposits</option>
 					  </select>
-            &nbsp;From:
+            <br>
+            From
 						<input type="text" class="calendarWidget date-input" id="transactionsStartDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
-            			&nbsp;To:
+            			&nbsp;&nbsp;&nbsp;To
 						<input type="text" class="calendarWidget date-input" id="transactionsEndDate" onblur="handleTransactionsListChange()" onchange="handleTransactionsListChange()">
 				  </div>
 
@@ -636,15 +637,15 @@ function openTable(evt, dataType)
 
         <div class="data-container" id="expenses-container">
           <div id="transactions-filtering-options">
-            Viewing Expenses &nbsp;&nbsp;&nbsp;&nbsp;
-            From:
+            Viewing Expenses
+            <br>
+            From
             <input type="text" class = "calendarWidget date-input" id="expensesStartDate" onblur="handleExpensesListChange()" onchange="handleExpensesListChange()">
             &nbsp;&nbsp;&nbsp;
-            To:
+            To
             <input type="text" class = "calendarWidget date-input" id="expensesEndDate" onblur="handleExpensesListChange()" onchange="handleExpensesListChange()">
           </div>
           <div id="elementsAccountsFilter">
-          In Accounts:
           </div>
           <div class = "scrollMoney">
             <table id="expenses-table" class="moneyTables">
