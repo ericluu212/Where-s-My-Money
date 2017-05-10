@@ -1,7 +1,7 @@
 function removeAccount(){
     if (confirm("Are you sure you want to remove all of the selected accounts?") == true) {
 		for(var i=0; i<accountsArray.length; i++){
-			if(document.getElementById(accountsArray[i]).className == 'highlight'){
+			if(document.getElementById(accountsArray[i]+"row").className == 'highlight'){
 				var row = document.getElementById(accountsArray[i]+"row");
 				row.parentNode.removeChild(row);
 				accountsArray.splice(i, 1);
