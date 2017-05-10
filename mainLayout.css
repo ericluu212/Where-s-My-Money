@@ -112,13 +112,9 @@ li a:hover {
 	right: 0;
 }
 
-.accountButtons .btn-success:hover{
-  background-color: #006400;
-}
-
 .accountButtons .btn-danger:disabled{
-  background-color: lightgrey;
-  border-color: lightgrey;
+  background-color: #A9A9A9;
+  border-color: #A9A9A9;
 }
 #addAccountContent{
 	padding: 0px 0px 10px 0px;
@@ -208,22 +204,23 @@ li a:hover {
 }
 
 .highlight { 
-  background: #dcefdc;
+  
 }
 
 .checkboxTable td
 {
-    padding:0 10px 0 10px;
+    padding:7px 10px 7px 10px;
 }
 
 .checkboxTable th, td {
     border: 1px solid #ddd;
 }
 .checkboxTable th{
-    background-color: #5cb85c;
     padding:0 10px 0 10px;
-    text-align: center;
+    border: 1px solid black;
+    background-color: #5cb85c;;
     color: white;
+    text-align: center;
     font-size: 28px; 
     font-weight: normal;
 }

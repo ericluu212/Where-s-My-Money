@@ -102,6 +102,9 @@ function makeTable(){
     labelCell.appendChild(label);
     labelCell.id=accountsArray[i];
     accountNumber.appendChild(number);
+    row.color = colors[i][1];
+    row.clickedColor = colors[i][0];
+    row.style.backgroundColor = row.color;
     row.appendChild(labelCell);
     row.appendChild(accountNumber);
     table.appendChild(row);
@@ -113,6 +116,9 @@ function showManageAccounts(){
   var homePage = document.getElementById("homePage");
   page.style.display = "block";
   homePage.style.display = "none";
+  document.getElementById("remove-account-button").disabled = true;
+  makeTable();
+
 }
 
 function showHomePage(){
@@ -126,8 +132,27 @@ $(document).on('click', '#accountsTable tr:not(:first-child)', function(e){
   var rows = $('#accountsTable tr');
   var row = $(this);
   rows.removeClass('highlight');
+  for(var i=0; i<rows.length; i++){
+    rows[i].style.backgroundColor = rows[i].color;
+    rows[i].style.color = "#333";
+  }
   row.addClass('highlight');
+  row["0"].style.backgroundColor = "#c9302c";
+  row["0"].style.color = "white";
   document.getElementById("remove-account-button").disabled = false;
+});
+
+$(document).click(function(e){
+ if($(e.target).is("#accountsTable") || $(e.target).closest("#accountsTable").length){
+ }
+  else{
+    var rows = $('#accountsTable tr');
+    for(var i=0; i<rows.length; i++){
+      rows[i].style.backgroundColor = rows[i].color;
+      rows[i].style.color = "#333";
+    }
+    document.getElementById("remove-account-button").disabled = true;
+  }
 });
 
 function renderAccountBalances() {
