@@ -74,6 +74,24 @@ var TransactionsList = function()
 		$(this).triggerHandler("render", details);
 	}
 
+	this.getBalance = function(account)
+	{
+		if ($.inArray(account, this.accounts) > -1) {
+			var sum = 0;
+			var accountTransactions = accountsFilter(this.transactions, [account]);
+			for (var i = 0; i < accountTransactions.length; i++) {
+				sum += accountTransactions[i].cost;
+			}
+			if (sum < 0) {
+				return '-$' + Math.abs(sum.toFixed(2));
+			} else {
+				return '$' + Math.abs(sum.toFixed(2));
+			}
+		} else {
+			return '0.00';
+		}
+	}
+
 	this.createTableElement = function(transaction)
 	{
 		var tableElement = document.createElement('tr');
