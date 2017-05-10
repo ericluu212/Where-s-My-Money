@@ -13,7 +13,6 @@ function saveChanges(){
     requestsList.denyRequest(denyCache[i])
   }
   for(i=0; i<changeCache.length; i++){
-    console.log('change');
   }
   emptyCache();
 }
@@ -58,8 +57,6 @@ $(document).on('click', '.request-close', function(){
     while(list.hasChildNodes()){
       list.removeChild(list.lastChild);
     }
-
-    console.log("Closed request");
 });
 
 $(window).click(function(event) {
